@@ -11,7 +11,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
 /**
  * IMPORT OWN STYLES
  * */
-import '../containers/styles/Category.css'
+import '../containers/styles/Inicial.css'
 /**
  * IMPORT COMPONENTS AND CONTAINERS
  * */
@@ -114,7 +114,11 @@ class Inicial extends Component {
                             <ul id="categorias">
 
                                 {/*{this.renderCategoriesList()}*/}
-
+                                <li>dsvsdvbsddsbbs</li>
+                                <li>dsvsdvbsddsbbs</li>
+                                <li>dsvsdvbsddsbbs</li>
+                                <li>dsvsdvbsddsbbs</li>
+                                <li>dsvsdvbsddsbbs</li>
                             </ul>
 
                             <div className="contenido">
@@ -130,7 +134,7 @@ class Inicial extends Component {
                                     <hr/>
                                 </div>
 
-                                {/*{this.renderPoolCategories()}*/}
+                                {/*{this.renderPoolCategories()}*/}<CardProduct />
 
                             </div>
                         </section>
@@ -145,7 +149,7 @@ class Inicial extends Component {
 
 
 
-export default connect(mapStateToProps)(Inicial);
+export default connect()(Inicial);
 
 
 

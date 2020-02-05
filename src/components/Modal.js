@@ -65,58 +65,70 @@ class Modal extends Component {
                 "email": this.state.valuesUsuLog.loginEmailUsu,
                 "password": this.state.valuesUsuLog.loginPasswordUsu
             };
-            console.log(paramsBody)
-            // this.myFormRef.reset();
+
+            let paramsHead = {
+                "X-Requested-With": "XMLHttpRequest",
+                "Content-Type": "application/json"
+            }
+
+            this.myFormRef.reset();
             // userRegister(paramsBody);
-            // axios.post('http://localhost:3000/users/login', paramsBody)
-            //     .then(res => {
-            //         if (res.status == 200) {
-            //             store.dispatch({
-            //                 type: GET_USER, payload: {
-            //                     id: res.data.id,
-            //                     username: res.data.user_name,
-            //                     address: res.data.address,
-            //                     token: res.data.token,
-            //                     email: res.data.email,
-            //                     role: res.data.role
-            //                 }
-            //             });
-            //             localStorage.setItem('user', JSON.stringify(res.data))
-            //             window.location.href = "/";
-            //             // this.setState({logExito: res})
-            //         } else {
-            //             this.setState({logError: 'error en login'})
-            //         }
-            //
-            //     })
-            //     .catch(err => {
-            //         this.setState({logError: 'Error en login'})
-            //         setTimeout(function () {
-            //             this.setState({logError: ''})
-            //         }.bind(this), 2000)
-            //     });
+            axios.post('http://localhost:8000/api/auth/login', paramsBody, paramsHead)
+                .then(res => {
+                    if (res.status == 200) {
+                        // store.dispatch({
+                        //     type: GET_USER, payload: {
+                        //         id: res.data.id,
+                        //         username: res.data.user_name,
+                        //         address: res.data.address,
+                        //         token: res.data.token,
+                        //         email: res.data.email,
+                        //         role: res.data.role
+                        //     }
+                        // });
+                        localStorage.setItem('user', JSON.stringify(res.data))
+                        window.location.href = "/categorias";
+                        // this.setState({logExito: res})
+                    } else {
+                        this.setState({logError: 'error en login'})
+                    }
+
+                })
+                .catch(err => {
+                    this.setState({logError: 'Error en login'})
+                    setTimeout(function () {
+                        this.setState({logError: ''})
+                    }.bind(this), 2000)
+                });
         } else {
             let paramsBody = {
                 "email": this.state.valuesEmpLog.loginEmailEmp,
                 "password": this.state.valuesEmpLog.loginPasswordEmp,
             };
-            console.log(paramsBody)
-            // axios.post('http://localhost:3000/users/register', paramsBody)
-            //     .then(res => {
-            //         this.setState({
-            //             RegExito: res.data.message,
-            //             RegError: '',
-            //         });
-            //         if (res.status == 200) window.location.href = "/";
-            //         // this.handleSubmit("login-form")
-            //     })
-            //     .catch(err => {
-            //         this.setState({
-            //             RegError: err.message,
-            //             RegExito: ''
-            //         })
-            //     });
-            // this.myFormRef.reset();
+
+            let paramsHead = {
+                "X-Requested-With": "XMLHttpRequest",
+                "Content-Type": "application/json"
+            }
+
+            alert(paramsBody)
+            axios.post('http://localhost:8000/api/auth/login', paramsBody, paramsHead)
+                .then(res => {
+                    console.log('response login', res);
+                    // this.setState({
+                    //     logExitoEmpLog: res.data.message,
+                    //     logErrorEmpLog: '',
+                    // });
+                    if (res.status == 200) window.location.href = "/home";
+                    // this.handleSubmit("login-form")
+                })
+                .catch(err => {
+                    this.setState({
+                        RegError: err.message,
+                        RegExito: ''
+                    })
+                });
+            this.myFormRef.reset();
         }
     };
     handleChangeusu = (ev) => {

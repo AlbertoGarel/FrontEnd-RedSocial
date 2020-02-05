@@ -19,6 +19,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
  * */
 import App from './containers/App';
 import Category from "./containers/Category";
+import Inicial from "./containers/Inicial";
 import SearchView from "./components/SearchView";
 import AdminView from "./containers/AdminView";
 import NotFoundPage from "./components/NotFoundPage";
@@ -51,6 +52,7 @@ ReactDOM.render(
             <Header/>
             <Switch>
                 <Route path="/" exact component={App}/>
+                <Route path="/home" component={Inicial}/>
                 <Route path="/categorias" component={Category}/>
                 <Route path="/search-results" component={SearchView}/>
                 <Route path="/admin" component={AdminView}/>

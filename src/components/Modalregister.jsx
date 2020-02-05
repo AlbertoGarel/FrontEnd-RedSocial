@@ -41,14 +41,14 @@ class Modal extends Component {
                 userStreet: '',
                 confirmPassword: '',
             },
-            validationsUsu : {
+            validationsUsu: {
                 usernameUsu: '',
                 usercityUsu: '',
                 emailUsu: '',
                 passwordUsu: '',
                 confirmPasswordUsu: ''
             },
-            validationsEmp : {
+            validationsEmp: {
                 nameEmp: '',
                 nameResEmp: '',
                 usercityEmp: '',
@@ -68,14 +68,14 @@ class Modal extends Component {
 
 
     //envío de formulario
-    handleSubmit= (ev) => {
+    handleSubmit = (ev) => {
         ev.preventDefault();
         const isValid = this.validateAll(ev);
 
         if (!isValid) {
             return false
         }
-        console.log('peticion',ev.target.id)
+        console.log('peticion', ev.target.id)
         // const values = JSON.stringify(this.state);
         if (ev.target.id === "register-formUsu") {
             let paramsBody = {
@@ -83,12 +83,12 @@ class Modal extends Component {
                 "email": this.state.valuesUsu.emailUsu,
                 "password": this.state.valuesUsu.passwordUsu,
                 "ciudad_id": this.state.usercityUsu,
-                'tipo' : 'usuario'
+                'tipo': 'usuario'
             };
 
             let paramsHead = {
-                "X-Requested-With" : "XMLHttpRequest",
-                "Content-Type" : "application/json"
+                "X-Requested-With": "XMLHttpRequest",
+                "Content-Type": "application/json"
             };
 
             axios.post('http://127.0.0.1:8000/api/auth/signup', paramsBody, paramsHead)
@@ -118,8 +118,8 @@ class Modal extends Component {
                 'tipo': 'empresa'
             };
             let paramsHead = {
-                "X-Requested-With" : "XMLHttpRequest",
-                "Content-Type" : "application/json"
+                "X-Requested-With": "XMLHttpRequest",
+                "Content-Type": "application/json"
             }
             axios.post('http://localhost:8000/api/auth/signup', paramsBody)
                 .then(res => {
@@ -127,7 +127,10 @@ class Modal extends Component {
                         RegExitoEmp: res.data.message,
                         RegErrorEmp: '',
                     });
-                    // if (res.status == 200) window.location.href = "/";
+
+
+
+                    // if (res.data.status === 200) window.location.href = "/categorias";
                     // this.handleSubmit("login-form")
                 })
                 .catch(err => {
@@ -143,7 +146,7 @@ class Modal extends Component {
     validateAll = (ev) => {
         const {usercityUsu, usercityEmp} = this.state;
         const {usernameUsu, emailUsu, passwordUsu, confirmPasswordUsu} = this.state.valuesUsu;
-        const { nameEmp, nameResEmp, emailEmp, passwordEmp, confirmPasswordEmp} = this.state.valuesEmp;
+        const {nameEmp, nameResEmp, emailEmp, passwordEmp, confirmPasswordEmp} = this.state.valuesEmp;
         const validationsUsu = {
             usernameUsu: '',
             usercityUsu: '',
@@ -160,7 +163,7 @@ class Modal extends Component {
             confirmPasswordEmp: ''
         };
         let isValid = true;
-
+alert(ev.target.id)
         if (ev.target.id === "register-formUsu") {
             if (!usercityUsu) {
                 validationsUsu.usercityUsu = 'Selecciona una ciudad';
@@ -276,7 +279,7 @@ class Modal extends Component {
     };
 
     validateOneUsu = (ev) => {
-        if(ev.target.id === "register-formUsu"){
+        if (ev.target.id === "register-formUsu") {
             const {name} = ev.target;
             const value = this.state.valuesUsu[name];
             let message = '';
@@ -355,7 +358,7 @@ class Modal extends Component {
     }
 
     handleChangesUsu = (ev) => {
-        console.log('esto es el ev',ev)
+        console.log('esto es el ev', ev)
         this.setState({usercityUsu: ev.target.value})
     };
     handleChangesEmp = (ev) => {
