@@ -1,0 +1,45 @@
+.mt-100 {
+    margin-top: 100px
+}
+
+.container-fluid {
+    margin-top: 50px
+}
+.card .card-header {
+    background-color: transparent;
+    border-bottom: none;
+    padding: 20px;
+    position: relative
+}
+
+.card .card-block {
+    padding: 1.25rem
+}
+
+.table-responsive {
+    display: inline-block;
+    width: 100%;
+    overflow-x: auto;
+    margin-bottom: 4em;
+    box-shadow: 0 1rem 3rem rgba(0,0,0,.175)!important;
+}
+
+.card .card-block table tr {
+    padding-bottom: 20px
+}
+
+.table>thead>tr>th {
+    border-bottom-color: #ccc
+}
+
+.table th {
+    padding: 1.25rem 0.75rem
+}
+
+td,
+th {
+    white-space: nowrap;
+    text-align: center;
+    vertical-align: middle!important;
+}
+

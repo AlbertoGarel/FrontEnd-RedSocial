@@ -1,0 +1,113 @@
+
+.dropdown-toggle::after {
+    display: none !important;
+}
+
+.fa-chevron-down:before {
+    content: "\f078";
+    font-size: 15px !important;
+    color: #A2A09E;
+}
+
+.dropdown-toggle::after {
+    display: inline-block;
+    margin-left: .255em;
+    vertical-align: .255em;
+    content: "\f078";
+    border-top: .3em solid;
+    border-right: .3em solid transparent;
+    border-bottom: 0;
+    border-left: .3em solid transparent;
+}
+
+label {
+    display: inline-block;
+    margin-bottom: 0;
+    margin-right: 4px;
+    color: #A2A09E;
+}
+
+.dropdown-menu {
+    left: -10em !important;
+    top: 3em;
+    right: 70px;
+    background-color: #fff;
+    width: 232px;
+    overflow: auto;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, .1);
+    border-radius: 8px;
+    padding: 16px 0 7px;
+    border: 1px solid rgba(0, 0, 0, .1);
+}
+
+h1 {
+    font-size: 18px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: bolder !important;
+    line-height: 22px;
+}
+
+.lugar_entrega {
+    color: #00ab61;
+    font-weight: 400;
+    font-size: 14px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+#identificate_btn {
+    background-color: #26B879;
+    margin: 16px 16px;
+    width: calc(100% - 32px);
+    color: white;
+    font-family: 'Open Sans', sans-serif;
+    font-width: 400;
+    font-size: 14px;
+    padding-bottom: .7em;
+    padding-top: .7em;
+}
+
+#dropdownMenu5 {
+    font-weight: 600;
+}
+
+#dropdownMenu5:hover {
+    color: black;
+}
+
+.fa-question:before,
+.fa-commenting:before {
+    content: "\f128";
+    margin-right: .3em;
+    vertical-align: text-top;
+    color: #A2A09E;
+}
+
+.dropdown-menu a.info {
+    font-size: 14px;
+    font-family: 'Open Sans', sans-serif;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+.dropdown-menu a.info:hover {
+    background-color: #E6E6E6;
+    color: black;
+}
+
+.fa-2x {
+    font-size: 1.5em !important;
+}
+
+.dropdown.open {
+    margin-right: 2em;
+}
+.dropdown-item.active, .dropdown-item:active {
+    color: #fff;
+    text-decoration: none;
+    background-color: green;
+}
+.dropdown-menu.show i{
+    margin-right: .3em;
+    vertical-align: text-top;
+    color: #A2A09E;
+}
