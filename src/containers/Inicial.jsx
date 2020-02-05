@@ -77,18 +77,18 @@ class Inicial extends Component {
     }
 
     renderPoolCategories() {
-        if (this.props.desc.length > 2) {
-            if (this.state.render !== 'search') this.setState({render: 'search'});
-
-            return this.props.busqueda.map((product) => {
-                return (
-                    <Fragment key={product.id}>
-                        <CardProduct data={product}/>
-                    </Fragment>
-                )
-            })
-        }
-        return this.props.poolCat.map((product) => {
+        // if (this.props.desc.length > 2) {
+        //     if (this.state.render !== 'search') this.setState({render: 'search'});
+        //
+        //     return this.props.busqueda.map((product) => {
+        //         return (
+        //             <Fragment key={product.id}>
+        //                 <CardProduct data={product}/>
+        //             </Fragment>
+        //         )
+        //     })
+        // }
+        return this.props.categories.map((product) => {
             if (this.state.render !== 'category') this.setState({render: 'category'});
             return (
                 <Fragment key={product.id}>
@@ -96,6 +96,7 @@ class Inicial extends Component {
                 </Fragment>
             )
         })
+
     }
 
     handleCategory = (category) => {
@@ -134,7 +135,7 @@ class Inicial extends Component {
                                     <hr/>
                                 </div>
 
-                                {/*{this.renderPoolCategories()}*/}<CardProduct />
+                                {this.renderPoolCategories()}
 
                             </div>
                         </section>
@@ -146,10 +147,14 @@ class Inicial extends Component {
     }
 }
 
+function mapStateToProps(state) {
+    return {
+        categories: state.Categories.list
+    }
+}
 
 
-
-export default connect()(Inicial);
+export default connect(mapStateToProps)(Inicial);
 
 
 

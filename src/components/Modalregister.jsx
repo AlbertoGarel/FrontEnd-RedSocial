@@ -7,7 +7,7 @@ import axios from 'axios';
 import store from "../store";
 
 // import Popper from 'popper.js';
-class Modal extends Component {
+class Modalregister extends Component {
 // const Modal = (props) => {
     constructor(props) {
         super(props);
@@ -701,4 +701,4 @@ alert(ev.target.id)
 
 }
 
-export default Modal;
+export default Modalregister;

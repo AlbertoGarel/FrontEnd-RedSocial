@@ -12,7 +12,7 @@ class UpdateProducts extends Component {
     }
 
     componentDidMount() {
-        showCategories();
+        // showCategories();
         // showPoolCat(this.state.cat);
     }
 

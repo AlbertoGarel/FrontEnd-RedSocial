@@ -17,9 +17,11 @@ export const DELETE_ORDER = 'DELETE_ORDER';
 
 
 export function showCategories() {
-    axios.get('http://localhost:3000/categories')
+    axios.get('http://localhost:8000/api/ofertas')
+
         .then(res => {
-            store.dispatch({type: SHOW_CATEGORIES, payload: res.data});
+            console.log('index', res.data.obj)
+            store.dispatch({type: SHOW_CATEGORIES, payload: res.data.obj});
         })
 }
 
