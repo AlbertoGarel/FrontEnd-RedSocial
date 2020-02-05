@@ -75,7 +75,7 @@ class Modal extends Component {
         if (!isValid) {
             return false
         }
-
+        console.log('peticion',ev.target.id)
         // const values = JSON.stringify(this.state);
         if (ev.target.id === "register-formUsu") {
             let paramsBody = {
@@ -94,16 +94,16 @@ class Modal extends Component {
             axios.post('http://127.0.0.1:8000/api/auth/signup', paramsBody, paramsHead)
                 .then(res => {
                     this.setState({
-                        RegExito: res.data.message,
-                        RegError: '',
+                        RegExitoUsu: res.data.message,
+                        RegErrorUsu: '',
                     });
                     // if (res.status == 200) window.location.href = "/";
                     // this.handleSubmit("login-form")
                 })
                 .catch(err => {
                     this.setState({
-                        RegError: err.message,
-                        RegExito: ''
+                        RegErrorUsu: err.message,
+                        RegExitoUsu: ''
                     })
                 });
             this.myFormRef.reset();
@@ -113,28 +113,27 @@ class Modal extends Component {
                 "name": this.state.valuesEmp.nameEmp,
                 "email": this.state.valuesEmp.emailEmp,
                 "password": this.state.valuesEmp.passwordEmp,
-                "address": this.state.valuesEmp.userStreetEmp,
                 "name_responsable": this.state.valuesEmp.nameResEmp,
-                "usercity": this.state.usercityEmp,
+                "ciudad_id": this.state.usercityEmp,
                 'tipo': 'empresa'
             };
             let paramsHead = {
                 "X-Requested-With" : "XMLHttpRequest",
                 "Content-Type" : "application/json"
             }
-            axios.post('http://127.0.0.1:8000/api/auth/signup', paramsBody, paramsHead)
+            axios.post('http://localhost:8000/api/auth/signup', paramsBody)
                 .then(res => {
                     this.setState({
-                        RegExito: res.data.message,
-                        RegError: '',
+                        RegExitoEmp: res.data.message,
+                        RegErrorEmp: '',
                     });
                     // if (res.status == 200) window.location.href = "/";
                     // this.handleSubmit("login-form")
                 })
                 .catch(err => {
                     this.setState({
-                        RegError: err.message,
-                        RegExito: ''
+                        RegErrorEmp: err.message,
+                        RegExitoEmp: ''
                     })
                 });
             this.myFormRef.reset();
@@ -468,8 +467,8 @@ class Modal extends Component {
                                                         <div className="col-lg-12">
                                                             {/*<p className="error">{this.state.logError}</p>*/}
                                                             {/*<p className="correcto">{this.state.logExito}</p>*/}
-                                                            <p className="error">{this.state.RegError}</p>
-                                                            <p className="correcto">{this.state.RegExito}</p>
+                                                            <p className="error">{this.state.RegErrorUsu}</p>
+                                                            <p className="correcto">{this.state.RegExitoUsu}</p>
                                                             <form id="register-formUsu"
                                                                   onSubmit={(ev) => this.handleSubmit(ev)}
                                                                   method="post" role="form"
@@ -578,7 +577,8 @@ class Modal extends Component {
                             {/*flip inicio detras*/}
                             <div className="back"
                                  style={this.state.ModalRotate == 'empresa' ? {transform: 'rotateY(0deg)'} : {}}>
-
+                                <p className="error">{this.state.RegErrorEmp}</p>
+                                <p className="correcto">{this.state.RegExitoEmp}</p>
                                 <form id="register-formEmp"
                                       onSubmit={(ev) => this.handleSubmit(ev)}
                                       method="post" role="form"
