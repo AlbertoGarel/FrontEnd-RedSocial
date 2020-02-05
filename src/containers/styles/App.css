@@ -4,7 +4,7 @@
     background-position: center;
 }
 #root .navbar.navbar-expand-lg.navbar-light.flex-shrink-1 {
-    display: none;
+    /* display: none; */
 }
 #intro nav{
     border-bottom: none!important;

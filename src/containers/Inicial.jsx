@@ -135,8 +135,19 @@ class Inicial extends Component {
                                     <hr/>
                                 </div>
 
-                                {this.renderPoolCategories()}
+                                <div className="container-fluid">
+                                    <div className="row">
+                                        <div className="col-12 w-50">
+                                        {this.renderPoolCategories()}
 
+                                        </div>
+                                        <div className="col-12 bg-success w-50">
+                                        {this.renderPoolCategories()}
+
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
                         </section>
                     </main>
