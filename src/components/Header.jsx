@@ -57,7 +57,7 @@ class Header extends Component {
 
         return (
             <Fragment>
-                <nav className="navbar navbar-expand-lg navbar-light flex-shrink-1">
+                <nav id="nav" className="navbar navbar-expand-lg navbar-light flex-shrink-1">
                     <Link to="/" id="enlace-logo" ><img
                         src="./assets/icons/logTT.png"
                         alt="logo mercahome"

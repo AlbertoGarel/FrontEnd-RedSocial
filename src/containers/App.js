@@ -18,12 +18,13 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            search:'',
+            search: '',
             isShowing: false,
             isShowingReg: false,
         };
         this.textInput = React.createRef()
     }
+
     triggerOpenModalHandler = () => {
         this.setState({
             isShowing: true
@@ -47,6 +48,13 @@ class App extends Component {
     };
 
     componentDidMount() {
+//comprobamos la url para ocultar navegador
+        let query = window.location.origin;
+        let element = document.getElementById('nav');
+        if(query === 'http://localhost:3001') {
+            element.classList.add("oculto");
+            // console.log('element',element.hasAttribute('class'))
+        }
 
     }
 
@@ -61,8 +69,12 @@ class App extends Component {
                     </a>
                     <div id="buttons-cont" className="d-flex justify-content-end align-items-center"
                          style={{height: 10 + '%',}}>
-                        <button type="button" className="btn btn-primary btn-lg raised" onClick={this.triggerOpenModalHandler}>Login</button>
-                        <button type="button" className="btn btn-primary btn-lg raised" onClick={this.triggerOpenModalHandlerReg}>Register</button>
+                        <button type="button" className="btn btn-primary btn-lg raised"
+                                onClick={this.triggerOpenModalHandler}>Login
+                        </button>
+                        <button type="button" className="btn btn-primary btn-lg raised"
+                                onClick={this.triggerOpenModalHandlerReg}>Register
+                        </button>
                     </div>
 
                     <h1 id="texto"></h1>

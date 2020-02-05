@@ -171,3 +171,6 @@
 .vertical.flip-container:hover .front {
     transform: rotateX(180deg);
 }
+.oculto{
+    display: none!important;
+}
