@@ -157,7 +157,7 @@ class Modal extends Component {
                         logExitoEmpLog: res.data.message,
                         logErrorEmpLog: res.data.error,
                     });
-                    if (res.data.status == 200) {
+                    if (res.data.state == 200) {
 
                         window.location.href = "/home";
                     }

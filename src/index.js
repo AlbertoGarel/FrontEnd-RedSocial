@@ -56,6 +56,7 @@ if (localStorage.getItem('user')) {
     });
 }
 
+
 // const store = createStore(reducers, composeEnhancers());
 ReactDOM.render(
     <Provider store={store}>
