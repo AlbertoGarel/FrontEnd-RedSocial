@@ -15,22 +15,40 @@ export const ADD_PRODUCT = 'ADD_PRODUCT';
 export const SUBTRACT_PRODUCT = 'SUBTRACT_PRODUCT';
 export const DELETE_ORDER = 'DELETE_ORDER';
 
+
 // -------
+export const SHOW_CIUDADES = 'SHOW_CIUDADES';
 export const SHOW_OFERTAS = 'SHOW_OFERTAS';
 export const SHOW_USUARIO = 'SHOW_USUARIO';
+export const SHOW_OFERTABYID = 'SHOW_OFERTABYID';
+
+// Oferta por ID
+export function showOfertaById(id) {
+    axios.get('http://localhost:8000/api/oferta/' + id)
+        .then(res => {
+            store.dispatch({ type: SHOW_OFERTABYID, payload: res.data.obj })
+        })
+}
+
+export function showCiudades() {
+    axios.get('http://localhost:8000/api/ciudades')
+        .then(res => {
+            store.dispatch({ type: SHOW_CIUDADES, payload: res.data.obj })
+        })
+}
 
 //ofertas
 export function showOfertas() {
     axios.get('http://localhost:8000/api/ofertas')
         .then(res => {
             console.log('index', res.data.obj)
-            store.dispatch({type: SHOW_OFERTAS, payload: res.data.obj});
+            store.dispatch({ type: SHOW_OFERTAS, payload: res.data.obj });
         })
 }
 
 //usuarios
 export function showUsuario(type, data) {
-    store.dispatch({type: type, payload: data});
+    store.dispatch({ type: type, payload: data });
 }
 
 //-------------------------------------------------------------------------
@@ -39,39 +57,39 @@ export function showCategories() {
 
         .then(res => {
             console.log('index', res.data.obj)
-            store.dispatch({type: SHOW_CATEGORIES, payload: res.data.obj});
+            store.dispatch({ type: SHOW_CATEGORIES, payload: res.data.obj });
         })
 }
 
 export async function showTopProducts() {
     const res = await axios.get('http://localhost:3000/products/top');
-    store.dispatch({type: SHOW_TOPPRODUCTS, payload: res.data});
+    store.dispatch({ type: SHOW_TOPPRODUCTS, payload: res.data });
 
 }
 
 export async function showSliderProducts() {
     const res = await axios.get('http://localhost:3000/products/promo');
-    store.dispatch({type: SHOW_SLIDERPRODUCTS, payload: res.data});
+    store.dispatch({ type: SHOW_SLIDERPRODUCTS, payload: res.data });
 }
 
 export function showPoolCat(cat) {
     axios.get(`http://localhost:3000/products/?category=${cat}`)
         .then(res => {
-            store.dispatch({type: SHOW_POOLCAT, payload: res.data});
+            store.dispatch({ type: SHOW_POOLCAT, payload: res.data });
         })
 }
 
 export function sortByPrice(btnBol) {
-    store.dispatch({type: SORT_BYPRICE, payload: btnBol})
+    store.dispatch({ type: SORT_BYPRICE, payload: btnBol })
 };
 
 export async function search(desc) {
     const res = await axios.get(`http://localhost:3000/products/?name=${desc}`);
-    store.dispatch({type: SEARCH, payload: {list: res.data, desc: desc}})
+    store.dispatch({ type: SEARCH, payload: { list: res.data, desc: desc } })
 };
 
 export async function searchDelete(desc) {
-    await store.dispatch({type: DELETE, payload: true})
+    await store.dispatch({ type: DELETE, payload: true })
 };
 
 // export function userRegister(paramsBody) {
@@ -112,7 +130,7 @@ export function logOut(paramsBody, paramsHeaders) {
                 });
                 localStorage.removeItem('user');
                 localStorage.removeItem('redux_localstorage_simple_Carrito');
-                store.dispatch({type: DELETE_ORDER, payload: []});
+                store.dispatch({ type: DELETE_ORDER, payload: [] });
                 window.location.href = "/";
                 return res.data.message
             }
@@ -142,7 +160,7 @@ export function subtractProduct(data) {
 export function AddOrder(paramsBody, paramsHeaders) {
     axios.post('http://localhost:3000/orders/add', paramsBody, paramsHeaders)
         .then(res => {
-            store.dispatch({type: DELETE_ORDER, payload: []});
+            store.dispatch({ type: DELETE_ORDER, payload: [] });
             return res.data.message
         })
         .catch(err => console.log(err))

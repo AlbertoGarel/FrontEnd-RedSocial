@@ -25,13 +25,25 @@ class Carrito extends Component {
         };
 
     }
+    componentDidMount(){
+        
+    }
 
 
     openCart = () => {
         (this.state.showClass === 'noShow') ? this.setState({showClass: ''}) : this.setState({showClass: 'noShow'});
     };
 
-    renderItemsToCart() {
+    renderItemsOfertas() {
+        if(this.props.ofertas > 0){
+             this.props.ofertas.map(oferta => {
+                 return (
+                <Fragment key={oferta.id}>
+                    <CardProduct data={oferta} />
+                </Fragment>
+                )
+            }) 
+        }
 
     }
 
@@ -59,7 +71,7 @@ class Carrito extends Component {
                     </div>
                     <div id="body_carrito">
 
-                        {/*RENDER ELEMENTS*/}
+                        {this.renderItemsOfertas()}
 
                     </div>
                     <hr/>
@@ -71,7 +83,7 @@ class Carrito extends Component {
 
 function mapStateToProps(state) {
     return {
-        items: state.Carrito.list,
+        ofertas: state.Ofertas.ofertasbyid,
 
     }
 }

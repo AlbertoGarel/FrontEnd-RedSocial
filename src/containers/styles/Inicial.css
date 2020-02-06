@@ -4,13 +4,11 @@ hr {
     margin: 0px;
     padding: 0px;
 }
-
 .fa-chevron-right:before {
     content: "\f054";
     font-size: .5em;
     margin-right: .5em;
 }
-
 ul#categorias {
     padding: 0px;
     position: fixed;
@@ -22,11 +20,9 @@ ul#categorias {
     border-right: 1px solid #e6e6e6;
     height: calc(100vh - 76px);
 }
-
 ul#categorias::-webkit-scrollbar {
     display: none;
 }
-
 #categorias li {
     padding: 1em;
     list-style-type: none;
@@ -42,28 +38,21 @@ ul#categorias::-webkit-scrollbar {
     transition-duration: .6s;
     color: #00ab61;
 }
-
 .contenido {
     margin-left: 200px;
     width: calc(100% - 200px);
     padding-top: 48px;
-    display: flex;
-    justify-content: flex-start;
-    flex-wrap: wrap;
 }
-
 /*main{*/
 /*    margin-top: 74px;*/
 /*}*/
 .compens_nav {
     margin-top: 74px;
 }
-
 .container-fluid.no-padd {
     padding-left: 0px;
     padding-right: 0px;
 }
-
 .cover {
     width: 100%;
     height: 100%;
@@ -72,7 +61,6 @@ ul#categorias::-webkit-scrollbar {
     justify-content: center;
     align-items: center;
 }
-
 .p_error {
     margin-top: 1em;
     text-transform: capitalize;
@@ -80,16 +68,36 @@ ul#categorias::-webkit-scrollbar {
     font-weight: 900;
     font-size: 16px;
 }
-
-.titulo {
-    width: 90% !important;
+.buscador {
+   display: flex;
+   align-items: flex-start;
+   margin-left: 2em;
+   margin-bottom: 2em;
+}
+#input-buscador {
+    outline:none !important;
+    outline-width: 0 !important;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    width: 41vw;
+    height: 2.6em;
+    font-size: 16px;
+}
+#input-buscador:focus{
+    outline:none !important;
+    outline-width: 0 !important;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none; 
+}
+#button-buscador {
+    margin-left: 1em;
+    height: 3em;
+    width: 7.9vw;
+    background-color: rgb(223, 197, 82);    
 }
 
-.titulo > h2 {
-    font-family: 'Open Sans', sans-serif;
-    font-weight: 700;
-    font-size: 32px;
-    text-transform: capitalize;
-    text-indent: 1em;
+#secCategorias {
+    margin: 1em;
 }
-

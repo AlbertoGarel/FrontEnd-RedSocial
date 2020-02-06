@@ -7,6 +7,7 @@ import PoolCat from './poolCat'
 import Search from "./SearchPoduct";
 import Users from "./users";
 import Carrito from "./Carrito";
+import Ciudades from "./Ciudades";
 
 import Ofertas from "./ofertas";
 import Usuarios from "./usuarios";
@@ -22,7 +23,8 @@ let reducers = combineReducers({
     Users,
     Carrito,
     Ofertas,
-    Usuarios
+    Usuarios,
+    Ciudades
 });
 
 export default reducers;

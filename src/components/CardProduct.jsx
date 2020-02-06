@@ -6,6 +6,8 @@ import { addProduct, showCategories, showPoolCat, subtractProduct } from '../act
 //CSS
 import './styles/CardProduct.css'
 
+import BotonUs from "../components/BotonUs";
+import {showOfertaById} from '../actions';
 class CardProduct extends Component {
 
     constructor(props) {
@@ -28,17 +30,21 @@ class CardProduct extends Component {
     //     }, 1000);
     // }
 
+   
     render() {
-
+        const { data } = this.props
         return (
-            <div className="card">
-                <div class="card bg-light mb-3" >
-                    <div class="card-header">Header</div>
-                    <div class="card-body">
-                        <h5 class="card-title">Light card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                    </div>
+            <div className="card" data-idTecno = {data.tecnologia_id}>
+                <div className="card bg-light mb-3" >
+                    <div className="card-body">
+                        <h3 className="card-title">{data.puesto}</h3>
+                        <h6 className="card-subtitle">{data.name}</h6>
+                        <p className="ciudad">{data.name_ciu}</p>
+                        <p className="card-text">{data.descripcion}</p>
+                        <p className="info text-info">{data.tipo_cont} | {data.tipo_jorn} | {data.salario_min} - {data.salario_max}</p>
+                    
+                     </div>
+                    <BotonUs data = {data.oferta_id} />
                 </div>
             </div>
         )
