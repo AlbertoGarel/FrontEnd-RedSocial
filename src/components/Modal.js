@@ -1,10 +1,11 @@
 import React, {Component, Fragment} from 'react';
-import {GET_USER, userRegister} from "../actions";
+import {GET_USER, SHOW_USUARIO, userRegister} from "../actions";
 
 import './styles/Modal.css';
 import $ from 'jquery';
 import axios from 'axios';
 import store from "../store";
+import { showUsuario} from "../actions";
 
 // import Popper from 'popper.js';
 class Modal extends Component {
@@ -31,11 +32,11 @@ class Modal extends Component {
                 loginEmailEmp: '',
                 loginPasswordEmp: '',
             },
-            validationsUsu : {
+            validationsUsu: {
                 emailUsu: '',
                 passwordUsu: '',
             },
-            validationsEmp : {
+            validationsEmp: {
                 emailEmp: '',
                 passwordEmp: '',
             },
@@ -60,10 +61,11 @@ class Modal extends Component {
         }
 
         // const values = JSON.stringify(this.state);
-        if (ev.target.id === "login-formUsu") {
+        if (ev.target.id == "login-formUsu") {
             const paramsBody = {
                 "email": this.state.valuesUsuLog.loginEmailUsu,
-                "password": this.state.valuesUsuLog.loginPasswordUsu
+                "password": this.state.valuesUsuLog.loginPasswordUsu,
+                "tipo": 'usuario'
             };
 
             let paramsHead = {
@@ -71,23 +73,59 @@ class Modal extends Component {
                 "Content-Type": "application/json"
             }
 
-            this.myFormRef.reset();
+            // this.myFormRef.reset();
             // userRegister(paramsBody);
             axios.post('http://localhost:8000/api/auth/login', paramsBody, paramsHead)
                 .then(res => {
-                    if (res.status == 200) {
+                    this.setState({
+                        logExitoEmpLog: res.data.message,
+                        logErrorEmpLog: res.data.error,
+                    });
+                    if (res.data.state == 200) {
                         // store.dispatch({
                         //     type: GET_USER, payload: {
-                        //         id: res.data.id,
-                        //         username: res.data.user_name,
-                        //         address: res.data.address,
-                        //         token: res.data.token,
-                        //         email: res.data.email,
-                        //         role: res.data.role
+                        //         set: res.data.obj,
+                        //         tipo :'usuario',
+                        //         usernname: res.data.obj.name,
+                        //         prim_apellido: res.data.obj.prim_apellido,
+                        //         seg_apellido: res.data.obj.seg_apellido,
+                        //         email: res.data.obj.email,
+                        //         password: res.data.obj.password,
+                        //         about: res.data.obj.about,
+                        //         ciudad_id: res.data.obj.ciudad_id,
+                        //         direccion: res.data.obj.direccion,
+                        //         imagen: res.data.obj.imagen,
+                        //         sexo: res.data.obj.sexo,
+                        //         especialidad: res.data.obj.especialidad,
+                        //         telefono: res.data.obj.telefono,
+                        //         created_at: "2020-02-05 19:19:21",
+                        //         updated_at: "2020-02-05 19:19:21",
+                        //         token: res.data.remember_token
                         //     }
-                        // });
-                        localStorage.setItem('user', JSON.stringify(res.data))
-                        window.location.href = "/categorias";
+                        // })
+                        let user = {
+                            tipo: 'usuario',
+                            id: res.data.obj.id,
+                            username: res.data.obj.name,
+                            prim_apellido: res.data.obj.prim_apellido,
+                            seg_apellido: res.data.obj.seg_apellido,
+                            email: res.data.obj.email,
+                            password: res.data.obj.password,
+                            about: res.data.obj.about,
+                            ciudad_id: res.data.obj.ciudad_id,
+                            direccion: res.data.obj.direccion,
+                            imagen: res.data.obj.imagen,
+                            sexo: res.data.obj.sexo,
+                            especialidad: res.data.obj.especialidad,
+                            telefono: res.data.obj.telefono,
+                            created_at: "2020-02-05 19:19:21",
+                            updated_at: "2020-02-05 19:19:21",
+                            token: res.data.remember_token
+                        }
+                        // console.log('userjson', user);
+                        // showUsuario(SHOW_USUARIO, )
+                        localStorage.setItem('user', JSON.stringify(user))
+                        window.location.href = "/home";
                         // this.setState({logExito: res})
                     } else {
                         this.setState({logError: 'error en login'})
@@ -104,6 +142,7 @@ class Modal extends Component {
             let paramsBody = {
                 "email": this.state.valuesEmpLog.loginEmailEmp,
                 "password": this.state.valuesEmpLog.loginPasswordEmp,
+                'tipo' : 'empresa'
             };
 
             let paramsHead = {
@@ -111,15 +150,17 @@ class Modal extends Component {
                 "Content-Type": "application/json"
             }
 
-            alert(paramsBody)
             axios.post('http://localhost:8000/api/auth/login', paramsBody, paramsHead)
                 .then(res => {
-                    console.log('response login', res);
-                    // this.setState({
-                    //     logExitoEmpLog: res.data.message,
-                    //     logErrorEmpLog: '',
-                    // });
-                    if (res.status == 200) window.location.href = "/home";
+                    console.log('usuario de login', res.data.obj);
+                    this.setState({
+                        logExitoEmpLog: res.data.message,
+                        logErrorEmpLog: res.data.error,
+                    });
+                    if (res.data.status == 200) {
+
+                        window.location.href = "/home";
+                    }
                     // this.handleSubmit("login-form")
                 })
                 .catch(err => {
@@ -184,10 +225,10 @@ class Modal extends Component {
                 validationsUsu.loginEmailUsu = 'Email es requerido'
                 isValid = false
             }
-            if (loginEmailUsu && !/\S+@\S+\.\S+/.test(validationsUsu)) {
-                validationsUsu.loginEmailUsu = 'Formato de Email debe ser :  example@mail.com';
-                isValid = false
-            }
+            // if (loginEmailUsu && !/\S+@\S+\.\S+/.test(validationsUsu)) {
+            //     validationsUsu.loginEmailUsu = 'Formato de Email debe ser :  example@mail.com';
+            //     isValid = false
+            // }
             if (loginPasswordUsu < 8) {
                 validationsUsu.password = 'Longitud mínima de 8 caracteres es requerida.';
                 isValid = false;
@@ -308,9 +349,9 @@ class Modal extends Component {
     //Handler Button Flip
     handleEmpresa = () => {
         // this.setState({ModalRotate: 'usuario'})
-        if(this.state.ModalRotate === 'usuario'){
+        if (this.state.ModalRotate === 'usuario') {
             this.setState({ModalRotate: 'empresa'})
-        }else{
+        } else {
             this.setState({ModalRotate: 'usuario'})
         }
     };
@@ -359,7 +400,8 @@ class Modal extends Component {
                             {/*flip inicio*/}
 
                             {/*flip delante*/}
-                            <div className="front" style={this.state.ModalRotate == 'empresa' ? {transform: 'rotateY(180deg)'} : {}}>
+                            <div className="front"
+                                 style={this.state.ModalRotate == 'empresa' ? {transform: 'rotateY(180deg)'} : {}}>
                                 {/*flip delante*/}
                                 <div className="modal-body">
                                     <div className="row formulario-row">
@@ -376,9 +418,9 @@ class Modal extends Component {
                                                 <div className="panel-body">
                                                     <div className="row formulario-row">
                                                         <div className="col-lg-12">
-                                                            <p className="error">{this.state.logError}</p>
-                                                            <p className="correcto">{this.state.logExito}</p>
-                                                            <form id="login-form"
+                                                            <p className="error">{this.state.logErrorUsuLog}</p>
+                                                            <p className="correcto">{this.state.logExitoUsuLog}</p>
+                                                            <form id="login-formUsu"
                                                                   onSubmit={(ev) => this.handleSubmit(ev)}
                                                                   method="post" role="form" style={{display: 'block'}}
                                                                   ref={(login) => this.myFormRef = login}>
@@ -439,7 +481,8 @@ class Modal extends Component {
                                 {/*flip fin*/}
                             </div>
                             {/*flip inicio detras*/}
-                            <div className="back" style={this.state.ModalRotate == 'empresa' ? {transform: 'rotateY(0deg)'} : {}}>
+                            <div className="back"
+                                 style={this.state.ModalRotate == 'empresa' ? {transform: 'rotateY(0deg)'} : {}}>
 
                                 <div className="row formulario-row">
                                     <div className="col-md-12 col-md-offset-3">
@@ -455,9 +498,9 @@ class Modal extends Component {
                                             <div className="panel-body">
                                                 <div className="row formulario-row">
                                                     <div className="col-lg-12">
-                                                        <p className="error">{this.state.logError}</p>
-                                                        <p className="correcto">{this.state.logExito}</p>
-                                                        <form id="login-form"
+                                                        <p className="error">{this.state.logErrorEmpLog}</p>
+                                                        <p className="correcto">{this.state.logExitoEmpLog}</p>
+                                                        <form id="login-formEmp"
                                                               onSubmit={(ev) => this.handleSubmit(ev)}
                                                               method="post" role="form" style={{display: 'block'}}
                                                               ref={(login) => this.myFormRef = login}>
@@ -518,15 +561,15 @@ class Modal extends Component {
                     </div>
                     <div className="modal-footer">
                         {/*<button className="btn-cancel" onClick={this.props.close}>CLOSE</button>*/}
-                        { this.state.ModalRotate == 'usuario' ?
+                        {this.state.ModalRotate == 'usuario' ?
                             <button className="btn-continue btn-primary raised" onClick={this.handleEmpresa}><i
                                 className="fa fa-3x fa-building-o"/>
                                 Login Empresas
                             </button>
                             :
                             < button className="btn-continue" onClick={this.handleEmpresa}><i
-                            className="fa fa-3x fa-users"/>
-                            Login Usuarios
+                                className="fa fa-3x fa-users"/>
+                                Login Usuarios
                             </button>
                         }
                     </div>

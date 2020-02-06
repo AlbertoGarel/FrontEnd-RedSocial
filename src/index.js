@@ -34,13 +34,24 @@ console.log('%cSilence is Gold...', 'color:white;background-color:purple');
 if (localStorage.getItem('user')) {
     const user = JSON.parse(localStorage.getItem('user'));
     store.dispatch({
-        type: GET_USER, payload: {
-            id: user.id,
-            username: user.user_name,
-            address: user.address,
-            token: user.token,
+        type: GET_USER, payload:{
+            tipo : user.tipo,
+            id:  user.id,
+            username: user.username,
+            prim_apellido:  user.prim_apellido,
+            seg_apellido: user.seg_apellido,
             email: user.email,
-            role: user.role
+            password: user.password,
+            about: user.about,
+            ciudad_id: user.ciudad_id,
+            direccion: user.direccion,
+            imagen: user.imagen,
+            sexo: user.sexo,
+            especialidad: user.especialidad,
+            telefono: user.telefono,
+            created_at: user.created_at,
+            updated_at: user.updated_at,
+            token: user.remember_token
         }
     });
 }

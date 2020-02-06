@@ -20,6 +20,7 @@ import Wrapper from "../components/Wrapper";
  * IMPORT REDUCERS
  * */
 import {
+    showOfertas,
     showCategories,
     showPoolCat,
     sortByPrice,
@@ -50,6 +51,7 @@ class Inicial extends Component {
     }
 
     componentDidMount() {
+        showOfertas();
         showCategories();
         showPoolCat(this.state.cat);
     }
@@ -88,7 +90,7 @@ class Inicial extends Component {
         //         )
         //     })
         // }
-        return this.props.categories.map((product) => {
+        return this.props.ofertas.map((product) => {
             if (this.state.render !== 'category') this.setState({render: 'category'});
             return (
                 <Fragment key={product.id}>
@@ -160,7 +162,7 @@ class Inicial extends Component {
 
 function mapStateToProps(state) {
     return {
-        categories: state.Categories.list
+        ofertas: state.Ofertas.list
     }
 }
 

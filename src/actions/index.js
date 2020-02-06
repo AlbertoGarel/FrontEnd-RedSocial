@@ -15,9 +15,27 @@ export const ADD_PRODUCT = 'ADD_PRODUCT';
 export const SUBTRACT_PRODUCT = 'SUBTRACT_PRODUCT';
 export const DELETE_ORDER = 'DELETE_ORDER';
 
+// -------
+export const SHOW_OFERTAS = 'SHOW_OFERTAS';
+export const SHOW_USUARIO = 'SHOW_USUARIO';
 
-export function showCategories() {
+//ofertas
+export function showOfertas() {
     axios.get('http://localhost:8000/api/ofertas')
+        .then(res => {
+            console.log('index', res.data.obj)
+            store.dispatch({type: SHOW_OFERTAS, payload: res.data.obj});
+        })
+}
+
+//usuarios
+export function showUsuario(type, data) {
+    store.dispatch({type: type, payload: data});
+}
+
+//-------------------------------------------------------------------------
+export function showCategories() {
+    axios.get('http://localhost:8000/api/year')
 
         .then(res => {
             console.log('index', res.data.obj)
@@ -81,7 +99,7 @@ export async function searchDelete(desc) {
 export function logOut(paramsBody, paramsHeaders) {
     axios.patch('http://localhost:3000/users/logout', paramsBody, paramsHeaders)
         .then(res => {
-            if(res.status === 200){
+            if (res.status === 200) {
                 store.dispatch({
                     type: USER_DELETE, payload: {
                         id: '',
@@ -94,9 +112,9 @@ export function logOut(paramsBody, paramsHeaders) {
                 });
                 localStorage.removeItem('user');
                 localStorage.removeItem('redux_localstorage_simple_Carrito');
-                        store.dispatch({type: DELETE_ORDER, payload:[]});
+                store.dispatch({type: DELETE_ORDER, payload: []});
                 window.location.href = "/";
-                        return res.data.message
+                return res.data.message
             }
 
         })
@@ -122,12 +140,12 @@ export function subtractProduct(data) {
 }
 
 export function AddOrder(paramsBody, paramsHeaders) {
-     axios.post('http://localhost:3000/orders/add', paramsBody, paramsHeaders)
-        .then(res=>{
-            store.dispatch({type: DELETE_ORDER, payload:[]});
+    axios.post('http://localhost:3000/orders/add', paramsBody, paramsHeaders)
+        .then(res => {
+            store.dispatch({type: DELETE_ORDER, payload: []});
             return res.data.message
         })
-        .catch(err=>console.log(err))
+        .catch(err => console.log(err))
 
 
 }

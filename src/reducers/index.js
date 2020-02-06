@@ -8,6 +8,9 @@ import Search from "./SearchPoduct";
 import Users from "./users";
 import Carrito from "./Carrito";
 
+import Ofertas from "./ofertas";
+import Usuarios from "./usuarios";
+
 
 let reducers = combineReducers({
     //reducers...
@@ -17,7 +20,9 @@ let reducers = combineReducers({
     PoolCat,
     Search,
     Users,
-    Carrito
+    Carrito,
+    Ofertas,
+    Usuarios
 });
 
 export default reducers;
