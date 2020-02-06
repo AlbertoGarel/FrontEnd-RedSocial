@@ -24,8 +24,11 @@ export const SHOW_OFERTABYID = 'SHOW_OFERTABYID';
 
 // Oferta por ID
 export function showOfertaById(id) {
-    axios.get('http://localhost:8000/api/oferta/' + id)
+    
+    axios.get('http://localhost:8000/api/ofertas/' + id)
         .then(res => {
+            console.log(res.data.obj);
+
             store.dispatch({ type: SHOW_OFERTABYID, payload: res.data.obj })
         })
 }

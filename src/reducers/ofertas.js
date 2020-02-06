@@ -13,10 +13,10 @@ function Ofertas(state = initialState, action) {
         case SHOW_OFERTAS:
             return Object.assign({}, state, { list: action.payload });
             break;
-        // case SHOW_OFERTABYID:
-        //     return Object.assign({}, state, { ofertasbyid: action.payload });
+        case SHOW_OFERTABYID:
+            return Object.assign({}, state, { ofertasbyid: action.payload });
 
-        //     break;
+            break;
         default:
             return state;
     }
