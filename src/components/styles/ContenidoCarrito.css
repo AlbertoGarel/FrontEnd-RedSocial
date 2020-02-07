@@ -1,3 +1,17 @@
 #body_carrito .card{
     margin: 0px;
 }
+#body_carrito img{
+    width: 30%;
+    float: left;
+    margin: .4em .8em .4em .4em ;
+}
+#cont-texto{
+    padding: .8em!important;
+}
+#body_carrito button{
+    bottom: 0;
+    position: absolute;
+    right: 0;
+}
+

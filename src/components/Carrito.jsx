@@ -39,11 +39,15 @@ class Carrito extends Component {
     renderItemsOfertas() {
         // if(this.props.ofertasById){
         //      this.props.ofertasById.map(oferta => {
-        //          return (
-        //
-        //
-        //
-        //         )
+        if(this.props.ofertasById){
+            return(
+                <Fragment>
+                    <Contenidocarrito data={this.props.ofertasById}/>
+                </Fragment>
+            )
+        }
+
+
         //     })
         // }
 
@@ -73,8 +77,8 @@ console.log('en carrito' , this.props.ofertasById)
                     </div>
                     <div id="body_carrito">
 
-                        {/*{this.renderItemsOfertas()}*/}
-                            <Contenidocarrito />
+                        {this.renderItemsOfertas()}
+
                     </div>
                     <hr/>
                 </section>

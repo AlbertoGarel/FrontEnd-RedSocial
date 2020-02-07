@@ -21,23 +21,60 @@ class Contenidocarrito extends Component {
 
     }
 
+    addOferta(id){
+        let paramsBody = {
+            'user_id' : JSON.parse(localStorage.getItem('user').id)
+        }
+        axios.get('http://localhost:8000/api/oferta/create/'+id)
+            .then(res=>{
+
+            })
+    }
+
+
     render() {
         // console.log(this.props.data.id);
-
+        // alert(JSON.parse(localStorage.getItem('user').id));
+        const {data} = this.props;
         return (
             <Fragment>
                 {/*<div className="card-deck col-12 bg-warning">*/}
-                    <div className="card col-12 bg-light">
-                        <img src="..." className="card-img-top" alt="..."/>
-                        <div className="card-body">
-                            <h5 className="card-title">Card title</h5>
-                            <p className="card-text">This is a longer card with supporting text below as a natural
-                                lead-in to additional content. This content is a little bit longer.</p>
-                            <p className="card-text"><small className="text-muted">Last updated 3 mins ago</small>fgfgfg
-                            </p>
-                        </div>
+                <div className="card col-12 bg-light">
+                    <div id="cabecera">
+                        <img
+                            src="https://d500.epimg.net/cincodias/imagenes/2015/05/08/pyme/1431098283_691735_1431098420_noticia_normal.jpg"
+                            className="card-img-top" alt="..."/>
+                            <div>
+                                <h5>{data.name}</h5>
+                                <hr/>
+                                <h6>Sobre nosotros...</h6>
+                                <p>{data.about}</p>
+                            </div>
                     </div>
-                {/*</div>*/}
+                    <div className="card-body">
+                        <div id="cont-texto" className="bg-light">
+                                <h3 className="card-title">{data.puesto}</h3>
+                                <h6 className="card-subtitle text-info">{data.name_ciu}</h6>
+                            <hr className="w-75 mx-auto"/>
+                                <h6 className="">Descripción:</h6>
+                                <p className="card-text">{data.descripcion}</p>
+                            <h6>Tecnología:</h6>
+                            <p className="card-text">{data.name_tec}</p>
+                            <h6>Estudios mínimos:</h6>
+                            <p className="card-text">{data.tipo_est}</p>
+                            <h6>Condiciones:</h6>
+                                <p className="info text-info">{data.tipo_cont} | {data.tipo_jorn} | {data.salario_min} - {data.salario_max}</p>
+                            <h6></h6>
+                        </div>
+
+                    </div>
+                    <button id="botonVer" type="button"
+                            className="btn btn-primary btn-lg raised float-right mr-3 mb-3"
+                    onClick={()=>this.addOferta(data.id)}>
+                        Solicitar
+                    </button>
+                </div>
+
             </Fragment>
         )
     }
