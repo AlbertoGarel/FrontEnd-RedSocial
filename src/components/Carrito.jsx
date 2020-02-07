@@ -2,6 +2,8 @@ import React, {Component, Fragment} from 'react';
 
 import {connect} from 'react-redux'
 import {AddOrder} from '../actions'
+
+import Contenidocarrito from '../components/ContenidoCarrito'
 /**
  * IMPORT BOOTSTRAP
  * */
@@ -35,21 +37,21 @@ class Carrito extends Component {
     };
 
     renderItemsOfertas() {
-        if(this.props.ofertas > 0){
-             this.props.ofertas.map(oferta => {
-                 return (
-                <Fragment key={oferta.id}>
-                    <CardProduct data={oferta} />
-                </Fragment>
-                )
-            }) 
-        }
+        // if(this.props.ofertasById){
+        //      this.props.ofertasById.map(oferta => {
+        //          return (
+        //
+        //
+        //
+        //         )
+        //     })
+        // }
 
     }
 
 
     render() {
-
+console.log('en carrito' , this.props.ofertasById)
         return (
             <Fragment>
                 <button id="btn_carrito" style={{position:'relative'}} onClick={this.openCart}>
@@ -71,8 +73,8 @@ class Carrito extends Component {
                     </div>
                     <div id="body_carrito">
 
-                        {this.renderItemsOfertas()}
-
+                        {/*{this.renderItemsOfertas()}*/}
+                            <Contenidocarrito />
                     </div>
                     <hr/>
                 </section>
@@ -83,7 +85,7 @@ class Carrito extends Component {
 
 function mapStateToProps(state) {
     return {
-        ofertas: state.Ofertas.ofertasbyid,
+        ofertasById: state.Ofertas.ofertasbyid,
 
     }
 }

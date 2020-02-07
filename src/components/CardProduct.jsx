@@ -33,8 +33,9 @@ class CardProduct extends Component {
    
     render() {
         const { data } = this.props
+        // console.log('en card---------',this.props.data)
         return (
-            <div className="card" data-idTecno = {data.tecnologia_id}>
+            <div className="card" key={data.id} data-idTecno = {data.tecnologia_id}>
                 <div className="card bg-light mb-3" >
                     <div className="card-body">
                         <h3 className="card-title">{data.puesto}</h3>
@@ -44,7 +45,7 @@ class CardProduct extends Component {
                         <p className="info text-info">{data.tipo_cont} | {data.tipo_jorn} | {data.salario_min} - {data.salario_max}</p>
                     
                      </div>
-                    <BotonUs data = {data.oferta_id} />
+                    <BotonUs data = {data.id} />
                 </div>
             </div>
         )

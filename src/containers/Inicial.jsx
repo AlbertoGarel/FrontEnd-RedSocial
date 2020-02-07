@@ -91,8 +91,10 @@ class Inicial extends Component {
         //         )
         //     })
         // }
+
+
         return this.props.ofertas.map((product) => {
-            if (this.state.render !== 'category') this.setState({ render: 'category' });
+            // if (this.state.render !== 'category') this.setState({ render: 'category' });
             return (
                 <Fragment key={product.id}>
                     <CardProduct data={product} />

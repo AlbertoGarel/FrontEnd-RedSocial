@@ -32,7 +32,7 @@ class BotonUs extends Component {
     }
 
     render() {
-        console.log(this.props.data.id);
+        // console.log(this.props.data.id);
         
         return (
             <div className="botonLlamada">
