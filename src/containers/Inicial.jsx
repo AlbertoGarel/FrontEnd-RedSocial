@@ -42,7 +42,7 @@ class Inicial extends Component {
         super(props);
         this.state = {
             btn: false,
-            render: 'todas',
+            render: 'todas'
         };
         //bind function
         this.outputEvent = this.outputEvent.bind(this);
@@ -75,7 +75,6 @@ class Inicial extends Component {
     }
 
     renderPoolRenders = () => {
-        this.setState({renderizado: this})
         switch (this.props.controlBusq) {
             case 'todas':
                 return this.props.ofertas.map((product, index) => {
