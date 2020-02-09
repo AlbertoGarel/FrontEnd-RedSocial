@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import axios from 'axios';
 import store from "../store";
-import SHOW_OFERTABYID from '../reducers/ofertas';
 
 
 //REDUX
 import { connect } from "react-redux";
-import { addProduct, showCategories, showPoolCat, subtractProduct, showOfertaById, showCiudades } from '../actions'
+import { showOfertaById, openNowCart } from '../actions'
 //CSS
 import '../components/styles/BotonUs.css';
 
@@ -26,9 +25,11 @@ class BotonUs extends Component {
         //    console.log(res.data.obj);
         //     store.dispatch({type: SHOW_OFERTABYID, payload: res.data.obj})
         // }).catch(err => console.log(err))
-        
+
         // showOfertaById(id);
-        showOfertaById(id)
+
+        showOfertaById(id);
+        openNowCart();
     }
 
     render() {
@@ -47,5 +48,7 @@ class BotonUs extends Component {
         )
     }
 }
+
+
 
 export default BotonUs;

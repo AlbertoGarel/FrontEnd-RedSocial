@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from 'react';
-import {GET_USER, userRegister} from "../actions";
+import {showCiudades, userRegister} from "../actions";
 
 import './styles/Modal.css';
 import $ from 'jquery';
@@ -340,6 +340,7 @@ alert(ev.target.id)
             .then(res => {
                 // console.log(res)
                 this.renderTopCities(res)
+                showCiudades()
             })
             .catch(err => console.log(err));
     }

@@ -1,5 +1,5 @@
-import React, { Component, Fragment } from 'react';
-import { connect } from 'react-redux'
+import React, {Component, Fragment} from 'react';
+import {connect} from 'react-redux'
 /**
  * IMPORT BOOTSTRAP
  * */
@@ -8,6 +8,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
  *  IMPORT LIBRARIES OF BOOTSTRAP
  * */
 import 'bootstrap/dist/js/bootstrap.bundle.min';
+import $ from 'jquery';
+import Popper from 'popper.js';
+
 /**
  * IMPORT OWN STYLES
  * */
@@ -20,23 +23,26 @@ import Wrapper from "../components/Wrapper";
  * IMPORT REDUCERS
  * */
 import {
+    showOfertaByCont,
+    showOfertaByJor,
+    showOfertaBySal,
+    showByEstudios,
+    showByProvincias, showOfertaByExp,
     showOfertaById,
     showOfertas,
-    showCategories,
-    showPoolCat,
     sortByPrice,
-    searchDelete
 } from "../actions";
 import CardProduct from "../components/CardProduct";
 import SortBtn from "../components/SortBtn";
+
+import AsideUser from "../components/AsideUser";
 
 class Inicial extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            cat: "Agua",
             btn: false,
-            render: 'category'
+            render: 'todas',
         };
         //bind function
         this.outputEvent = this.outputEvent.bind(this);
@@ -44,74 +50,165 @@ class Inicial extends Component {
 
     outputEvent() {
         if (this.state.btn === false) {
-            this.setState({ btn: true });
+            this.setState({btn: true});
         } else {
-            this.setState({ btn: false });
+            this.setState({btn: false});
         }
         sortByPrice(this.state.btn);
     }
 
     componentDidMount() {
-        showOfertas();
-        showCategories();
-        showPoolCat(this.state.cat);
+        if (this.state.render === 'todas') {
+            showOfertas();
+        } else {
+            showByProvincias();
+            showByEstudios();
+            showOfertaByExp();
+            showOfertaBySal();
+            showOfertaByJor();
+            showOfertaByCont();
+        }
     }
 
     renderCategoriesList() {
-        if (this.props.categories.length === 0) {
-            return (
-                <div className="cover">
-                    <img className="w-50" src="./assets/images/no_products.png" alt="no products" />
-                    <p className="p_error">No hay categorías</p>
-                </div>
-            );
+
+    }
+
+    renderPoolRenders = () => {
+        this.setState({renderizado: this})
+        switch (this.props.controlBusq) {
+            case 'todas':
+                return this.props.ofertas.map((product, index) => {
+                    return (
+                        <Fragment key={index}>
+                            <CardProduct data={product}/>
+                        </Fragment>
+                    )
+                });
+                break;
+            case 'ciudad':
+                if (!this.props.buscPorCiud.length) {
+                    return (
+                        <div className="cover">
+                            <p className="p_error">No hay categorías</p>
+                            <img className="w-25" src="./assets/images/checklist.png" alt="no products"/>
+                        </div>
+                    )
+                } else {
+                    return this.props.buscPorCiud.map((product, index) => {
+                        return (
+                            <Fragment key={index}>
+                                <CardProduct data={product}/>
+                            </Fragment>
+                        )
+                    });
+                }
+                break;
+            case 'estudios':
+                if (!this.props.buscPorEst.length) {
+                    return (
+                        <div className="cover">
+                            <p className="p_error">No hay categorías</p>
+                            <img className="w-25" src="./assets/images/checklist.png" alt="no products"/>
+                        </div>
+                    )
+                } else {
+                    return this.props.buscPorEst.map((product, index) => {
+                        return (
+                            <Fragment key={index}>
+                                <CardProduct data={product}/>
+                            </Fragment>
+                        )
+                    });
+                }
+                break;
+            case 'experiencia':
+                if (!this.props.buscPorExp.length) {
+                    return (
+                        <div className="cover">
+                            <p className="p_error">No hay categorías</p>
+                            <img className="w-25" src="./assets/images/checklist.png" alt="no products"/>
+                        </div>
+                    )
+                } else {
+                    return this.props.buscPorExp.map((product, index) => {
+                        return (
+                            <Fragment key={index}>
+                                <CardProduct data={product}/>
+                            </Fragment>
+                        )
+                    });
+                }
+                break;
+            case 'salario':
+                if (!this.props.buscPorSal.length) {
+                    return (
+                        <div className="cover">
+                            <p className="p_error">No hay categorías</p>
+                            <img className="w-25" src="./assets/images/checklist.png" alt="no products"/>
+                        </div>
+                    )
+                } else {
+                    return this.props.buscPorSal.map((product, index) => {
+                        return (
+                            <Fragment key={index}>
+                                <CardProduct data={product}/>
+                            </Fragment>
+                        )
+                    });
+                }
+                break;
+            case 'jornada':
+                if (!this.props.buscPorJor.length) {
+                    return (
+                        <div className="cover">
+                            <p className="p_error">No hay categorías</p>
+                            <img className="w-25" src="./assets/images/checklist.png" alt="no products"/>
+                        </div>
+                    )
+                } else {
+                    return this.props.buscPorJor.map((product, index) => {
+                        return (
+                            <Fragment key={index}>
+                                <CardProduct data={product}/>
+                            </Fragment>
+                        )
+                    });
+                }
+                break;
+            case 'contrato':
+                if (!this.props.buscPorCont.length) {
+                    return (
+                        <div className="cover">
+                            <p className="p_error">No hay categorías</p>
+                            <img className="w-25" src="./assets/images/checklist.png" alt="no products"/>
+                        </div>
+                    )
+                } else {
+                    return this.props.buscPorCont.map((product, index) => {
+                        return (
+                            <Fragment key={index}>
+                                <CardProduct data={product}/>
+                            </Fragment>
+                        )
+                    });
+                }
+                break;
+            default:
+                return this.props.ofertas.map((product, index) => {
+                    return (
+                        <Fragment key={index}>
+                            <CardProduct data={product}/>
+                        </Fragment>
+                    )
+
+                });
         }
-        return this.props.categories.map((category) => {
-            return (
-                <Fragment key={category.id}>
-                    <li id={category.category} key={category.id} onClick={() => this.handleCategory(category.category)}>
-                        <i
-                            className="fa fa-2x fa-chevron-right" />elemento
-                    </li>
-                    <hr />
-                </Fragment>
-            )
-        })
-    }
-
-    renderPoolCategories() {
-        // if (this.props.desc.length > 2) {
-        //     if (this.state.render !== 'search') this.setState({render: 'search'});
-        //
-        //     return this.props.busqueda.map((product) => {
-        //         return (
-        //             <Fragment key={product.id}>
-        //                 <CardProduct data={product}/>
-        //             </Fragment>
-        //         )
-        //     })
-        // }
-
-
-        return this.props.ofertas.map((product) => {
-            // if (this.state.render !== 'category') this.setState({ render: 'category' });
-            return (
-                <Fragment key={product.id}>
-                    <CardProduct data={product} />
-                </Fragment>
-            )
-        })
-
-    }
-
-    handleCategory = (category) => {
-        this.setState({ cat: category });
-        showPoolCat(category);
-        searchDelete();
-
     };
 
+
     render() {
+        const renderizado = this.props.controlBusq;
         return (
             <Fragment>
                 <Wrapper>
@@ -120,39 +217,127 @@ class Inicial extends Component {
                             <div id="secCategorias">
                                 <ul id="categorias">
                                     {/*{this.renderCategoriesList()}*/}
-                                    <li>dsvsdvbsddsbbs</li>
-                                    <li>dsvsdvbsddsbbs</li>
-                                    <li>dsvsdvbsddsbbs</li>
-                                    <li>dsvsdvbsddsbbs</li>
-                                    <li>dsvsdvbsddsbbs</li>
+                                    <AsideUser data={renderizado}/>
                                 </ul>
                             </div>
                             <div className="contenido">
-                                {/* <div className="titulo mx-auto mb-2 ">
-                                <h2>Muestra elementos</h2>
-                                {
-                                    (this.state.render === 'category') ?
-                                        <SortBtn clickHandler={this.outputEvent} data={this.state.btn} />
-                                        : <SortBtn clickHandler={this.outputEvent} data={this.state.btn}
-                                            tipo={"d-none"} />
-                                }
-                                <hr />
-                            </div> */}
-                                <div className="buscador">
-                                    <input id="input-buscador" type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" />
-                                    <button id="button-buscador" type="button" class="btn btn-secondary">Buscar</button>
+                                <div className="titulo mx-auto mb-2 position-sticky">
+                                    {/*<div className="">*/}
+                                    <div className="buscador">
+                                        <input id="input-buscador" type="text" className="form-control"
+                                               aria-label="Sizing example input"
+                                               aria-describedby="inputGroup-sizing-default"/>
+                                        <button id="button-buscador" type="button"
+                                                className="btn btn-secondary">Buscar
+                                        </button>
+                                    </div>
+                                    <h2 className="ml-3">{
+                                        renderizado === 'todas' || '' ?
+                                            <h2>Todas Las Ofertas</h2>
+                                            :
+                                            <h2>Filtrado por <span className="text-info"
+                                                                   style={{fontSize: 'inherit'}}>{renderizado}</span>
+                                            </h2>
+                                    }
+                                    </h2>
+                                    {
+                                        (this.state.render === 'category') ?
+                                            <SortBtn clickHandler={this.outputEvent} data={this.state.btn}/>
+                                            : <SortBtn clickHandler={this.outputEvent} data={this.state.btn}
+                                                       tipo={"d-none"}/>
+                                    }
+                                    <hr className="mb-5"/>
+                                    {/*</div>*/}
                                 </div>
-                                <div className="cards">
-                                    <div className="columna">
-                                        <div className="yo">
-                                            {this.renderPoolCategories()}
+                                <div className="container-fluid">
+                                    <div className="row">
+                                        <div className="col-8">
+                                            {this.renderPoolRenders()}
+                                        </div>
+                                        <div style={{backgroundColor: '#00ced114'}} className="col-4">
+                                            <div className="container-flui">
+                                                <div id="div_control_ofertas" className="bg-info text-white shadow-lg mb-3">
+                                                    <h2 id="control_ofertas">Control de tus ofertas</h2>
+                                                </div>
+                                                <hr/>
+                                                {/*------*/}
+
+                                                <div className="card mt-2 mb-2">
+                                                    <div className="card-header">
+                                                        Quote
+                                                    </div>
+                                                    <div className="card-body">
+                                                        <blockquote className="blockquote mb-0">
+                                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                                                Integer posuere erat a ante.</p>
+                                                            <footer className="blockquote-footer">Someone famous
+                                                                in <cite title="Source Title">Source Title</cite>
+                                                            </footer>
+                                                        </blockquote>
+                                                    </div>
+                                                    <button type="button" className="btn btn-outline-info">Informacion</button>
+                                                </div>
+
+                                                {/*------*/}
+                                                <div className="card mt-2 mb-2">
+                                                    <div className="card-header">
+                                                        Quote
+                                                    </div>
+                                                    <div className="card-body">
+                                                        <blockquote className="blockquote mb-0">
+                                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                                                Integer posuere erat a ante.</p>
+                                                            <footer className="blockquote-footer">Someone famous
+                                                                in <cite title="Source Title">Source Title</cite>
+                                                            </footer>
+                                                        </blockquote>
+                                                    </div>
+                                                    <button type="button" className="btn btn-outline-info">Informacion</button>
+                                                </div>
+
+                                                {/*------*/}
+                                                <div className="card mt-2 mb-2">
+                                                    <div className="card-header">
+                                                        Quote
+                                                    </div>
+                                                    <div className="card-body">
+                                                        <blockquote className="blockquote mb-0">
+                                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                                                Integer posuere erat a ante.</p>
+                                                            <footer className="blockquote-footer">Someone famous
+                                                                in <cite title="Source Title">Source Title</cite>
+                                                            </footer>
+                                                        </blockquote>
+                                                    </div>
+                                                    <button type="button" className="btn btn-outline-info">Informacion</button>
+                                                </div>
+
+                                                {/*------*/}
+                                                <div className="card mt-2 mb-2">
+                                                    <div className="card-header">
+                                                        Quote
+                                                    </div>
+                                                    <div className="card-body">
+                                                        <blockquote className="blockquote mb-0">
+                                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                                                Integer posuere erat a ante.</p>
+                                                            <footer className="blockquote-footer">Someone famous
+                                                                in <cite title="Source Title">Source Title</cite>
+                                                            </footer>
+                                                        </blockquote>
+                                                    </div>
+                                                    <button type="button" className="btn btn-outline-info">Informacion</button>
+                                                </div>
+
+                                                {/*------*/}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </section>
                     </main>
-                    <hr />
+                    <hr/>
                 </Wrapper>
             </Fragment>
         )
@@ -161,7 +346,14 @@ class Inicial extends Component {
 
 function mapStateToProps(state) {
     return {
-        ofertas: state.Ofertas.list
+        ofertas: state.Ofertas.list,
+        buscPorCiud: state.Ofertas.porProvincia,
+        buscPorEst: state.Ofertas.porEstudios,
+        buscPorExp: state.Ofertas.porExperiencia,
+        buscPorSal: state.Ofertas.porSalario,
+        buscPorJor: state.Ofertas.porJornada,
+        buscPorCont: state.Ofertas.porContrato,
+        controlBusq: state.Ofertas.controlBusq
     }
 }
 

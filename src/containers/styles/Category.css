@@ -23,6 +23,27 @@ a {
     font-size: .875rem;
     letter-spacing: .2px;
 }
+
+
+div.datos{
+    border: 1px solid lightgrey;
+    background: #DBF0F6;
+}
+.datos label{
+    color: black;
+}
+#contactoUser h1{
+    margin-top: 8rem!important;
+    font-size: 2em!important;
+}
+#contactoUser .h2{
+    font-size: 1em!important;
+}
+#contactoUser .custom-file-label::after{
+    background-color: #0099cc;
+    color: white;
+    font-weight: 900;
+}
 /*MEDIA QUERIES CONTENEDOR PRINCIPAL-----------------------------------------------*/
 
 @media (max-width: 576px){

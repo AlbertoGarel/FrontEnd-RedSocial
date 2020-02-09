@@ -48,7 +48,7 @@ function Carrito(state = initialState, action) {
         case DELETE_ORDER:
             return {
                 ...state,
-            list: action.payload
+                list: action.payload
             };
         default:
             return state;

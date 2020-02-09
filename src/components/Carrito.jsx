@@ -1,7 +1,7 @@
 import React, {Component, Fragment} from 'react';
 
 import {connect} from 'react-redux'
-import {AddOrder} from '../actions'
+import {openNowCart, closeNowCart} from '../actions'
 
 import Contenidocarrito from '../components/ContenidoCarrito'
 /**
@@ -22,57 +22,59 @@ class Carrito extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            showClass: 'noShow',
-            message: ''
+            // showClass: this.props.cartAction,
+            message: '',
         };
 
     }
-    componentDidMount(){
-        
+
+    componentDidMount() {
+
     }
 
-
     openCart = () => {
-        (this.state.showClass === 'noShow') ? this.setState({showClass: ''}) : this.setState({showClass: 'noShow'});
+        // (this.state.showClass === 'noShow') ? this.setState({showClass: ''}) : this.setState({showClass: 'noShow'});
+        // (this.state.showClass === 'noShow') ?  closeNowCart() : openNowCart();
+        (this.props.cartAction === 'noShow') ?  openNowCart() : closeNowCart() ;
     };
 
-    renderItemsOfertas() {
-        // if(this.props.ofertasById){
-        //      this.props.ofertasById.map(oferta => {
-        if(this.props.ofertasById){
-            return(
+
+
+    renderItemsOfertas(i) {
+        if (this.props.ofertasById.length === undefined) {
+            return (
                 <Fragment>
-                    <Contenidocarrito data={this.props.ofertasById}/>
+                    <Contenidocarrito data={this.props.ofertasById}
+                    />
                 </Fragment>
             )
         }
-
-
-        //     })
-        // }
-
     }
 
 
+
+
     render() {
-console.log('en carrito' , this.props.ofertasById)
+
         return (
             <Fragment>
-                <button id="btn_carrito" style={{position:'relative'}} onClick={this.openCart}>
-                    <i className="fa fa-3x fa-linkedin-square pintagris"></i>
+                <button id="btn_carrito" style={{position: 'relative'}} onClick={this.openCart}>
+                    <i className="fa fa-3x fa-object-ungroup"/>
                     <span style={
-                        {position:'absolute',
-                            top:50+'%',
-                            left:58+'%',
-                            transform: 'translate('+ '-' +50 + '%' + ','+ '-'+50+'%)',
-                            fontSize: 1.3+'em',
-                            color:'white',
+                        {
+                            position: 'absolute',
+                            top: 50 + '%',
+                            left: 58 + '%',
+                            transform: 'translate(' + '-' + 50 + '%' + ',' + '-' + 50 + '%)',
+                            fontSize: 1.3 + 'em',
+                            color: 'white',
 
                         }}> </span>
                 </button>
-                <section id="carrito_container" className={this.state.showClass}>
+                {/*<section id="carrito_container" className={this.state.showClass}>*/}
+                <section id="carrito_container" className={this.props.cartAction}>
                     <div id="header_carrito">
-                        <button id="btn_close_carrito" onClick={this.openCart}>X</button>
+                        <button id="btn_close_carrito" onClick={()=>closeNowCart()}>X</button>
                         <p className="lugar_entrega"><span style={{display: "block"}}>//</span> // </p>
                     </div>
                     <div id="body_carrito">
@@ -90,6 +92,7 @@ console.log('en carrito' , this.props.ofertasById)
 function mapStateToProps(state) {
     return {
         ofertasById: state.Ofertas.ofertasbyid,
+        cartAction: state.Cart.showClass
 
     }
 }

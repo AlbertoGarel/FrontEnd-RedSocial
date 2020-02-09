@@ -1,13 +1,14 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 
 //REDUX
-import { connect } from "react-redux";
-import { addProduct, showCategories, showPoolCat, subtractProduct } from '../actions'
+import {connect} from "react-redux";
+import {addProduct, showCategories, showPoolCat, subtractProduct} from '../actions'
 //CSS
 import './styles/CardProduct.css'
 
 import BotonUs from "../components/BotonUs";
 import {showOfertaById} from '../actions';
+
 class CardProduct extends Component {
 
     constructor(props) {
@@ -30,24 +31,23 @@ class CardProduct extends Component {
     //     }, 1000);
     // }
 
-   
+
     render() {
-        const { data } = this.props
-        // console.log('en card---------',this.props.data)
+        const {data} = this.props;
+
         return (
-            <div className="card" key={data.id} data-idTecno = {data.tecnologia_id}>
-                <div className="card bg-light mb-3" >
+
+                <div className="card bg-light mb-3" key={data.id} data-idtecno={data.tecnologia_id}>
                     <div className="card-body">
                         <h3 className="card-title">{data.puesto}</h3>
                         <h6 className="card-subtitle">{data.name}</h6>
                         <p className="ciudad">{data.name_ciu}</p>
                         <p className="card-text">{data.descripcion}</p>
                         <p className="info text-info">{data.tipo_cont} | {data.tipo_jorn} | {data.salario_min} - {data.salario_max}</p>
-                    
-                     </div>
-                    <BotonUs data = {data.id} />
+                    </div>
+                    <BotonUs data={data.id}/>
                 </div>
-            </div>
+
         )
     }
 }

@@ -10,7 +10,9 @@
 nav {
     border-bottom: 1px solid #E6E6E6 !important;
     /*background-color: #fff;*/
-    background-color: #b5cdf680;
+    /*background-color: #33A6CC;*/
+    background: rgb(255,255,255);
+    background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(51,170,204,1) 100%);
     height: 76px;
     padding: 0 24px;
     -ms-flex-align: center;
@@ -22,6 +24,7 @@ nav {
     width: 100%;
     position: fixed !important;
     z-index: 999;
+    box-shadow: 0 1rem 3rem rgba(0,0,0,.175)!important;
 }
 
 @media (max-width: 991.98px) {
@@ -213,7 +216,8 @@ a {
     width: 100%;
     margin: 4px auto;
     border-radius: 2px;
-    border: 2px solid #00ab61;
+    /*border: 2px solid #00ab61;*/
+    border: 2px solid #000;
     -webkit-transition: opacity .2s ease-in;
     transition: opacity .2s ease-in;
 }

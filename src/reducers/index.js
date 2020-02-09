@@ -8,9 +8,13 @@ import Search from "./SearchPoduct";
 import Users from "./users";
 import Carrito from "./Carrito";
 import Ciudades from "./Ciudades";
+import Cart from "./Cart";
 
 import Ofertas from "./ofertas";
 import Usuarios from "./usuarios";
+import Estudios from "./Estudios";
+import Jornada from "./Jornada";
+import Contratos from "./Contratos";
 
 
 let reducers = combineReducers({
@@ -24,7 +28,11 @@ let reducers = combineReducers({
     Carrito,
     Ofertas,
     Usuarios,
-    Ciudades
+    Ciudades,
+    Cart,
+    Estudios,
+    Jornada,
+    Contratos
 });
 
 export default reducers;

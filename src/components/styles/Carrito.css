@@ -151,3 +151,11 @@
 .pintagris{
     color: #A2A09E;
 }
+.fa-object-ungroup{
+    color: white;
+}
+.fa-object-ungroup:hover{
+    color: white;
+    transform: scale(1.2);
+    transition-duration: 1s;
+}

@@ -58,7 +58,7 @@ class Header extends Component {
         return (
             <Fragment>
                 <nav id="nav" className="navbar navbar-expand-lg navbar-light flex-shrink-1">
-                    <Link to="/" id="enlace-logo" ><img
+                    <Link to="/home" id="enlace-logo" ><img
                         src="./assets/icons/logTT.png"
                         alt="logo mercahome"
                         id="nav_logo"
@@ -72,13 +72,18 @@ class Header extends Component {
 
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <div id="search_cont" className="form-inline my-2 my-lg-0">
-                            <span id="search_span"><i className="fa fa-2x fa-search"/></span>
+                            {/*<span id="search_span"><i className="fa fa-2x fa-search"/></span>*/}
 
                         </div>
                         <div className="menu-left" role="menu">
+                            <Link to="/home" className="menu-item subhead1-b" data-test="categories-link"
+                            >
+                                <label className="menu-item__label">HOME</label>
+                                <span className="menu-item__border"/>
+                            </Link>
                             <Link to="/categorias" className="menu-item subhead1-b" data-test="categories-link"
                             >
-                                <label className="menu-item__label">SECCIÖN</label>
+                                <label className="menu-item__label">PERFIL</label>
                                 <span className="menu-item__border"/>
                             </Link>
                             {/*{*/}

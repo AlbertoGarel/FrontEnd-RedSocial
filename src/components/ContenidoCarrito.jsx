@@ -22,13 +22,14 @@ class Contenidocarrito extends Component {
     }
 
     addOferta(id){
-        let paramsBody = {
-            'user_id' : JSON.parse(localStorage.getItem('user').id)
-        }
-        axios.get('http://localhost:8000/api/oferta/create/'+id)
-            .then(res=>{
-
-            })
+        // let paramsBody = {
+        //     'user_id' : JSON.parse(localStorage.getItem('user').id)
+        // }
+        // axios.get('http://localhost:8000/api/oferta/create/'+id)
+        //     .then(res=>{
+        //
+        //     })
+        alert(id)
     }
 
 
@@ -70,7 +71,8 @@ class Contenidocarrito extends Component {
                     </div>
                     <button id="botonVer" type="button"
                             className="btn btn-primary btn-lg raised float-right mr-3 mb-3"
-                    onClick={()=>this.addOferta(data.id)}>
+                    onClick={()=>this.addOferta(data.id)}
+                    >
                         Solicitar
                     </button>
                 </div>

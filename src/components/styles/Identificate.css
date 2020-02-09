@@ -6,7 +6,7 @@
 .fa-chevron-down:before {
     content: "\f078";
     font-size: 15px !important;
-    color: #A2A09E;
+    color: white;
 }
 
 .dropdown-toggle::after {
@@ -24,7 +24,8 @@ label {
     display: inline-block;
     margin-bottom: 0;
     margin-right: 4px;
-    color: #A2A09E;
+    color: white;
+    font-weight: 900;
 }
 
 .dropdown-menu {

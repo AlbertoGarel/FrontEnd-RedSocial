@@ -13,12 +13,17 @@ ul#categorias {
     padding: 0px;
     position: fixed;
     overflow-y: scroll;
-    max-width: 200px;
+    max-width: 290px;
+    /*max-width: 190px;*/
     overflow-X: hidden;
     margin: 0;
     width: 100%;
-    border-right: 1px solid #e6e6e6;
-    height: calc(100vh - 76px);
+    /* border-right: 1px solid #e6e6e6; */
+    height: calc(100vh - 100px);
+    margin: 10px;
+    box-shadow: 0 1rem 3rem rgba(0,0,0,.175)!important;
+    z-index: 99;
+    border: 1px solid #c3bfbfb3;
 }
 ul#categorias::-webkit-scrollbar {
     display: none;
@@ -30,17 +35,21 @@ ul#categorias::-webkit-scrollbar {
 }
 
 #categorias li:hover {
-    transform: scale(1.1);
-    border-top: 5px;
+/*    transform: scale(1.1);*/
+/*    border-top: 5px;*/
     box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15) !important;
-    cursor: pointer;
-    padding-left: 1.5em;
-    transition-duration: .6s;
-    color: #00ab61;
+/*    cursor: pointer;*/
+/*    padding-left: 1.5em;*/
+/*    transition-duration: .6s;*/
+/*    color: #00ab61;*/
+    position: relative;
+}
+#categorias li:hover form{
+    width: 100%;
 }
 .contenido {
-    margin-left: 200px;
-    width: calc(100% - 200px);
+    margin-left: 320px;
+    width: calc(100% - 320px);
     padding-top: 48px;
 }
 /*main{*/
@@ -69,10 +78,10 @@ ul#categorias::-webkit-scrollbar {
     font-size: 16px;
 }
 .buscador {
-   display: flex;
-   align-items: flex-start;
-   margin-left: 2em;
-   margin-bottom: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2em;
 }
 #input-buscador {
     outline:none !important;
@@ -94,10 +103,33 @@ ul#categorias::-webkit-scrollbar {
 #button-buscador {
     margin-left: 1em;
     height: 3em;
-    width: 7.9vw;
+    /*width: 7.9vw;*/
     background-color: rgb(223, 197, 82);    
 }
-
-#secCategorias {
-    margin: 1em;
+.dropdown-menu.show {
+    left: -2em!important;
+    top: 3em;
+    right: 70px;
+    background-color: #fff;
+    width: 232px;
+    overflow: auto;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, .1);
+    border-radius: 8px;
+    padding: 16px 0 7px;
+    border: 1px solid rgba(0, 0, 0, .1);
+}
+#categorias select::-webkit-scrollbar {
+    /* solo oculta su visualizacion */
+    display: none;
+}
+/*#categorias select option:nth-child(1) {*/
+/*    !* solo oculta su visualizacion *!*/
+/*    display: none;*/
+/*}*/
+#control_ofertas{
+    padding: .3em;
+}
+#div_control_ofertas{
+    border-radius: .5em;
+    margin-top: 1em;
 }
