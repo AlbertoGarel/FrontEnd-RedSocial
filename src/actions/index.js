@@ -34,6 +34,7 @@ export const SHOW_OFERTABYSAL = 'SHOW_OFERTABYSAL';
 export const SHOW_OFERTABYJOR = 'SHOW_OFERTABYJOR';
 export const SHOW_OFERTABYCONT = 'SHOW_OFERTABYCONT';
 
+
 const tokenUser = JSON.parse(localStorage.getItem('user')).token;
 let userHeader = {
     headers: {

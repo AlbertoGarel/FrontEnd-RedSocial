@@ -133,3 +133,6 @@ ul#categorias::-webkit-scrollbar {
     border-radius: .5em;
     margin-top: 1em;
 }
+#categorias label{
+    color: black;
+}
