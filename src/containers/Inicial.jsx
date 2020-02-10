@@ -1,5 +1,5 @@
-import React, {Component, Fragment} from 'react';
-import {connect} from 'react-redux'
+import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux'
 /**
  * IMPORT BOOTSTRAP
  * */
@@ -31,10 +31,11 @@ import {
     showOfertaById,
     showOfertas,
     sortByPrice,
+    showOfertasByUs
 } from "../actions";
 import CardProduct from "../components/CardProduct";
 import SortBtn from "../components/SortBtn";
-
+import ControlOfertas from "../components/ControlOfertas";
 import AsideUser from "../components/AsideUser";
 
 class Inicial extends Component {
@@ -50,9 +51,9 @@ class Inicial extends Component {
 
     outputEvent() {
         if (this.state.btn === false) {
-            this.setState({btn: true});
+            this.setState({ btn: true });
         } else {
-            this.setState({btn: false});
+            this.setState({ btn: false });
         }
         sortByPrice(this.state.btn);
     }
@@ -68,10 +69,22 @@ class Inicial extends Component {
             showOfertaByJor();
             showOfertaByCont();
         }
+        showOfertasByUs();
     }
 
     renderCategoriesList() {
 
+    }
+
+    renderOfertasUs = () => {
+        return this.props.ofertasByUsers.map((product, index) => {
+            return (
+                <Fragment key={index}>
+                    <ControlOfertas data={product} />
+                </Fragment>
+            )
+
+        });
     }
 
     renderPoolRenders = () => {
@@ -80,7 +93,7 @@ class Inicial extends Component {
                 return this.props.ofertas.map((product, index) => {
                     return (
                         <Fragment key={index}>
-                            <CardProduct data={product}/>
+                            <CardProduct data={product} />
                         </Fragment>
                     )
                 });
@@ -90,14 +103,14 @@ class Inicial extends Component {
                     return (
                         <div className="cover">
                             <p className="p_error">No hay categorías</p>
-                            <img className="w-25" src="./assets/images/checklist.png" alt="no products"/>
+                            <img className="w-25" src="./assets/images/checklist.png" alt="no products" />
                         </div>
                     )
                 } else {
                     return this.props.buscPorCiud.map((product, index) => {
                         return (
                             <Fragment key={index}>
-                                <CardProduct data={product}/>
+                                <CardProduct data={product} />
                             </Fragment>
                         )
                     });
@@ -108,14 +121,14 @@ class Inicial extends Component {
                     return (
                         <div className="cover">
                             <p className="p_error">No hay categorías</p>
-                            <img className="w-25" src="./assets/images/checklist.png" alt="no products"/>
+                            <img className="w-25" src="./assets/images/checklist.png" alt="no products" />
                         </div>
                     )
                 } else {
                     return this.props.buscPorEst.map((product, index) => {
                         return (
                             <Fragment key={index}>
-                                <CardProduct data={product}/>
+                                <CardProduct data={product} />
                             </Fragment>
                         )
                     });
@@ -126,14 +139,14 @@ class Inicial extends Component {
                     return (
                         <div className="cover">
                             <p className="p_error">No hay categorías</p>
-                            <img className="w-25" src="./assets/images/checklist.png" alt="no products"/>
+                            <img className="w-25" src="./assets/images/checklist.png" alt="no products" />
                         </div>
                     )
                 } else {
                     return this.props.buscPorExp.map((product, index) => {
                         return (
                             <Fragment key={index}>
-                                <CardProduct data={product}/>
+                                <CardProduct data={product} />
                             </Fragment>
                         )
                     });
@@ -144,14 +157,14 @@ class Inicial extends Component {
                     return (
                         <div className="cover">
                             <p className="p_error">No hay categorías</p>
-                            <img className="w-25" src="./assets/images/checklist.png" alt="no products"/>
+                            <img className="w-25" src="./assets/images/checklist.png" alt="no products" />
                         </div>
                     )
                 } else {
                     return this.props.buscPorSal.map((product, index) => {
                         return (
                             <Fragment key={index}>
-                                <CardProduct data={product}/>
+                                <CardProduct data={product} />
                             </Fragment>
                         )
                     });
@@ -162,14 +175,14 @@ class Inicial extends Component {
                     return (
                         <div className="cover">
                             <p className="p_error">No hay categorías</p>
-                            <img className="w-25" src="./assets/images/checklist.png" alt="no products"/>
+                            <img className="w-25" src="./assets/images/checklist.png" alt="no products" />
                         </div>
                     )
                 } else {
                     return this.props.buscPorJor.map((product, index) => {
                         return (
                             <Fragment key={index}>
-                                <CardProduct data={product}/>
+                                <CardProduct data={product} />
                             </Fragment>
                         )
                     });
@@ -180,32 +193,32 @@ class Inicial extends Component {
                     return (
                         <div className="cover">
                             <p className="p_error">No hay categorías</p>
-                            <img className="w-25" src="./assets/images/checklist.png" alt="no products"/>
+                            <img className="w-25" src="./assets/images/checklist.png" alt="no products" />
                         </div>
                     )
                 } else {
                     return this.props.buscPorCont.map((product, index) => {
                         return (
                             <Fragment key={index}>
-                                <CardProduct data={product}/>
+                                <CardProduct data={product} />
                             </Fragment>
                         )
                     });
                 }
                 break;
-                case 'empresas':
+            case 'empresas':
                 if (!this.props.porEmpresas.length) {
                     return (
                         <div className="cover">
                             <p className="p_error">No hay categorías</p>
-                            <img className="w-25" src="./assets/images/checklist.png" alt="no products"/>
+                            <img className="w-25" src="./assets/images/checklist.png" alt="no products" />
                         </div>
                     )
                 } else {
                     return this.props.porEmpresas.map((product, index) => {
                         return (
                             <Fragment key={index}>
-                                <CardProduct data={product}/>
+                                <CardProduct data={product} />
                             </Fragment>
                         )
                     });
@@ -215,7 +228,7 @@ class Inicial extends Component {
                 return this.props.ofertas.map((product, index) => {
                     return (
                         <Fragment key={index}>
-                            <CardProduct data={product}/>
+                            <CardProduct data={product} />
                         </Fragment>
                     )
 
@@ -226,6 +239,8 @@ class Inicial extends Component {
 
     render() {
         const renderizado = this.props.controlBusq;
+        console.log('fsa',this.props.ofertasByUsers);
+        
         return (
             <Fragment>
                 <Wrapper>
@@ -234,7 +249,7 @@ class Inicial extends Component {
                             <div id="secCategorias">
                                 <ul id="categorias">
                                     {/*{this.renderCategoriesList()}*/}
-                                    <AsideUser data={renderizado}/>
+                                    <AsideUser data={renderizado} />
                                 </ul>
                             </div>
                             <div className="contenido">
@@ -242,10 +257,10 @@ class Inicial extends Component {
                                     {/*<div className="">*/}
                                     <div className="buscador">
                                         <input id="input-buscador" type="text" className="form-control"
-                                               aria-label="Sizing example input"
-                                               aria-describedby="inputGroup-sizing-default"/>
+                                            aria-label="Sizing example input"
+                                            aria-describedby="inputGroup-sizing-default" />
                                         <button id="button-buscador" type="button"
-                                                className="btn btn-secondary">Buscar
+                                            className="btn btn-secondary">Buscar
                                         </button>
                                     </div>
                                     <h2 className="ml-3">{
@@ -253,17 +268,17 @@ class Inicial extends Component {
                                             <h2>Todas Las Ofertas</h2>
                                             :
                                             <h2>Filtrado por <span className="text-info"
-                                                                   style={{fontSize: 'inherit'}}>{renderizado}</span>
+                                                style={{ fontSize: 'inherit' }}>{renderizado}</span>
                                             </h2>
                                     }
                                     </h2>
                                     {
                                         (this.state.render === 'category') ?
-                                            <SortBtn clickHandler={this.outputEvent} data={this.state.btn}/>
+                                            <SortBtn clickHandler={this.outputEvent} data={this.state.btn} />
                                             : <SortBtn clickHandler={this.outputEvent} data={this.state.btn}
-                                                       tipo={"d-none"}/>
+                                                tipo={"d-none"} />
                                     }
-                                    <hr className="mb-5"/>
+                                    <hr className="mb-5" />
                                     {/*</div>*/}
                                 </div>
                                 <div className="container-fluid">
@@ -271,79 +286,14 @@ class Inicial extends Component {
                                         <div className="col-8">
                                             {this.renderPoolRenders()}
                                         </div>
-                                        <div style={{backgroundColor: '#00ced114'}} className="col-4">
+                                        <div style={{ backgroundColor: '#00ced114' }} className="col-4">
                                             <div className="container-flui">
                                                 <div id="div_control_ofertas" className="bg-info text-white shadow-lg mb-3">
                                                     <h2 id="control_ofertas">Control de tus ofertas</h2>
                                                 </div>
-                                                <hr/>
-                                                {/*------*/}
-
-                                                <div className="card mt-2 mb-2">
-                                                    <div className="card-header">
-                                                        Quote
-                                                    </div>
-                                                    <div className="card-body">
-                                                        <blockquote className="blockquote mb-0">
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                                                Integer posuere erat a ante.</p>
-                                                            <footer className="blockquote-footer">Someone famous
-                                                                in <cite title="Source Title">Source Title</cite>
-                                                            </footer>
-                                                        </blockquote>
-                                                    </div>
-                                                    <button type="button" className="btn btn-outline-info">Informacion</button>
-                                                </div>
-
-                                                {/*------*/}
-                                                <div className="card mt-2 mb-2">
-                                                    <div className="card-header">
-                                                        Quote
-                                                    </div>
-                                                    <div className="card-body">
-                                                        <blockquote className="blockquote mb-0">
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                                                Integer posuere erat a ante.</p>
-                                                            <footer className="blockquote-footer">Someone famous
-                                                                in <cite title="Source Title">Source Title</cite>
-                                                            </footer>
-                                                        </blockquote>
-                                                    </div>
-                                                    <button type="button" className="btn btn-outline-info">Informacion</button>
-                                                </div>
-
-                                                {/*------*/}
-                                                <div className="card mt-2 mb-2">
-                                                    <div className="card-header">
-                                                        Quote
-                                                    </div>
-                                                    <div className="card-body">
-                                                        <blockquote className="blockquote mb-0">
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                                                Integer posuere erat a ante.</p>
-                                                            <footer className="blockquote-footer">Someone famous
-                                                                in <cite title="Source Title">Source Title</cite>
-                                                            </footer>
-                                                        </blockquote>
-                                                    </div>
-                                                    <button type="button" className="btn btn-outline-info">Informacion</button>
-                                                </div>
-
-                                                {/*------*/}
-                                                <div className="card mt-2 mb-2">
-                                                    <div className="card-header">
-                                                        Quote
-                                                    </div>
-                                                    <div className="card-body">
-                                                        <blockquote className="blockquote mb-0">
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                                                Integer posuere erat a ante.</p>
-                                                            <footer className="blockquote-footer">Someone famous
-                                                                in <cite title="Source Title">Source Title</cite>
-                                                            </footer>
-                                                        </blockquote>
-                                                    </div>
-                                                    <button type="button" className="btn btn-outline-info">Informacion</button>
+                                                <hr />
+                                                <div className="col-8">
+                                                    {this.renderOfertasUs()}
                                                 </div>
 
                                                 {/*------*/}
@@ -354,7 +304,7 @@ class Inicial extends Component {
                             </div>
                         </section>
                     </main>
-                    <hr/>
+                    <hr />
                 </Wrapper>
             </Fragment>
         )
@@ -371,7 +321,8 @@ function mapStateToProps(state) {
         buscPorJor: state.Ofertas.porJornada,
         buscPorCont: state.Ofertas.porContrato,
         controlBusq: state.Ofertas.controlBusq,
-        porEmpresas: state.Ofertas.porEmpresas
+        porEmpresas: state.Ofertas.porEmpresas,
+        ofertasByUsers: state.OfertasByUs.list
     }
 }
 

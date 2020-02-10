@@ -35,6 +35,7 @@ export const SHOW_OFERTABYSAL = 'SHOW_OFERTABYSAL';
 export const SHOW_OFERTABYJOR = 'SHOW_OFERTABYJOR';
 export const SHOW_OFERTABYCONT = 'SHOW_OFERTABYCONT';
 export const SHOW_OFERTABYEMP = 'SHOW_OFERTABYEMP';
+export const SHOW_OFERTASBYUSER = 'SHOW_OFERTASBYUSER';
 
 
  let userHeader = '';
@@ -210,9 +211,21 @@ export function showEmpresas() {
     
 
 
-//usuarios
+//USUARIOS
 export function showUsuario(type, data) {
     store.dispatch({type: type, payload: data});
+}
+
+export function showOfertasByUs(){
+    axios.get('http://localhost:8000/api/user/mostrar-ofertas', userHeader)
+        .then(res => {
+            console.log('caca', res.data.obj)
+            store.dispatch({type: SHOW_OFERTASBYUSER, payload: res.data.obj});
+        })
+        .catch(err => {
+                console.log(err.error)
+            }
+        )
 }
 
 //FUNCIONALIDADES FRONT
