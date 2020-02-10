@@ -37,8 +37,8 @@ export const SHOW_OFERTABYCONT = 'SHOW_OFERTABYCONT';
 export const SHOW_OFERTABYEMP = 'SHOW_OFERTABYEMP';
 
 
-// let userHeader = '';
-// if(localStorage.getItem('user')){
+ let userHeader = '';
+ if(localStorage.getItem('user')){
 
     const tokenUser = JSON.parse(localStorage.getItem('user')).token;
     let userHeader = {
@@ -48,7 +48,7 @@ export const SHOW_OFERTABYEMP = 'SHOW_OFERTABYEMP';
             'Content-Type': 'application/json'
         }
     };
-// }
+ }
 
 
 //BUSQUEDAS POR CONDICIONES  http://127.0.0.1:8000/api/ofertas/provincia/41
