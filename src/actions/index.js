@@ -34,15 +34,18 @@ export const SHOW_OFERTABYSAL = 'SHOW_OFERTABYSAL';
 export const SHOW_OFERTABYJOR = 'SHOW_OFERTABYJOR';
 export const SHOW_OFERTABYCONT = 'SHOW_OFERTABYCONT';
 
+// let userHeader = '';
+// if(localStorage.getItem('user')){
 
-const tokenUser = JSON.parse(localStorage.getItem('user')).token;
-let userHeader = {
-    headers: {
-        'Authorization': `Bearer ${tokenUser}`,
-        'X-Requested-With': 'XMLHttpRequest',
-        'Content-Type': 'application/json'
-    }
-};
+    const tokenUser = JSON.parse(localStorage.getItem('user')).token;
+    let userHeader = {
+        headers: {
+            'Authorization': `Bearer ${tokenUser}`,
+            'X-Requested-With': 'XMLHttpRequest',
+            'Content-Type': 'application/json'
+        }
+    };
+// }
 
 
 //BUSQUEDAS POR CONDICIONES  http://127.0.0.1:8000/api/ofertas/provincia/41
