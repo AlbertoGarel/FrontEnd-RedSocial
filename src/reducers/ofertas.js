@@ -50,7 +50,7 @@ function Ofertas(state = initialState, action) {
             return Object.assign({}, state, {porContrato: action.payload, controlBusq: 'contrato'});
             break;
             case SHOW_OFERTABYEMP :
-            return Object.assign({}, state, {list: action.payload, controlBusq: 'porEmpresas'});
+            return Object.assign({}, state, {list: action.payload, controlBusq: 'empresas'});
             break;
         default:
             return state;
