@@ -338,8 +338,8 @@ alert(ev.target.id)
     componentDidMount() {
         axios.get('http://127.0.0.1:8000/api/ciudades')
             .then(res => {
-                // console.log(res)
-                this.renderTopCities(res)
+                console.log('ciudades en register', res.data.obj)
+                this.renderTopCities(res);
                 showCiudades()
             })
             .catch(err => console.log(err));
@@ -347,11 +347,11 @@ alert(ev.target.id)
 
     renderTopCities(res) {
         let elems = [];
-
+console.log('elementos de render',elems);
         res.data.obj.forEach(function (element) {
             elems.push(
                 <Fragment key={element.id}>
-                    <option value={element.id}>{element.name}</option>
+                    <option value={element.id}>{element.name_ciu}</option>
                 </Fragment>
             )
         });
@@ -510,7 +510,6 @@ alert(ev.target.id)
                                                                     <select name="usercityUsu" className="form-control"
                                                                             defaultValue={this.state.valuesUsu.usercityUsu}
                                                                             onChange={this.handleChangesUsu}>
-                                                                        <option>Selecciona Ciudad</option>
                                                                         {this.state.rows}
                                                                     </select>
                                                                     <p className="error">{this.state.validationsUsu.usercityUsu}</p>
@@ -620,7 +619,6 @@ alert(ev.target.id)
                                         <select name="usercityEmp" className="form-control"
                                                 defaultValue={this.state.valuesEmp.usercityEmp}
                                                 onChange={this.handleChangesEmp}>
-                                            <option>Selecciona Ciudad</option>
                                             {this.state.rows}
                                         </select>
                                         <p className="error">{this.state.validationsEmp.usercityEmp}</p>
