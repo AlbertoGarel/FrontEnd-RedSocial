@@ -42,7 +42,7 @@ class BotonUs extends Component {
                     type="button"
                     className="btn btn-primary btn-lg raised float-right mr-3 mb-3"
                     onClick={() => this.muestraOferta(this.props.data)}
-                >Solicitar
+                >Ver más
                 </button>
             </div>
         )

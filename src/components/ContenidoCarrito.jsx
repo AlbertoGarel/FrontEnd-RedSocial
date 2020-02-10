@@ -63,6 +63,8 @@ class Contenidocarrito extends Component {
                             <p className="card-text">{data.name_tec}</p>
                             <h6>Estudios mínimos:</h6>
                             <p className="card-text">{data.tipo_est}</p>
+                            <h6>Experiencia mínima:</h6>
+                            <p className="card-text">{data.experiencia_min}</p>
                             <h6>Condiciones:</h6>
                                 <p className="info text-info">{data.tipo_cont} | {data.tipo_jorn} | {data.salario_min} - {data.salario_max}</p>
                             <h6></h6>
