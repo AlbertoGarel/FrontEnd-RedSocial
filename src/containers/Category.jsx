@@ -4,8 +4,10 @@ import React, {Component, Fragment} from 'react';
  *  IMPORT COMPONENTS
  * */
 import Wrapper from '../components/Wrapper';
-import Slider from '../components/Slider';
+import OptionSelectCiud from '../components/OptionSelectCiud';
 import Showproducts from "../components/ShowProducts";
+
+import {connect} from 'react-redux';
 /**
  * IMPORT BOOTSTRAP
  * */
@@ -20,6 +22,8 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
  *  IMPORT STYLES
  * */
 import './styles/App.css';
+import {showCiudades} from "../actions";
+
 
 class Category extends Component {
     constructor(props) {
@@ -27,8 +31,18 @@ class Category extends Component {
         this.state = {
             title: "promoción"
         }
+        this.myFormRef = React.createRef();
     }
 
+
+    componentDidMount() {
+        // showCiudades()
+    }
+
+    changeMultiSelect(){
+        // this.select.current.style.color = 'tomato'
+
+    }
 
     render() {
         return (
@@ -51,7 +65,7 @@ class Category extends Component {
                                                         src="https://joanboira.com/wp-content/uploads/2019/10/Retrato-de-perfil-profesional-1.jpg"
                                                         className="card-img-top" alt="..."/>
                                                 </div>
-                                                <div className="input-group mb-3">
+                                                <div className="input-group mb-3 justify-content-end">
                                                     <div className="input-group-prepend">
                                                     <span className="input-group-text"
                                                           id="inputGroupFileAddon01">Upload</span>
@@ -66,67 +80,91 @@ class Category extends Component {
                                                 </div>
                                             </section>
                                             <div className="datos p-3 mb-3">
-                                                <form>
+                                                <form id="perfil"
+                                                      onSubmit={(ev) => this.hansleSubmit(ev)}
+                                                      method="post"
+                                                      role="form"
+                                                      ref={(perfil) => this.myFormRef = perfil}
+                                                >
                                                     <div className="form-row">
                                                         <div className="form-group col-md-6">
                                                             <label htmlFor="inputName">Nombre</label>
-                                                            <input type="text" className="form-control" id="inputName"/>
+                                                            <input type="text" className="form-control" id="inputName"
+
+                                                                   name="inputName"
+                                                                   onChange={this.handleChangePerfil}
+                                                                   onBlur={this.validateOnePerfil}
+
+                                                                   placeholder="Nombre"
+                                                            />
+                                                            {/*<p className="error">{this.state.validationsPerfil.inputName}</p>*/}
                                                         </div>
                                                         <div className="form-group col-md-6">
                                                             <label htmlFor="inputPrim_ape">Primer apellido</label>
                                                             <input type="text" className="form-control"
-                                                                   id="inputPrim_ape"/>
+                                                                   id="inputPrim_ape"
+
+                                                                   name="inputPrim_ape"
+                                                                   onChange={this.handleChangePerfil}
+                                                                   onBlur={this.validateOnePerfil}
+
+                                                                   placeholder="Primer apellido"
+                                                            />
+                                                            {/*<p className="error">{this.state.validationsPerfil.inputPrim_ape}</p>*/}
                                                         </div>
                                                         <div className="form-group col-md-6">
                                                             <label htmlFor="inputSeg_ape">Segundo apellido</label>
                                                             <input type="text" className="form-control"
-                                                                   id="inputSeg_ape"/>
+                                                                   id="inputSeg_ape"
+
+                                                                   name="inputSeg_ape"
+                                                                   onChange={this.handleChangePerfil}
+                                                                   onBlur={this.validateOnePerfil}
+
+                                                                   placeholder="Segundo apellido"
+
+                                                            />
+                                                            {/*<p className="error">{this.state.validationsPerfil.inputSeg_ape}</p>*/}
                                                         </div>
                                                         <div className="form-group col-md-6">
                                                             <label htmlFor="inputSeg_ape">Telefono</label>
                                                             <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
                                                                    className="form-control"
                                                                    placeholder="999 999 999"
-                                                                   id="inputSeg_ape"/>
+                                                                   id="inputTelefono"
+
+                                                                   name="inputTelefono"
+                                                                   onChange={this.handleChangePerfil}
+                                                                   onBlur={this.validateOnePerfil}
+
+                                                            />
+                                                            {/*<p className="error">{this.state.validationsPerfil.inputTelefono}</p>*/}
                                                         </div>
                                                     </div>
-                                                    {/*<div className="form-row">*/}
-                                                    {/*    <div className="form-group col-md-6">*/}
-                                                    {/*        <label htmlFor="inputEmail4">Email</label>*/}
-                                                    {/*        <input type="email" className="form-control"*/}
-                                                    {/*               id="inputEmail4"/>*/}
-                                                    {/*    </div>*/}
-                                                    {/*    <div className="form-group col-md-6">*/}
-                                                    {/*        <label htmlFor="inputPassword4">Password</label>*/}
-                                                    {/*        <input type="password" className="form-control"*/}
-                                                    {/*               id="inputPassword4"/>*/}
-                                                    {/*    </div>*/}
-                                                    {/*</div>*/}
                                                     <div className="form-group">
-                                                        <label htmlFor="inputAddress"></label>
+                                                        <label htmlFor="inputAddress">Dirección</label>
                                                         <input type="text" className="form-control" id="inputAddress"
-                                                               placeholder="1234 Main St"/>
-                                                    </div>
-                                                    <div className="form-group">
-                                                        <label htmlFor="inputAddress2">Address 2</label>
-                                                        <input type="text" className="form-control" id="inputAddress2"
-                                                               placeholder="Apartment, studio, or floor"/>
+                                                               placeholder="Calle San Mateo"
+
+                                                               name="inputAddress"
+                                                               onChange={this.handleChangePerfil}
+                                                               onBlur={this.validateOnePerfil}
+
+                                                        />
+                                                        {/*<p className="error">{this.state.validationsPerfil.inputAddress}</p>*/}
                                                     </div>
                                                     <div className="form-row">
                                                         <div className="form-group col-md-6">
-                                                            <label htmlFor="inputCity">City</label>
-                                                            <input type="text" className="form-control" id="inputCity"/>
+                                                            <label htmlFor="inputCity">Provincia</label>
+                                                                <OptionSelectCiud />
+                                                            {/*<p className="error">{this.state.validationsPerfil.cityPerfil}</p>*/}
                                                         </div>
-                                                        <div className="form-group col-md-4">
-                                                            <label htmlFor="inputState">State</label>
-                                                            <select id="inputState" className="form-control">
-                                                                <option selected>Choose...</option>
-                                                                <option>...</option>
+                                                        <div className="form-group col-md-6">
+                                                            <label htmlFor="inputZip">Sexo</label>
+                                                            <select className="form-control" id="inputZip">
+                                                                <option value="Hombre">Hombre</option>
+                                                                <option value="Mujer">Mujer</option>
                                                             </select>
-                                                        </div>
-                                                        <div className="form-group col-md-2">
-                                                            <label htmlFor="inputZip">Zip</label>
-                                                            <input type="text" className="form-control" id="inputZip"/>
                                                         </div>
                                                     </div>
                                                     <div className="form-group">
@@ -210,5 +248,10 @@ class Category extends Component {
     }
 }
 
+function mapStateToProps(state) {
+    // return {
+    //     ciud: state.Ciudades.list,
+    // }
+}
 
-export default Category;
+export default connect(mapStateToProps)(Category);
