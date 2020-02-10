@@ -29,7 +29,14 @@ class Category extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            title: "promoción"
+            title: "promoción",
+            validationsUsu: {
+                usernameUsu: '',
+                usercityUsu: '',
+                emailUsu: '',
+                passwordUsu: '',
+                confirmPasswordUsu: ''
+            },
         }
         this.myFormRef = React.createRef();
     }
@@ -42,6 +49,34 @@ class Category extends Component {
     changeMultiSelect(){
         // this.select.current.style.color = 'tomato'
 
+    }
+
+    //validaciones perfil
+    validateOnePerfil = (ev)=>{
+        if (ev.target.id === "perfil") {
+            const {name} = ev.target;
+            const value = this.state.valuesUsu[name];
+            let message = '';
+
+            if (!value) {
+                message = `${name} es requerido`
+            }
+
+            if (value && name === 'usernameUsu' && (value.length < 8 || value.length > 50)) {
+                message = 'Nombre debe contener de 8 a 20 caracteres.'
+            }
+
+            if (value && name === 'email' && !/\S+@\S+\.\S+/.test(value)) {
+                message = 'Formato de Email debe ser :  example@mail.com'
+            }
+
+            this.setState({
+                validationsUsu: {
+                    ...this.state.validationsUsu,
+                    [name]: message
+                }
+            })
+        }
     }
 
     render() {

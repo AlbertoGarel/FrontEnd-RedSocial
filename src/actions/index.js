@@ -113,7 +113,7 @@ export function showOfertaBySal(id) {
 
 //OFERTAS POR SALARIO MÍNIMO
 export function showOfertaByJor(id) {
-    axios.get('http://localhost:8000/api/ofertas/salario/' + id, userHeader)
+    axios.get('http://localhost:8000/api/ofertas/jornada/' + id, userHeader)
         .then(res => {
             store.dispatch({type: SHOW_OFERTABYJOR, payload: res.data.obj})
         })
