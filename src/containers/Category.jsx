@@ -211,7 +211,7 @@ class Category extends Component {
                                                             </label>
                                                         </div>
                                                     </div>
-                                                    <button type="submit" className="btn btn-primary">Sign in</button>
+                                                    <button type="submit" className="btn btn-primary">Modificar</button>
                                                 </form>
 
                                                 {/*------*/}
@@ -239,7 +239,7 @@ class Category extends Component {
                                                                    id="inputPassword4"/>
                                                         </div>
                                                     </div>
-                                                    <button type="submit" className="btn btn-primary">Sign in</button>
+                                                    <button type="submit" className="btn btn-primary">Modificar</button>
                                                 </form>
                                             </div>
                                             <div className="">

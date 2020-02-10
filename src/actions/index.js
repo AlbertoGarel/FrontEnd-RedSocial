@@ -190,7 +190,6 @@ export function showOfertas() {
             store.dispatch({type: SHOW_OFERTAS, payload: res.data.obj});
         })
         .catch(err => {
-                alert(err.error)
                 console.log(err.error)
             }
         )
@@ -204,7 +203,6 @@ export function showEmpresas() {
             store.dispatch({type: SHOW_EMPRESAS, payload: res.data.obj});
         })
         .catch(err => {
-                alert(err.error)
                 console.log(err.error)
             }
         )
