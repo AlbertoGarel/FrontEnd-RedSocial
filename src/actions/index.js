@@ -38,10 +38,10 @@ export const SHOW_OFERTABYEMP = 'SHOW_OFERTABYEMP';
 
 
  let userHeader = '';
- if(localStorage.getItem('user')){
+ if(JSON.parse(localStorage.getItem('user')).tipo === 'usuario'){
 
     const tokenUser = JSON.parse(localStorage.getItem('user')).token;
-    let userHeader = {
+     userHeader = {
         headers: {
             'Authorization': `Bearer ${tokenUser}`,
             'X-Requested-With': 'XMLHttpRequest',
