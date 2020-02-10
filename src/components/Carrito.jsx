@@ -23,7 +23,7 @@ class Carrito extends Component {
         super(props);
         this.state = {
             // showClass: this.props.cartAction,
-            message: '',
+            message: ''
         };
 
     }
@@ -78,7 +78,7 @@ class Carrito extends Component {
                         <p className="lugar_entrega"><span style={{display: "block"}}>//</span> // </p>
                     </div>
                     <div id="body_carrito">
-
+                    
                         {this.renderItemsOfertas()}
 
                     </div>

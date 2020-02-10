@@ -174,3 +174,8 @@
 .oculto{
     display: none!important;
 }
+.absoluto{
+    position: absolute;
+    width: 100%!important;
+    left: 0;
+}
