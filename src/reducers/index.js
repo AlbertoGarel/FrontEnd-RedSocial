@@ -15,6 +15,8 @@ import Usuarios from "./usuarios";
 import Estudios from "./Estudios";
 import Jornada from "./Jornada";
 import Contratos from "./Contratos";
+import Empresas from "./Empresas";
+
 
 
 let reducers = combineReducers({
@@ -32,7 +34,8 @@ let reducers = combineReducers({
     Cart,
     Estudios,
     Jornada,
-    Contratos
+    Contratos,
+    Empresas
 });
 
 export default reducers;

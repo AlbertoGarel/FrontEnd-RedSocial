@@ -1,4 +1,4 @@
-import React, {Component, Fragment} from 'react';
+import React, { Component, Fragment } from 'react';
 
 /**
  * IMPORT BOOTSTRAP
@@ -9,7 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
  * */
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 
-import {showOfertaByExp} from '../actions';
+import { showOfertaByExp } from '../actions';
 
 /**
  * IMPORT OWN Components
@@ -18,8 +18,10 @@ import OptionSelectCiud from '../components/OptionSelectCiud';
 import EstudiosSelectUser from '../components/EstudiosSelectUser';
 import OptionSelectJornada from '../components/OptionSelectJornada';
 import OptionSelectContrato from '../components/OptionSelectContrato';
+import OptionSelectEmpresa from '../components/OptionSelectEmp';
 
-import {showOfertas, showOfertaBySal} from '../actions';
+
+import { showOfertas, showOfertaBySal } from '../actions';
 
 class AsideUser extends Component {
     constructor(props) {
@@ -39,10 +41,10 @@ class AsideUser extends Component {
 
     handlerRange() {
         let slider = document.getElementById("myRange");
-        this.setState({valorRange: parseInt(slider.value)});
-        if(parseInt(slider.value) === 5){
+        this.setState({ valorRange: parseInt(slider.value) });
+        if (parseInt(slider.value) === 5) {
             showOfertaByExp(50);
-        }else{
+        } else {
             showOfertaByExp(this.state.valorRange);
         }
 
@@ -55,18 +57,22 @@ class AsideUser extends Component {
             <Fragment>
                 <li>
                     <div className="form-group">
-                        <label htmlFor="exampleInputEmail1">Buscando por...</label>
+                        {/* <label htmlFor="exampleInputEmail1">Buscando por...</label>
                         <input type="email" className="form-control" defaultValue={this.props.data}
                                readOnly/>
                         <small id="emailHelp" className="form-text text-muted">Refleja el último criterio de
                             búsqueda.
-                        </small>
+                        </small> */}
+                        <label htmlFor="ciudades_lista">Empresas</label>
+
+                        <OptionSelectEmpresa />
+
                     </div>
                 </li>
                 <li>
                     <div className="text-center">
                         <button type="button" className="btn btn-secondary text-center"
-                                onClick={() => this.handler()}
+                            onClick={() => this.handler()}
                         >ver todas
                         </button>
                     </div>
@@ -76,7 +82,7 @@ class AsideUser extends Component {
                         <div className="form-group">
                             <label htmlFor="ciudades_lista">Provincias</label>
 
-                            <OptionSelectCiud/>
+                            <OptionSelectCiud />
 
                         </div>
                     </form>
@@ -86,7 +92,7 @@ class AsideUser extends Component {
                         <div className="form-group">
                             <label htmlFor="ciudades_lista">Estudios</label>
 
-                            <EstudiosSelectUser/>
+                            <EstudiosSelectUser />
 
                         </div>
                     </form>
@@ -94,7 +100,7 @@ class AsideUser extends Component {
                 <li>
                     <div className="dropdown text-center">
                         <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                         >
                             Salario mínimo
                         </button>
@@ -114,17 +120,17 @@ class AsideUser extends Component {
                         <div className="form-group">
                             <label htmlFor="ciudades_lista">Experiencia</label>
                             <input list="tickmarks" type="range" className="custom-range" min="0" max="5" step="1"
-                                   id="myRange" onChange={() => this.handlerRange()}/>
-                            <p className="text-center text-secondary" style={{fontSize: 1.3 + 'em'}}>
+                                id="myRange" onChange={() => this.handlerRange()} />
+                            <p className="text-center text-secondary" style={{ fontSize: 1.3 + 'em' }}>
 
                                 años:
 
                                 <span className="text-info ml-2"
-                                      style={{fontSize: 1.1 + 'em'}}
-                                      id="value"
+                                    style={{ fontSize: 1.1 + 'em' }}
+                                    id="value"
                                 >
-                                        {this.state.valorRange}
-                                      </span>
+                                    {this.state.valorRange}
+                                </span>
                             </p>
 
                         </div>
@@ -134,7 +140,7 @@ class AsideUser extends Component {
                     <form action="">
                         <div className="form-group">
                             <label htmlFor="ciudades_lista">Jornada</label>
-                            <OptionSelectJornada/>
+                            <OptionSelectJornada />
                         </div>
                     </form>
                 </li>
@@ -142,7 +148,7 @@ class AsideUser extends Component {
                     <form action="">
                         <div className="form-group">
                             <label htmlFor="ciudades_lista">Contratos</label>
-                            <OptionSelectContrato/>
+                            <OptionSelectContrato />
                         </div>
                     </form>
                 </li>

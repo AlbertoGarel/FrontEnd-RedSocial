@@ -193,6 +193,24 @@ class Inicial extends Component {
                     });
                 }
                 break;
+                case 'empresas':
+                if (!this.props.porEmpresas.length) {
+                    return (
+                        <div className="cover">
+                            <p className="p_error">No hay categorías</p>
+                            <img className="w-25" src="./assets/images/checklist.png" alt="no products"/>
+                        </div>
+                    )
+                } else {
+                    return this.props.porEmpresas.map((product, index) => {
+                        return (
+                            <Fragment key={index}>
+                                <CardProduct data={product}/>
+                            </Fragment>
+                        )
+                    });
+                }
+                break;
             default:
                 return this.props.ofertas.map((product, index) => {
                     return (
@@ -352,7 +370,8 @@ function mapStateToProps(state) {
         buscPorSal: state.Ofertas.porSalario,
         buscPorJor: state.Ofertas.porJornada,
         buscPorCont: state.Ofertas.porContrato,
-        controlBusq: state.Ofertas.controlBusq
+        controlBusq: state.Ofertas.controlBusq,
+        porEmpresas: state.Ofertas.porEmpresas
     }
 }
 

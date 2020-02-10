@@ -26,6 +26,7 @@ export const SHOW_OFERTABYID = 'SHOW_OFERTABYID';
 export const SHOW_ESTUDIOS = 'SHOW_ESTUDIOS';
 export const SHOW_JORNADAS = 'SHOW_JORNADAS';
 export const SHOW_CONTRATOS = 'SHOW_CONTRATOS';
+export const SHOW_EMPRESAS = 'SHOW_EMPRESAS';
 //por condiciones
 export const SHOWOFERTA_BYPROVINCIAID = 'SHOWOFERTA_BYPROVINCIAID';
 export const SHOWOFERTA_BYESTUDIOS = 'SHOWOFERTA_BYESTUDIOS';
@@ -33,6 +34,8 @@ export const SHOW_OFERTABYEXP = 'SHOW_OFERTABYEXP';
 export const SHOW_OFERTABYSAL = 'SHOW_OFERTABYSAL';
 export const SHOW_OFERTABYJOR = 'SHOW_OFERTABYJOR';
 export const SHOW_OFERTABYCONT = 'SHOW_OFERTABYCONT';
+export const SHOW_OFERTABYEMP = 'SHOW_OFERTABYEMP';
+
 
 // let userHeader = '';
 // if(localStorage.getItem('user')){
@@ -132,6 +135,18 @@ export function showOfertaByCont(id) {
         )
 }
 
+//OFERTAS POR NOMBRE EMPRESA
+export function showOfertaByEmp(id) {
+    axios.get('http://localhost:8000/api/ofertas/empresas/' + id, userHeader)
+        .then(res => {
+            store.dispatch({type: SHOW_OFERTABYEMP, payload: res.data.obj})
+        })
+        .catch(err => {
+                console.log(err.error)
+            }
+        )
+}
+
 
 
 //////PUBLICOS
@@ -180,6 +195,22 @@ export function showOfertas() {
             }
         )
 }
+
+//EMPRESA
+export function showEmpresas() {
+    axios.get('http://localhost:8000/api/empresas')
+        .then(res => {
+            console.log('index', res.data.obj)
+            store.dispatch({type: SHOW_EMPRESAS, payload: res.data.obj});
+        })
+        .catch(err => {
+                alert(err.error)
+                console.log(err.error)
+            }
+        )
+        }
+    
+
 
 //usuarios
 export function showUsuario(type, data) {

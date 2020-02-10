@@ -6,6 +6,7 @@ import {SHOW_OFERTABYEXP} from '../actions';
 import {SHOW_OFERTABYSAL} from '../actions';
 import {SHOW_OFERTABYJOR} from '../actions';
 import {SHOW_OFERTABYCONT} from '../actions';
+import {SHOW_OFERTABYEMP} from '../actions';
 
 
 const initialState = {
@@ -18,6 +19,7 @@ const initialState = {
     porJornada: [],
     porContrato:[],
     controlBusq: '',
+    porEmpresas: []
 
 };
 
@@ -46,6 +48,9 @@ function Ofertas(state = initialState, action) {
             break;
             case SHOW_OFERTABYCONT:
             return Object.assign({}, state, {porContrato: action.payload, controlBusq: 'contrato'});
+            break;
+            case SHOW_OFERTABYEMP :
+            return Object.assign({}, state, {list: action.payload, controlBusq: 'porEmpresas'});
             break;
         default:
             return state;
