@@ -25,6 +25,7 @@ import Wrapper from "../components/Wrapper";
 import {showOfertasEmpresa} from '../actions';
 
 import CardEmpresa from '../components/CardEmpresa'
+import OfertasEmpresa from "../reducers/ofertasEmp";
 
 class Inicial extends Component {
     constructor(props) {
@@ -263,7 +264,7 @@ class Inicial extends Component {
                                 <div className="container-fluid">
                                     <div className="row">
                                         <div className="col-8">
-                                            {/*{this.renderPoolRenders()}*/}
+                                            {this.renderPoolRenders()}
                                         </div>
                                         <div style={{ backgroundColor: '#00ced114' }} className="col-4">
                                             <div className="container-flui">
@@ -292,7 +293,7 @@ class Inicial extends Component {
 
 function mapStateToProps(state) {
     return {
-            ofertasEmp: state.ofertasEmp.list,
+            ofertasEmp: state.OfertasEmpresa.list,
     }
 }
 

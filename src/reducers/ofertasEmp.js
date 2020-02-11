@@ -5,7 +5,7 @@ const initialState = {
     list: []
 };
 
-function OfertasEmp(state = initialState, action) {
+function OfertasEmpresa(state = initialState, action) {
     switch (action.type) {
         case SHOW_OFERTASEMP :
             return Object.assign({}, state, {list: action.payload});
@@ -15,4 +15,4 @@ function OfertasEmp(state = initialState, action) {
     }
 }
 
-export default OfertasEmp;
+export default OfertasEmpresa;
