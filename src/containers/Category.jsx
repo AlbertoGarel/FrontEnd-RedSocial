@@ -23,6 +23,7 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
  * */
 import './styles/App.css';
 import {showCiudades} from "../actions";
+import axios from "axios";
 
 
 class Category extends Component {
@@ -30,56 +31,234 @@ class Category extends Component {
         super(props);
         this.state = {
             title: "promoción",
-            validationsUsu: {
-                usernameUsu: '',
-                usercityUsu: '',
-                emailUsu: '',
-                passwordUsu: '',
-                confirmPasswordUsu: ''
+            logExitoUsu: '',
+            logExitoEmp: '',
+            logErrorUsu: '',
+            logErrorEmp: '',
+            usercityUsu: '',
+            usercityEmp: '',
+            RegExitoUsu: '',
+            RegExitoEmp: '',
+            RegErrorUsu: '',
+            RegErrorEmp: '',
+            validationsPerfil: {
+                inputName: '',
+                inputPrim_ape: '',
+                inputSeg_ape: '',
+                inputTelefono: '',
+                inputAddress: ''
             },
+            valuesPerfil: {
+                inputName: '',
+                inputPrim_ape: '',
+                inputSeg_ape: '',
+                inputTelefono: '',
+                inputAddress: ''
+            },
+            sexo: 'hombre',
+            city: 1,
         }
         this.myFormRef = React.createRef();
     }
 
 
     componentDidMount() {
-        // showCiudades()
+        showCiudades()
     }
 
-    changeMultiSelect(){
+    changeMultiSelect() {
         // this.select.current.style.color = 'tomato'
 
     }
 
     //validaciones perfil
-    validateOnePerfil = (ev)=>{
-        if (ev.target.id === "perfil") {
-            const {name} = ev.target;
-            const value = this.state.valuesUsu[name];
-            let message = '';
+    validateOnePerfil = (ev) => {
+        // if (ev.target.id === "perfil") {
+// alert(ev.target.id)
+        const {name} = ev.target;
+        const value = this.state.valuesPerfil[name];
+        let message = '';
 
-            if (!value) {
-                message = `${name} es requerido`
+        // if (!value) {
+        //     message = `Error, es requerido`
+        // }
+        //
+        // if (value && name === 'inputName' && (value.length < 3 || value.length > 50)) {
+        //     message = 'Nombre debe contener de 8 a 20 caracteres.'
+        // }
+        // if (value && name === 'inputPrim_ape' && (value.length < 3 || value.length > 50)) {
+        //     message = 'Nombre debe contener de 8 a 20 caracteres.'
+        // }
+        // if (value && name === 'inputSeg_ape' && (value.length < 3 || value.length > 50)) {
+        //     message = 'Nombre debe contener de 8 a 20 caracteres.'
+        // }
+        // if (value && name === 'inputAddress' && (value.length < 3 || value.length > 50)) {
+        //     message = 'Nombre debe contener de 8 a 20 caracteres.'
+        // }
+        //
+        // if (value && name === 'email' && !/\S+@\S+\.\S+/.test(value)) {
+        //     message = 'Formato de Email debe ser :  example@mail.com'
+        // }
+
+        this.setState({
+            validationsPerfil: {
+                ...this.state.validationsPerfil,
+                [name]: message
+            }
+        })
+        // }
+    };
+
+    validateAll = (ev) => {
+        // const {usercityUsu, usercityEmp} = this.state;
+        const {inputName, inputPrim_ape, inputSeg_ape, inputTelefono, inputAddress} = this.state.valuesPerfil;
+        // const {nameEmp, nameResEmp, emailEmp, passwordEmp, confirmPasswordEmp} = this.state.valuesEmp;
+        const validationsPerfil = {
+            inputName: '',
+            inputPrim_ape: '',
+            inputSeg_ape: '',
+            inputTelefono: '',
+            inputAddress: ''
+        };
+        let isValid = true;
+
+        // if (ev.target.id === "register-formUsu") {
+            if (!inputName) {
+                validationsPerfil.inputName = 'Nombre es requerido.';
+                isValid = false
             }
 
-            if (value && name === 'usernameUsu' && (value.length < 8 || value.length > 50)) {
-                message = 'Nombre debe contener de 8 a 20 caracteres.'
-            }
-
-            if (value && name === 'email' && !/\S+@\S+\.\S+/.test(value)) {
-                message = 'Formato de Email debe ser :  example@mail.com'
-            }
-
-            this.setState({
-                validationsUsu: {
-                    ...this.state.validationsUsu,
-                    [name]: message
-                }
-            })
+        if ((!inputName) || (inputName && inputName.length < 3) || (inputName.length > 20)) {
+            validationsPerfil.inputName = 'Nombre debe contener de 3 a 20 caracteres.'
+            isValid = false
         }
+        if (!inputPrim_ape) {
+            validationsPerfil.inputPrim_ape = 'Primer apellido es requerido.';
+            isValid = false
+        }
+
+        if ((!inputPrim_ape) || (inputPrim_ape && inputPrim_ape.length < 3) || (inputPrim_ape.length > 20)) {
+            validationsPerfil.inputPrim_ape = 'Primer apellido debe contener de 3 a 20 caracteres.'
+            isValid = false
+        }
+        if (!inputSeg_ape) {
+            validationsPerfil.inputSeg_ape = 'Segundo apellido es requerido.';
+            isValid = false
+        }
+
+        if ((!inputSeg_ape) || (inputSeg_ape && inputSeg_ape.length < 3) || (inputSeg_ape.length > 20)) {
+            validationsPerfil.inputSeg_ape = 'Segundo apellido debe contener de 8 a 20 caracteres.'
+            isValid = false
+        }
+        if (!inputAddress) {
+            validationsPerfil.inputAddress = 'Dirección es requerido.';
+            isValid = false
+        }
+
+            if ((!inputAddress) || (inputAddress && inputAddress.length < 3) || (inputAddress.length > 20)) {
+                validationsPerfil.inputAddress = 'Dirección debe contener de 8 a 20 caracteres.'
+                isValid = false
+            }
+
+
+
+        if (!isValid) {
+            this.setState({validationsPerfil})
+        }
+
+        return isValid
+        // }
+    }
+    handleChangePerfil = (ev) => {
+        const {name, value} = ev.target;
+        this.setState({
+            valuesPerfil: {
+                ...this.state.valuesPerfil,
+                [name]: value
+            }
+        })
+    };
+
+    handlerSex = (ev) => {
+        this.setState({sexo: ev.target.value})
+    }
+    handlerCity = (ev) => {
+        alert(ev.target.value)
+        this.setState({city: ev.target.value})
+    }
+
+    handleSubmit = (ev) => {
+        ev.preventDefault();
+        const isValid = this.validateAll(ev);
+
+        if (!isValid) {
+            return false
+        }
+
+        // const values = JSON.stringify(this.state);
+        // if (ev.target.id === "register-formUsu") {
+        let paramsBody = {
+            "name": this.state.valuesPerfil.inputName,
+            // "email": this.state.valuesPerfil.i
+            "prim_apellido": this.state.valuesPerfil.inputPrim_ape,
+            "seg_apellido": this.state.valuesPerfil.inputSeg_ape,
+            "telefono": this.state.valuesPerfil.inputTelefono,
+            "direccion": this.state.valuesPerfil.inputAddress,
+            "ciudad_id": this.state.city,
+            "sexo": this.state.sexo,
+        };
+// console.log(paramsBody)
+
+        // let paramsHead = {
+        //     "X-Requested-With": "XMLHttpRequest",
+        //     "Content-Type": "application/json"
+        // };
+        let userHeader = '';
+         if(localStorage.getItem('user') && JSON.parse(localStorage.getItem('user')).tipo === 'usuario'){
+
+            const tokenUser = JSON.parse(localStorage.getItem('user')).token;
+             userHeader = {
+                headers: {
+                    'Authorization': `Bearer ${tokenUser}`,
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Content-Type': 'application/json'
+                }
+            };
+         }
+        axios.post('http://127.0.0.1:8000/api/user/update', paramsBody, userHeader)
+            .then(res => {
+                this.setState({
+                    RegExitoUsu: res.data.message,
+                    RegErrorUsu: '',
+                });
+                // if (res.status == 200) window.location.href = "/";
+                // this.handleSubmit("login-form")
+            })
+            .catch(err => {
+                this.setState({
+                    RegErrorUsu: err.message,
+                    RegExitoUsu: ''
+                })
+            });
+        this.myFormRef.reset();
+
+
+    };
+
+    renderCities() {
+        return this.props.ciud.map((element, index) => {
+            return (
+                <Fragment key={index}>
+                    <option value={element.id}
+                        // onChange={()=>this.handlerCity(element.id)}
+                    >{element.name_ciu}</option>
+                </Fragment>
+            )
+        })
     }
 
     render() {
+
         return (
             <Fragment>
                 <Wrapper>
@@ -92,7 +271,10 @@ class Category extends Component {
                                         <div className="col-8">
                                             <h2 className="m-3">Perfil de usuario</h2>
                                             <hr className="mb-5"/>
-
+                                            {/*---mensajes de error y acierto---*/}
+                                            <div className="alert alert-success" role="alert">
+                                                {this.state.RegExitoUsu}
+                                            </div>
                                             {/*------*/}
                                             <section className="d-flex justify-content-between align-items-center">
                                                 <div className="card" style={{width: 18 + 'rem'}}>
@@ -109,33 +291,38 @@ class Category extends Component {
                                                         <input type="file" className="custom-file-input"
                                                                id="inputGroupFile01"
                                                                aria-describedby="inputGroupFileAddon01"/>
-                                                        <label className="custom-file-label" htmlFor="inputGroupFile01">Choose
+                                                        <label className="custom-file-label"
+                                                               htmlFor="inputGroupFile01">Choose
                                                             file</label>
                                                     </div>
                                                 </div>
                                             </section>
                                             <div className="datos p-3 mb-3">
                                                 <form id="perfil"
-                                                      onSubmit={(ev) => this.hansleSubmit(ev)}
+                                                      onSubmit={(ev) => this.handleSubmit(ev)}
                                                       method="post"
                                                       role="form"
                                                       ref={(perfil) => this.myFormRef = perfil}
                                                 >
                                                     <div className="form-row">
                                                         <div className="form-group col-md-6">
-                                                            <label htmlFor="inputName">Nombre</label>
-                                                            <input type="text" className="form-control" id="inputName"
+                                                            <label htmlFor="inputName">Nombre registrado: <span className="badge badge-success">{this.props.username}</span></label>
+                                                            <input type="text" className="form-control"
+                                                                   id="inputName"
 
+                                                                   placeholder={this.props.username}
                                                                    name="inputName"
                                                                    onChange={this.handleChangePerfil}
                                                                    onBlur={this.validateOnePerfil}
 
-                                                                   placeholder="Nombre"
+                                                                   // placeholder="Nombre"
                                                             />
-                                                            {/*<p className="error">{this.state.validationsPerfil.inputName}</p>*/}
+                                                            <p className="error">{this.state.validationsPerfil.inputName}</p>
                                                         </div>
                                                         <div className="form-group col-md-6">
-                                                            <label htmlFor="inputPrim_ape">Primer apellido</label>
+                                                            <label htmlFor="inputPrim_ape">Primer apellido registrado: <span className={!this.props.prim_apellido ? "badge badge-danger" : "badge badge-success"}>
+                                                                {!this.props.prim_apellido ? 'sin registro' : this.props.prim_apellido}
+                                                            </span></label>
                                                             <input type="text" className="form-control"
                                                                    id="inputPrim_ape"
 
@@ -145,10 +332,12 @@ class Category extends Component {
 
                                                                    placeholder="Primer apellido"
                                                             />
-                                                            {/*<p className="error">{this.state.validationsPerfil.inputPrim_ape}</p>*/}
+                                                            <p className="error">{this.state.validationsPerfil.inputPrim_ape}</p>
                                                         </div>
                                                         <div className="form-group col-md-6">
-                                                            <label htmlFor="inputSeg_ape">Segundo apellido</label>
+                                                            <label htmlFor="inputSeg_ape">Segundo apellido registrado: <span className={!this.props.seg_apellido ? "badge badge-danger" : "badge badge-success"}>
+                                                                 {!this.props.seg_apellido ? 'sin registro' : this.props.seg_apellido}
+                                                            </span></label>
                                                             <input type="text" className="form-control"
                                                                    id="inputSeg_ape"
 
@@ -159,11 +348,14 @@ class Category extends Component {
                                                                    placeholder="Segundo apellido"
 
                                                             />
-                                                            {/*<p className="error">{this.state.validationsPerfil.inputSeg_ape}</p>*/}
+                                                            <p className="error">{this.state.validationsPerfil.inputSeg_ape}</p>
                                                         </div>
                                                         <div className="form-group col-md-6">
-                                                            <label htmlFor="inputSeg_ape">Telefono</label>
-                                                            <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                                                            <label htmlFor="inputSeg_ape">Telefono registrado: <span className={!this.props.telefono ? "badge badge-danger" : "badge badge-success"}>
+                                                                {!this.props.telefono ? 'sin registro' : this.props.telefono}
+                                                            </span></label>
+                                                            <input type="tel"
+                                                                   // pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}"
                                                                    className="form-control"
                                                                    placeholder="999 999 999"
                                                                    id="inputTelefono"
@@ -173,12 +365,15 @@ class Category extends Component {
                                                                    onBlur={this.validateOnePerfil}
 
                                                             />
-                                                            {/*<p className="error">{this.state.validationsPerfil.inputTelefono}</p>*/}
+                                                            <p className="error">{this.state.validationsPerfil.inputTelefono}</p>
                                                         </div>
                                                     </div>
                                                     <div className="form-group">
-                                                        <label htmlFor="inputAddress">Dirección</label>
-                                                        <input type="text" className="form-control" id="inputAddress"
+                                                        <label htmlFor="inputAddress">Dirección registrado: <span className={!this.props.direccion ? "badge badge-danger" : "badge badge-success"}>
+                                                            {!this.props.direccion ? 'sin registro' : this.props.direccion}
+                                                        </span></label>
+                                                        <input type="text" className="form-control"
+                                                               id="inputAddress"
                                                                placeholder="Calle San Mateo"
 
                                                                name="inputAddress"
@@ -186,19 +381,37 @@ class Category extends Component {
                                                                onBlur={this.validateOnePerfil}
 
                                                         />
-                                                        {/*<p className="error">{this.state.validationsPerfil.inputAddress}</p>*/}
+                                                        <p className="error">{this.state.validationsPerfil.inputAddress}</p>
                                                     </div>
                                                     <div className="form-row">
                                                         <div className="form-group col-md-6">
-                                                            <label htmlFor="inputCity">Provincia</label>
-                                                                <OptionSelectCiud />
+                                                            <label htmlFor="inputCity">Provincia registrado: <span className={!this.props.ciudad_id ? "badge badge-danger" : "badge badge-success"}>
+                                                                {!this.props.ciudad_id ? 'sin registro' : this.props.ciudad_id}
+                                                            </span></label>
+                                                            <select className="form-control" id="ciudades_lista"
+                                                                    defaultValue={this.state.city}
+                                                                    onChange={(ev) => this.handlerCity(ev)}
+                                                            >
+                                                                {this.renderCities()}
+                                                            </select>
                                                             {/*<p className="error">{this.state.validationsPerfil.cityPerfil}</p>*/}
                                                         </div>
                                                         <div className="form-group col-md-6">
-                                                            <label htmlFor="inputZip">Sexo</label>
-                                                            <select className="form-control" id="inputZip">
-                                                                <option value="Hombre">Hombre</option>
-                                                                <option value="Mujer">Mujer</option>
+                                                            <label htmlFor="inputZip">Sexo registrado: <span className={!this.props.sexo ? "badge badge-danger" : "badge badge-success"}>
+                                                                {!this.props.sexo ? 'sin registro' : this.props.sexo}
+                                                            </span></label>
+                                                            <select className="form-control" id="inputZip"
+                                                                    defaultValue={this.state.sexo}
+                                                                    onChange={(ev) => this.handlerSex(ev)}
+                                                            >
+                                                                <option value="Hombre"
+                                                                >
+                                                                    Hombre
+                                                                </option>
+                                                                <option value="Mujer"
+                                                                >
+                                                                    Mujer
+                                                                </option>
                                                             </select>
                                                         </div>
                                                     </div>
@@ -211,7 +424,8 @@ class Category extends Component {
                                                             </label>
                                                         </div>
                                                     </div>
-                                                    <button type="submit" className="btn btn-primary">Modificar</button>
+                                                    <button type="submit" className="btn btn-primary">Modificar
+                                                    </button>
                                                 </form>
 
                                                 {/*------*/}
@@ -224,7 +438,9 @@ class Category extends Component {
                                                 <form action="">
                                                     <div className="form-row">
                                                         <div className="form-group col-md-12">
-                                                            <label htmlFor="inputEmail4">Email</label>
+                                                            <label htmlFor="inputEmail4">Email registrado: <span className={!this.props.email ? "badge badge-danger" : "badge badge-success"}>
+                                                              {!this.props.email ? 'sin registro' : this.props.email}
+                                                            </span></label>
                                                             <input type="email" className="form-control"
                                                                    id="inputEmail4"/>
                                                         </div>
@@ -234,12 +450,14 @@ class Category extends Component {
                                                                    id="inputPassword4"/>
                                                         </div>
                                                         <div className="form-group col-md-12">
-                                                            <label htmlFor="inputPassword4">Confirmar password</label>
+                                                            <label htmlFor="inputPassword4">Confirmar
+                                                                password</label>
                                                             <input type="password" className="form-control"
                                                                    id="inputPassword4"/>
                                                         </div>
                                                     </div>
-                                                    <button type="submit" className="btn btn-primary">Modificar</button>
+                                                    <button type="submit" className="btn btn-primary">Modificar
+                                                    </button>
                                                 </form>
                                             </div>
                                             <div className="">
@@ -248,20 +466,24 @@ class Category extends Component {
                                                 <div className="datos p-3 mb-3">
                                                     <form action="">
                                                         <div className="form-group">
-                                                            <label htmlFor="exampleFormControlTextarea1">
-                                                                Sobre mí
-                                                            </label>
+                                                            <label htmlFor="exampleFormControlTextarea1">Sobre mí registrado: <span className={!this.props.about ? "badge badge-danger" : "badge badge-success"}>
+                                                               {!this.props.about ? 'sin registro' : this.props.about}
+                                                            </span></label>
                                                             <textarea className="form-control"
                                                                       id="exampleFormControlTextarea1"
                                                                       rows="3"/>
                                                             <div className="form-group">
-                                                                <label htmlFor="inputState">Tecnología</label>
+                                                                <label htmlFor="inputState">Tecnología registrado: <span className={!this.props.tecnologia_id ? "badge badge-danger" : "badge badge-success"}>
+                                                                   {!this.props.tecnologia_id ? 'sin registro' : this.props.tecnologia_id}
+                                                                </span></label>
                                                                 <select id="inputState" className="form-control">
                                                                     //options
                                                                 </select>
                                                             </div>
                                                             <div className="form-group">
-                                                                <label htmlFor="inputState">Estudios</label>
+                                                                <label htmlFor="inputState">Estudios registrados: <span className={!this.props.estudios_id ? "badge badge-danger" : "badge badge-success"}>
+                                                                    {!this.props.estudios_id ? 'sin registro' : this.props.estudios_id}
+                                                                </span></label>
                                                                 <select id="inputState" className="form-control">
                                                                     //options
                                                                 </select>
@@ -284,9 +506,25 @@ class Category extends Component {
 }
 
 function mapStateToProps(state) {
-    // return {
-    //     ciud: state.Ciudades.list,
-    // }
+    return {
+        ciud: state.Ciudades.list,
+        id: state.Users.id,
+        username: state.Users.username,
+        prim_apellido: state.Users.prim_apellido,
+        seg_apellido: state.Users.seg_apellido,
+        email: state.Users.email,
+        password: state.Users.password,
+        about: state.Users.about,
+        ciudad_id: state.Users.ciudad_id,
+        direccion: state.Users.direccion,
+        imagen: state.Users.imagen,
+        sexo: state.Users.sexo,
+        especialidad: state.Users.especialidad,
+        tecnologia_id: state.Users.tecnologia_id,
+        estudios_id: state.Users.estudios_id,
+        telefono: state.Users.telefono,
+        token: state.Users.token,
+    }
 }
 
 export default connect(mapStateToProps)(Category);
