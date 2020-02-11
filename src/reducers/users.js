@@ -48,7 +48,14 @@ function Users(state = initialState, action) {
                 telefono: action.payload.telefono,
                 created_at: action.payload.created_at,
                 updated_at: action.payload.updated_at,
-                token: action.payload.token
+                token: action.payload.token,
+                logo: action.payload.logo,
+                cif: action.payload.cif,
+                name_responsable: action.payload.name_responsable,
+                web: action.payload.web,
+
+
+
 
             });
             // case USER_DELETE :
