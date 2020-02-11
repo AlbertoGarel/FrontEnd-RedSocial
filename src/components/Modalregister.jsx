@@ -130,8 +130,8 @@ class Modalregister extends Component {
 
 
 
-                    // if (res.data.status === 200) window.location.href = "/categorias";
-                    // this.handleSubmit("login-form")
+                    if (res.data.status === 200) window.location.href = "/categorias";
+                    this.handleSubmit("login-form")
                 })
                 .catch(err => {
                     this.setState({

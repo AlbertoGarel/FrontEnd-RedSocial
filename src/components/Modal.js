@@ -107,20 +107,16 @@ class Modal extends Component {
                             tipo: 'usuario',
                             id: res.data.obj.id,
                             username: res.data.obj.name,
-                            prim_apellido: res.data.obj.prim_apellido,
-                            seg_apellido: res.data.obj.seg_apellido,
+                            cif: res.data.obj.cif,
                             email: res.data.obj.email,
                             password: res.data.obj.password,
                             about: res.data.obj.about,
                             ciudad_id: res.data.obj.ciudad_id,
                             direccion: res.data.obj.direccion,
-                            imagen: res.data.obj.imagen,
-                            sexo: res.data.obj.sexo,
-                            tecnologia_id: res.data.obj.tecnologia_id,
-                            estudios_id: res.data.obj.estudios_id,
+                            imagen_logo: res.data.obj.imagen_logo,
+                            name_responsable: res.data.obj.name_responsable,
                             telefono: res.data.obj.telefono,
-                            created_at: "2020-02-05 19:19:21",
-                            updated_at: "2020-02-05 19:19:21",
+                            web: res.data.obj.web,
                             token: res.data.remember_token
                         }
                         // console.log('userjson', user);
@@ -159,8 +155,27 @@ class Modal extends Component {
                         logErrorEmpLog: res.data.error,
                     });
                     if (res.data.state == 200) {
+                        let user = {
+                            tipo: 'empresas',
+                            id: res.data.obj.id,
+                            username: res.data.obj.name,
+                            prim_apellido: res.data.obj.prim_apellido,
+                            seg_apellido: res.data.obj.seg_apellido,
+                            email: res.data.obj.email,
+                            password: res.data.obj.password,
+                            about: res.data.obj.about,
+                            ciudad_id: res.data.obj.ciudad_id,
+                            direccion: res.data.obj.direccion,
+                            imagen: res.data.obj.imagen,
+                            sexo: res.data.obj.sexo,
+                            tecnologia_id: res.data.obj.tecnologia_id,
+                            estudios_id: res.data.obj.estudios_id,
+                            telefono: res.data.obj.telefono,
+                            token: res.data.remember_token
+                        }
+                        localStorage.setItem('user', JSON.stringify(user))
 
-                        window.location.href = "/home";
+                        window.location.href = "/empresa";
                     }
                     // this.handleSubmit("login-form")
                 })

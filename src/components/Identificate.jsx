@@ -21,9 +21,8 @@ class Identificate extends Component {
     }
 
     handlerLogout = () => {
-        let paramsBody = {email: JSON.parse(localStorage.getItem('user')).email};
-        let paramsHeaders = {headers: {Authorization: `bearer ${JSON.parse(localStorage.getItem('user')).token}`}};
-        logOut(paramsBody, paramsHeaders);
+        localStorage.removeItem( 'user' );
+        window.location.href = "/";
     };
 
 
@@ -39,78 +38,12 @@ class Identificate extends Component {
                 </label>
                 <i className="fa fa-2x fa-chevron-down"/>
                 <div className="dropdown-menu">
-                    <h1 className="dropdown-item">{user.username ? user.username : 'Invitado'}</h1>
-                    <p className="lugar_entrega dropdown-item">
-                        {/*{user.address ? user.address : 'Entregar en...'}*/}
-                    </p>
-                    <div className="dropdown-divider"/>
-                    {user.username ?
-                        <Fragment>
-                            <a className="dropdown-item info" href="/mispedidos">
-                                <i className="fa fa-2x fa-pencil-square-o"/>
-                                <span>Editar Perfil</span></a>
-                            {/*<a className="dropdown-item info" href="/">*/}
-                            {/*    <i className="fa fa-2x fa-user"/>*/}
-                            {/*<span>Cuenta</span>*/}
-                            {/*</a>*/}
-                        </Fragment>
-                        :
-                        <button id="identificate_btn" type="button" className="btn btn-lg btn-block"
-                                onClick={evento}>Identificate
-                        </button>
-                    }
-                    <div className="dropdown-divider"/>
-                    {/*-----perfil------*/}
-                    <p className="dropdown-item info">
-                        {!user.username ?
-                            <i className="fa fa-lg fa-question info"/>
-                            :
-                            <i className="fa fa-lg fa-check text-success"/>
-                        }
-                        <span>Nombre: {user.username}</span>
-                    </p>
-                    <p className="dropdown-item info">
-                        {!user.prim_apellido ?
-                            <i className="fa fa-2x fa-commenting"/>
-                            :
-                            <i className="fa fa-lg fa-check text-success"/>
-                        }
-                        <span>Apellidos: {user.prim_apellido} {user.seg_apellido}</span>
-                    </p>
-                    <p className="dropdown-item info">
-                        {!user.email ?
-                            <i className="fa fa-2x fa-commenting"/>
-                            :
-                            <i className="fa fa-lg fa-check text-success"/>
-                        }
-                        <span>Email: {user.email}</span>
-                    </p>
-                    <p className="dropdown-item info">
-                        {!user.Ciudad_id ?
-                            <i className="fa fa-2x fa-commenting"/>
-                            :
-                            <i className="fa fa-lg fa-check text-success"/>
-                        }
-                        <span>Ciudad: {user.ciudad_id}</span>
-                    </p>
-                    <p className="dropdown-item info">
-                        {!user.Ciudad_id ?
-                            <i className="fa fa-2x fa-commenting"/>
-                            :
-                            <i className="fa fa-lg fa-check text-success"/>
-                        }
-                        <span>Apellidos: {user.ciudad_id}</span>
-                    </p>
-//completar sólo con campos no completos
-                    {/*--------------*/}
-                    {user.username ?
+                    <h1 className="dropdown-item">Hasta pronto, {user.username}</h1>
                         <button className="dropdown-item info"
                                 onClick={() => this.handlerLogout()}>
                             <i className="fa fa-2x fa-sign-out" style={{transform: 'rotate(180deg)'}}/>
                             <span>Logout</span>
                         </button>
-                        :
-                        ''
                     }
                 </div>
             </div>

@@ -36,22 +36,42 @@ export const SHOW_OFERTABYJOR = 'SHOW_OFERTABYJOR';
 export const SHOW_OFERTABYCONT = 'SHOW_OFERTABYCONT';
 export const SHOW_OFERTABYEMP = 'SHOW_OFERTABYEMP';
 export const SHOW_OFERTASBYUSER = 'SHOW_OFERTASBYUSER';
+//empresa
+export const SHOW_OFERTASEMP = 'SHOW_OFERTASEMP';
 
 
- let userHeader = '';
- if(localStorage.getItem('user') && JSON.parse(localStorage.getItem('user')).tipo === 'usuario'){
+let userHeader = '';
+if (localStorage.getItem('user') && JSON.parse(localStorage.getItem('user')).tipo === 'usuario'
+|| localStorage.getItem('user') && JSON.parse(localStorage.getItem('user')).tipo === 'empresas'
+) {
 
     const tokenUser = JSON.parse(localStorage.getItem('user')).token;
-     userHeader = {
+    userHeader = {
         headers: {
             'Authorization': `Bearer ${tokenUser}`,
             'X-Requested-With': 'XMLHttpRequest',
             'Content-Type': 'application/json'
         }
     };
- }
+}
+
+/////////////////////////////////inicio secciòn de empresas//////////////////////////////////7//
+
+export function showOfertasEmpresa() {
+    axios.get(`http://127.0.0.1:8000/api/empresa/ofertas`, userHeader)
+        .then(res => {
+          console.log('ofeertasss emmmpresssss' , res.data.obj)
+            store.dispatch({type: SHOW_OFERTASEMP, payload: res.data.obj})
+        })
+        .catch(err => {
+                console.log(err.error)
+
+            }
+        )
+}
 
 
+////////////////////////////////inicio sección de usuarios//////////////////////////////////////
 //BUSQUEDAS POR CONDICIONES  http://127.0.0.1:8000/api/ofertas/provincia/41
 //BUSQ POR PROVINCIAS  SHOWOFERTA_BYESTUDIOS
 export function showByProvincias(provincia) {
@@ -88,6 +108,7 @@ export function showOfertaById(id) {
             }
         )
 }
+
 //OFERTAS POR EXPERIENCIA
 export function showOfertaByExp(id) {
     axios.get('http://localhost:8000/api/ofertas/experiencia/' + id, userHeader)
@@ -149,7 +170,6 @@ export function showOfertaByEmp(id) {
 }
 
 
-
 //////PUBLICOS
 //JORNADA
 export function showJornada() {
@@ -207,8 +227,7 @@ export function showEmpresas() {
                 console.log(err.error)
             }
         )
-        }
-    
+}
 
 
 //USUARIOS
@@ -216,7 +235,7 @@ export function showUsuario(type, data) {
     store.dispatch({type: type, payload: data});
 }
 
-export function showOfertasByUs(){
+export function showOfertasByUs() {
     axios.get('http://localhost:8000/api/user/mostrar-ofertas', userHeader)
         .then(res => {
             console.log('caca', res.data.obj)

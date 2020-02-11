@@ -23,6 +23,7 @@ import Inicial from "./containers/Inicial";
 import SearchView from "./components/SearchView";
 import AdminView from "./containers/AdminView";
 import NotFoundPage from "./components/NotFoundPage";
+import inicioEmpresa from "./containers/InicioEmpresa";
 import Header from "./components/Header";
 import {GET_USER} from "./actions";
 import UserOrders from "./containers/UserOrders";
@@ -50,8 +51,6 @@ if (localStorage.getItem('user')) {
             tecnologia_id: user.tecnologia_id,
             estudios_id: user.estudios_id,
             telefono: user.telefono,
-            created_at: user.created_at,
-            updated_at: user.updated_at,
             token: user.remember_token
         }
     });
@@ -70,6 +69,7 @@ ReactDOM.render(
                 <Route path="/search-results" component={SearchView}/>
                 <Route path="/admin" component={AdminView}/>
                 <Route path="/mispedidos" component={UserOrders}/>
+                <Route path="/empresa" component={inicioEmpresa}/>
                 <Route path="/404" component={NotFoundPage}/>
                 <Redirect to="/404"/>
             </Switch>
