@@ -17,6 +17,7 @@ import Jornada from "./Jornada";
 import Contratos from "./Contratos";
 import Empresas from "./Empresas";
 import OfertasByUs from "./OfertasByUs";
+import OfertasEmp from "./ofertasEmp";
 
 
 
@@ -37,7 +38,9 @@ let reducers = combineReducers({
     Jornada,
     Contratos,
     Empresas,
-    OfertasByUs
+    OfertasByUs,
+    // empresas
+    OfertasEmp,
 });
 
 export default reducers;
