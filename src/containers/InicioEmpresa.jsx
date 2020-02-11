@@ -24,10 +24,7 @@ import Wrapper from "../components/Wrapper";
  * */
 import {showOfertasEmpresa} from '../actions';
 
-import CardProduct from "../components/CardProduct";
-import SortBtn from "../components/SortBtn";
-import ControlOfertas from "../components/ControlOfertas";
-import AsideUser from "../components/AsideUser";
+import CardEmpresa from '../components/CardEmpresa'
 
 class Inicial extends Component {
     constructor(props) {
@@ -62,16 +59,16 @@ class Inicial extends Component {
 
     }
 
-    renderOfertasUs = () => {
-        return this.props.ofertasByUsers.map((product, index) => {
-            return (
-                <Fragment key={index}>
-                    <ControlOfertas data={product} />
-                </Fragment>
-            )
-
-        });
-    }
+    // renderOfertasUs = () => {
+    //     return this.props.ofertasByUsers.map((product, index) => {
+    //         return (
+    //             <Fragment key={index}>
+    //                 <CardEmpresa data={product} />
+    //             </Fragment>
+    //         )
+    //
+    //     });
+    // }
 
     renderPoolRenders = () => {
         switch (this.props.controlBusq) {
@@ -79,7 +76,7 @@ class Inicial extends Component {
                 return this.props.ofertasEmp.map((product, index) => {
                     return (
                         <Fragment key={index}>
-                            <CardProduct data={product} />
+                            <CardEmpresa data={product} />
                         </Fragment>
                     )
                 });
@@ -214,7 +211,7 @@ class Inicial extends Component {
                 return this.props.ofertasEmp.map((product, index) => {
                     return (
                         <Fragment key={index}>
-                            <CardProduct data={product} />
+                            <CardEmpresa data={product} />
                         </Fragment>
                     )
 
@@ -226,8 +223,8 @@ class Inicial extends Component {
     render() {
         // const renderizado = this.props.controlBusq;
 
-        const tokenUser = JSON.parse(localStorage.getItem('user')).token;
-        console.log(tokenUser)
+        const renderizado = this.props.controlBusq;
+
         return (
             <Fragment>
                 <Wrapper>
@@ -251,21 +248,15 @@ class Inicial extends Component {
                                         </button>
                                     </div>
                                     <h2 className="ml-3">
-                                    {/*    {*/}
-                                    {/*    renderizado === 'todas' || '' ?*/}
-                                    {/*        <h2>Todas Las Ofertas</h2>*/}
-                                    {/*        :*/}
-                                    {/*        <h2>Filtrado por <span className="text-info"*/}
-                                    {/*                               style={{ fontSize: 'inherit' }}>{renderizado}</span>*/}
-                                    {/*        </h2>*/}
-                                    {/*}*/}
-                                    </h2>
-                                    {
-                                        (this.state.render === 'category') ?
-                                            <SortBtn clickHandler={this.outputEvent} data={this.state.btn} />
-                                            : <SortBtn clickHandler={this.outputEvent} data={this.state.btn}
-                                                       tipo={"d-none"} />
+                                        {
+                                        renderizado === 'todas' || '' ?
+                                            <h2>Todas Las Ofertas</h2>
+                                            :
+                                            <h2>Filtrado por <span className="text-info"
+                                                                   style={{ fontSize: 'inherit' }}>{renderizado}</span>
+                                            </h2>
                                     }
+                                    </h2>
                                     <hr className="mb-5" />
                                     {/*</div>*/}
                                 </div>
@@ -301,7 +292,7 @@ class Inicial extends Component {
 
 function mapStateToProps(state) {
     return {
-            // ofertasEmp: state.ofertasEmp.list,
+            ofertasEmp: state.ofertasEmp.list,
     }
 }
 

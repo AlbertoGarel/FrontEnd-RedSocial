@@ -240,7 +240,6 @@ class Inicial extends Component {
 
     render() {
         const renderizado = this.props.controlBusq;
-        console.log('fsa',this.props.ofertasByUsers);
         
         return (
             <Fragment>
