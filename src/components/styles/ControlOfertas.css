@@ -1,0 +1,41 @@
+#textoDescripción {
+  width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  line-height : 1em;
+  padding-top: 1em;
+}
+
+.rechazado{
+  color: rgb(209, 20, 20);
+  float: left;
+  font-size: 14px;
+  border: rgb(209, 20, 20) 1px solid;
+  border-radius: 0.4em;
+  padding: 0.2em;
+
+}
+
+.aceptado{
+  color: green;
+  float: left;
+  font-size: 14px;
+  border: green 1px solid;
+  border-radius: 0.4em;
+  padding: 0.2em;
+}
+
+.revisando{
+  color: orange;
+  float: left ;
+  font-size: 14px;
+  border: orange 1px solid;
+  border-radius: 0.4em;
+  padding: 0.2em;
+}
+
+#botonX {
+  float: right ;
+  font-size: 10px;
+}

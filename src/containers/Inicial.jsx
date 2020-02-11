@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux'
+import axios from 'axios';
+
 /**
  * IMPORT BOOTSTRAP
  * */
@@ -236,7 +238,6 @@ class Inicial extends Component {
         }
     };
 
-
     render() {
         const renderizado = this.props.controlBusq;
         console.log('fsa',this.props.ofertasByUsers);
@@ -292,8 +293,9 @@ class Inicial extends Component {
                                                     <h2 id="control_ofertas">Control de tus ofertas</h2>
                                                 </div>
                                                 <hr />
-                                                <div className="col-8">
+                                                <div className="col-13">
                                                     {this.renderOfertasUs()}
+
                                                 </div>
 
                                                 {/*------*/}
