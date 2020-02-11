@@ -163,7 +163,7 @@ class Modalregister extends Component {
             confirmPasswordEmp: ''
         };
         let isValid = true;
-alert(ev.target.id)
+
         if (ev.target.id === "register-formUsu") {
             if (!usercityUsu) {
                 validationsUsu.usercityUsu = 'Selecciona una ciudad';
@@ -198,7 +198,7 @@ alert(ev.target.id)
                 validationsUsu.usernameUsu = 'Nombre es requerido.';
                 isValid = false
             }
-            if ((!usernameUsu) || (usernameUsu && usernameUsu.length < 8) || (usernameUsu.length > 20)) {
+            if ((!usernameUsu) || (usernameUsu && usernameUsu.length < 3) || (usernameUsu.length > 20)) {
                 validationsUsu.usernameUsu = 'Nombre debe contener de 8 a 20 caracteres.'
                 isValid = false
             }
@@ -250,7 +250,7 @@ alert(ev.target.id)
                 validationsEmp.nameEmp = 'Nombre es requerido.';
                 isValid = false
             }
-            if ((!nameEmp) || (nameEmp && nameEmp.length < 8) || (nameEmp.length > 20)) {
+            if ((!nameEmp) || (nameEmp && nameEmp.length < 3) || (nameEmp.length > 20)) {
                 validationsEmp.nameEmp = 'Nombre debe contener de 8 a 20 caracteres.'
                 isValid = false
             }
@@ -266,7 +266,7 @@ alert(ev.target.id)
                 validationsEmp.nameResEmp = 'Nombre es requerido.';
                 isValid = false
             }
-            if ((!nameResEmp) || (nameResEmp && nameResEmp.length < 8) || (nameResEmp.length > 20)) {
+            if ((!nameResEmp) || (nameResEmp && nameResEmp.length < 3) || (nameResEmp.length > 20)) {
                 validationsEmp.nameResEmp = 'Nombre debe contener de 8 a 20 caracteres.'
                 isValid = false
             }
@@ -288,7 +288,7 @@ alert(ev.target.id)
                 message = `${name} es requerido`
             }
 
-            if (value && name === 'usernameUsu' && (value.length < 8 || value.length > 50)) {
+            if (value && name === 'usernameUsu' && (value.length < 3 || value.length > 50)) {
                 message = 'Nombre debe contener de 8 a 20 caracteres.'
             }
 

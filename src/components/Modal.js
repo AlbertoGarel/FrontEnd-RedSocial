@@ -116,7 +116,8 @@ class Modal extends Component {
                             direccion: res.data.obj.direccion,
                             imagen: res.data.obj.imagen,
                             sexo: res.data.obj.sexo,
-                            especialidad: res.data.obj.especialidad,
+                            tecnologia_id: res.data.obj.tecnologia_id,
+                            estudios_id: res.data.obj.estudios_id,
                             telefono: res.data.obj.telefono,
                             created_at: "2020-02-05 19:19:21",
                             updated_at: "2020-02-05 19:19:21",
@@ -283,7 +284,7 @@ class Modal extends Component {
             message = `${name} es requerido`
         }
 
-        if (value && name === 'name' && (value.length < 8 || value.length > 50)) {
+        if (value && name === 'name' && (value.length < 3 || value.length > 50)) {
             message = 'Nombre debe contener de 8 a 20 caracteres.'
         }
 
@@ -307,7 +308,7 @@ class Modal extends Component {
             message = `${name} es requerido`
         }
 
-        if (value && name === 'name' && (value.length < 8 || value.length > 50)) {
+        if (value && name === 'name' && (value.length < 3 || value.length > 50)) {
             message = 'Nombre debe contener de 8 a 20 caracteres.'
         }
 

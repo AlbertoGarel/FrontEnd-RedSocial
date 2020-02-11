@@ -38,7 +38,7 @@ export const SHOW_OFERTABYEMP = 'SHOW_OFERTABYEMP';
 
 
  let userHeader = '';
- if(JSON.parse(localStorage.getItem('user')).tipo === 'usuario'){
+ if(localStorage.getItem('user') && JSON.parse(localStorage.getItem('user')).tipo === 'usuario'){
 
     const tokenUser = JSON.parse(localStorage.getItem('user')).token;
      userHeader = {
