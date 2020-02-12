@@ -25,14 +25,14 @@ import AdminView from "./containers/AdminView";
 import NotFoundPage from "./components/NotFoundPage";
 import inicioEmpresa from "./containers/InicioEmpresa";
 import Header from "./components/Header";
-import {GET_USER} from "./actions";
+import {GET_USER, GET_EMPRESA} from "./actions";
 import UserOrders from "./containers/UserOrders";
 
 console.log('%cSilence is Gold...', 'color:white;background-color:purple');
 // console.log = console.warn = console.error = () => {};
 
 
-if (localStorage.getItem('user')) {
+if (localStorage.getItem('user') && JSON.parse(localStorage.getItem('user')).tipo === 'usuario') {
     const user = JSON.parse(localStorage.getItem('user'));
     store.dispatch({
         type: GET_USER, payload:{
@@ -55,7 +55,27 @@ if (localStorage.getItem('user')) {
         }
     });
 }
-
+if (localStorage.getItem('user') && JSON.parse(localStorage.getItem('user')).tipo === 'empresas') {
+    const user = JSON.parse(localStorage.getItem('user'));
+    store.dispatch({
+        type: GET_EMPRESA, payload:{
+            tipo : user.tipo,
+            id:  user.id,
+            username: user.username,
+            email: user.email,
+            password: user.password,
+            about: user.about,
+            ciudad_id: user.ciudad_id,
+            direccion: user.direccion,
+            imagen_logo: user.imagen_logo,
+            name_responsable: user.name_responsable,
+            telefono: user.telefono,
+            web: user.web,
+            cif: user.cif,
+            token: user.remember_token
+        }
+    });
+}
 
 // const store = createStore(reducers, composeEnhancers());
 ReactDOM.render(

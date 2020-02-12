@@ -18,6 +18,8 @@ import Contratos from "./Contratos";
 import Empresas from "./Empresas";
 import OfertasByUs from "./OfertasByUs";
 import OfertasEmpresa from "./ofertasEmp";
+import Empresa from "./Empresa";
+import Tecnologias from "./Tecnologias";
 
 
 
@@ -41,6 +43,8 @@ let reducers = combineReducers({
     OfertasByUs,
     // empresas
     OfertasEmpresa,
+    Empresa,
+    Tecnologias,
 });
 
 export default reducers;

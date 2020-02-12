@@ -1,5 +1,4 @@
-import {GET_USER} from '../actions'
-import {USER_DELETE} from '../actions'
+import {GET_EMPRESA} from '../actions'
 
 const initialState = {
     id: '',
@@ -17,9 +16,9 @@ const initialState = {
     cif: '',
 };
 
-function Users(state = initialState, action) {
+function Empresa(state = initialState, action) {
     switch (action.type) {
-        case GET_USER :
+        case GET_EMPRESA :
             return Object.assign({}, state, {
                 id: action.payload.id,
                 username: action.payload.username,
@@ -41,4 +40,4 @@ function Users(state = initialState, action) {
     }
 }
 
-export default Users;
+export default Empresa;

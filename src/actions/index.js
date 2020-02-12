@@ -37,12 +37,14 @@ export const SHOW_OFERTABYCONT = 'SHOW_OFERTABYCONT';
 export const SHOW_OFERTABYEMP = 'SHOW_OFERTABYEMP';
 export const SHOW_OFERTASBYUSER = 'SHOW_OFERTASBYUSER';
 //empresa
+export const GET_EMPRESA = 'GET_EMPRESA';
 export const SHOW_OFERTASEMP = 'SHOW_OFERTASEMP';
+export const SHOW_TECNOLOGIAS = 'SHOW_TECNOLOGIAS';
 
 
 let userHeader = '';
 if (localStorage.getItem('user') && JSON.parse(localStorage.getItem('user')).tipo === 'usuario'
-|| localStorage.getItem('user') && JSON.parse(localStorage.getItem('user')).tipo === 'empresas'
+    || localStorage.getItem('user') && JSON.parse(localStorage.getItem('user')).tipo === 'empresas'
 ) {
 
     const tokenUser = JSON.parse(localStorage.getItem('user')).token;
@@ -60,7 +62,7 @@ if (localStorage.getItem('user') && JSON.parse(localStorage.getItem('user')).tip
 export function showOfertasEmpresa() {
     axios.get(`http://127.0.0.1:8000/api/empresa/ofertas`, userHeader)
         .then(res => {
-          console.log('ofeertasss emmmpresssss' , res.data.obj)
+            console.log('ofeertasss emmmpresssss', res.data.obj)
             store.dispatch({type: SHOW_OFERTASEMP, payload: res.data.obj})
         })
         .catch(err => {
@@ -171,6 +173,14 @@ export function showOfertaByEmp(id) {
 
 
 //////PUBLICOS
+//TECNOLOGIAS
+export function showTecnologias() {
+    axios.get('http://127.0.0.1:8000/api/tecnologias')
+        .then(res => {
+            store.dispatch({type: SHOW_TECNOLOGIAS, payload: res.data.obj})
+        })
+}
+
 //JORNADA
 export function showJornada() {
     axios.get('http://127.0.0.1:8000/api/jornadas')

@@ -1,5 +1,5 @@
-import React, { Component, Fragment } from 'react';
-import { connect } from 'react-redux'
+import React, {Component, Fragment} from 'react';
+import {connect} from 'react-redux'
 /**
  * IMPORT BOOTSTRAP
  * */
@@ -22,7 +22,7 @@ import Wrapper from "../components/Wrapper";
 /**
  * IMPORT REDUCERS
  * */
-import {showOfertasEmpresa} from '../actions';
+import {showOfertasEmpresa, showCiudades, showTecnologias} from '../actions';
 
 import CardEmpresa from '../components/CardEmpresa'
 import OfertasEmpresa from "../reducers/ofertasEmp";
@@ -40,16 +40,19 @@ class Inicial extends Component {
 
     outputEvent() {
         if (this.state.btn === false) {
-            this.setState({ btn: true });
+            this.setState({btn: true});
         } else {
-            this.setState({ btn: false });
+            this.setState({btn: false});
         }
 
     }
 
     componentDidMount() {
+        showCiudades();
+        showTecnologias();
         if (this.state.render === 'todas') {
             showOfertasEmpresa()
+
         } else {
 
         }
@@ -77,142 +80,142 @@ class Inicial extends Component {
                 return this.props.ofertasEmp.map((product, index) => {
                     return (
                         <Fragment key={index}>
-                            <CardEmpresa data={product} />
+                            <CardEmpresa data={product}/>
                         </Fragment>
                     )
                 });
                 break;
-    //         case 'ciudad':
-    //             if (!this.props.buscPorCiud.length) {
-    //                 return (
-    //                     <div className="cover">
-    //                         <p className="p_error">No hay categorías</p>
-    //                         <img className="w-25" src="./assets/images/checklist.png" alt="no products" />
-    //                     </div>
-    //                 )
-    //             } else {
-    //                 return this.props.buscPorCiud.map((product, index) => {
-    //                     return (
-    //                         <Fragment key={index}>
-    //                             <CardProduct data={product} />
-    //                         </Fragment>
-    //                     )
-    //                 });
-    //             }
-    //             break;
-    //         case 'estudios':
-    //             if (!this.props.buscPorEst.length) {
-    //                 return (
-    //                     <div className="cover">
-    //                         <p className="p_error">No hay categorías</p>
-    //                         <img className="w-25" src="./assets/images/checklist.png" alt="no products" />
-    //                     </div>
-    //                 )
-    //             } else {
-    //                 return this.props.buscPorEst.map((product, index) => {
-    //                     return (
-    //                         <Fragment key={index}>
-    //                             <CardProduct data={product} />
-    //                         </Fragment>
-    //                     )
-    //                 });
-    //             }
-    //             break;
-    //         case 'experiencia':
-    //             if (!this.props.buscPorExp.length) {
-    //                 return (
-    //                     <div className="cover">
-    //                         <p className="p_error">No hay categorías</p>
-    //                         <img className="w-25" src="./assets/images/checklist.png" alt="no products" />
-    //                     </div>
-    //                 )
-    //             } else {
-    //                 return this.props.buscPorExp.map((product, index) => {
-    //                     return (
-    //                         <Fragment key={index}>
-    //                             <CardProduct data={product} />
-    //                         </Fragment>
-    //                     )
-    //                 });
-    //             }
-    //             break;
-    //         case 'salario':
-    //             if (!this.props.buscPorSal.length) {
-    //                 return (
-    //                     <div className="cover">
-    //                         <p className="p_error">No hay categorías</p>
-    //                         <img className="w-25" src="./assets/images/checklist.png" alt="no products" />
-    //                     </div>
-    //                 )
-    //             } else {
-    //                 return this.props.buscPorSal.map((product, index) => {
-    //                     return (
-    //                         <Fragment key={index}>
-    //                             <CardProduct data={product} />
-    //                         </Fragment>
-    //                     )
-    //                 });
-    //             }
-    //             break;
-    //         case 'jornada':
-    //             if (!this.props.buscPorJor.length) {
-    //                 return (
-    //                     <div className="cover">
-    //                         <p className="p_error">No hay categorías</p>
-    //                         <img className="w-25" src="./assets/images/checklist.png" alt="no products" />
-    //                     </div>
-    //                 )
-    //             } else {
-    //                 return this.props.buscPorJor.map((product, index) => {
-    //                     return (
-    //                         <Fragment key={index}>
-    //                             <CardProduct data={product} />
-    //                         </Fragment>
-    //                     )
-    //                 });
-    //             }
-    //             break;
-    //         case 'contrato':
-    //             if (!this.props.buscPorCont.length) {
-    //                 return (
-    //                     <div className="cover">
-    //                         <p className="p_error">No hay categorías</p>
-    //                         <img className="w-25" src="./assets/images/checklist.png" alt="no products" />
-    //                     </div>
-    //                 )
-    //             } else {
-    //                 return this.props.buscPorCont.map((product, index) => {
-    //                     return (
-    //                         <Fragment key={index}>
-    //                             <CardProduct data={product} />
-    //                         </Fragment>
-    //                     )
-    //                 });
-    //             }
-    //             break;
-    //         case 'empresas':
-    //             if (!this.props.porEmpresas.length) {
-    //                 return (
-    //                     <div className="cover">
-    //                         <p className="p_error">No hay categorías</p>
-    //                         <img className="w-25" src="./assets/images/checklist.png" alt="no products" />
-    //                     </div>
-    //                 )
-    //             } else {
-    //                 return this.props.porEmpresas.map((product, index) => {
-    //                     return (
-    //                         <Fragment key={index}>
-    //                             <CardProduct data={product} />
-    //                         </Fragment>
-    //                     )
-    //                 });
-    //             }
-    //             break;
+            //         case 'ciudad':
+            //             if (!this.props.buscPorCiud.length) {
+            //                 return (
+            //                     <div className="cover">
+            //                         <p className="p_error">No hay categorías</p>
+            //                         <img className="w-25" src="./assets/images/checklist.png" alt="no products" />
+            //                     </div>
+            //                 )
+            //             } else {
+            //                 return this.props.buscPorCiud.map((product, index) => {
+            //                     return (
+            //                         <Fragment key={index}>
+            //                             <CardProduct data={product} />
+            //                         </Fragment>
+            //                     )
+            //                 });
+            //             }
+            //             break;
+            //         case 'estudios':
+            //             if (!this.props.buscPorEst.length) {
+            //                 return (
+            //                     <div className="cover">
+            //                         <p className="p_error">No hay categorías</p>
+            //                         <img className="w-25" src="./assets/images/checklist.png" alt="no products" />
+            //                     </div>
+            //                 )
+            //             } else {
+            //                 return this.props.buscPorEst.map((product, index) => {
+            //                     return (
+            //                         <Fragment key={index}>
+            //                             <CardProduct data={product} />
+            //                         </Fragment>
+            //                     )
+            //                 });
+            //             }
+            //             break;
+            //         case 'experiencia':
+            //             if (!this.props.buscPorExp.length) {
+            //                 return (
+            //                     <div className="cover">
+            //                         <p className="p_error">No hay categorías</p>
+            //                         <img className="w-25" src="./assets/images/checklist.png" alt="no products" />
+            //                     </div>
+            //                 )
+            //             } else {
+            //                 return this.props.buscPorExp.map((product, index) => {
+            //                     return (
+            //                         <Fragment key={index}>
+            //                             <CardProduct data={product} />
+            //                         </Fragment>
+            //                     )
+            //                 });
+            //             }
+            //             break;
+            //         case 'salario':
+            //             if (!this.props.buscPorSal.length) {
+            //                 return (
+            //                     <div className="cover">
+            //                         <p className="p_error">No hay categorías</p>
+            //                         <img className="w-25" src="./assets/images/checklist.png" alt="no products" />
+            //                     </div>
+            //                 )
+            //             } else {
+            //                 return this.props.buscPorSal.map((product, index) => {
+            //                     return (
+            //                         <Fragment key={index}>
+            //                             <CardProduct data={product} />
+            //                         </Fragment>
+            //                     )
+            //                 });
+            //             }
+            //             break;
+            //         case 'jornada':
+            //             if (!this.props.buscPorJor.length) {
+            //                 return (
+            //                     <div className="cover">
+            //                         <p className="p_error">No hay categorías</p>
+            //                         <img className="w-25" src="./assets/images/checklist.png" alt="no products" />
+            //                     </div>
+            //                 )
+            //             } else {
+            //                 return this.props.buscPorJor.map((product, index) => {
+            //                     return (
+            //                         <Fragment key={index}>
+            //                             <CardProduct data={product} />
+            //                         </Fragment>
+            //                     )
+            //                 });
+            //             }
+            //             break;
+            //         case 'contrato':
+            //             if (!this.props.buscPorCont.length) {
+            //                 return (
+            //                     <div className="cover">
+            //                         <p className="p_error">No hay categorías</p>
+            //                         <img className="w-25" src="./assets/images/checklist.png" alt="no products" />
+            //                     </div>
+            //                 )
+            //             } else {
+            //                 return this.props.buscPorCont.map((product, index) => {
+            //                     return (
+            //                         <Fragment key={index}>
+            //                             <CardProduct data={product} />
+            //                         </Fragment>
+            //                     )
+            //                 });
+            //             }
+            //             break;
+            //         case 'empresas':
+            //             if (!this.props.porEmpresas.length) {
+            //                 return (
+            //                     <div className="cover">
+            //                         <p className="p_error">No hay categorías</p>
+            //                         <img className="w-25" src="./assets/images/checklist.png" alt="no products" />
+            //                     </div>
+            //                 )
+            //             } else {
+            //                 return this.props.porEmpresas.map((product, index) => {
+            //                     return (
+            //                         <Fragment key={index}>
+            //                             <CardProduct data={product} />
+            //                         </Fragment>
+            //                     )
+            //                 });
+            //             }
+            //             break;
             default:
                 return this.props.ofertasEmp.map((product, index) => {
                     return (
                         <Fragment key={index}>
-                            <CardEmpresa data={product} />
+                            <CardEmpresa data={product}/>
                         </Fragment>
                     )
 
@@ -222,7 +225,6 @@ class Inicial extends Component {
 
 
     render() {
-        // const renderizado = this.props.controlBusq;
 
         const renderizado = this.props.controlBusq;
 
@@ -243,22 +245,22 @@ class Inicial extends Component {
                                     <div className="buscador">
                                         <input id="input-buscador" type="text" className="form-control"
                                                aria-label="Sizing example input"
-                                               aria-describedby="inputGroup-sizing-default" />
+                                               aria-describedby="inputGroup-sizing-default"/>
                                         <button id="button-buscador" type="button"
                                                 className="btn btn-secondary">Buscar
                                         </button>
                                     </div>
                                     <h2 className="ml-3">
                                         {
-                                        renderizado === 'todas' || '' ?
-                                            <h2>Todas Las Ofertas</h2>
-                                            :
-                                            <h2>Filtrado por <span className="text-info"
-                                                                   style={{ fontSize: 'inherit' }}>{renderizado}</span>
-                                            </h2>
-                                    }
+                                            renderizado === 'todas' || '' ?
+                                                <h2>Todas Las Ofertas</h2>
+                                                :
+                                                <h2>Filtrado por <span className="text-info"
+                                                                       style={{fontSize: 'inherit'}}>{renderizado}</span>
+                                                </h2>
+                                        }
                                     </h2>
-                                    <hr className="mb-5" />
+                                    <hr className="mb-5"/>
                                     {/*</div>*/}
                                 </div>
                                 <div className="container-fluid">
@@ -266,12 +268,13 @@ class Inicial extends Component {
                                         <div className="col-8">
                                             {this.renderPoolRenders()}
                                         </div>
-                                        <div style={{ backgroundColor: '#00ced114' }} className="col-4">
+                                        <div style={{backgroundColor: '#00ced114'}} className="col-4">
                                             <div className="container-flui">
-                                                <div id="div_control_ofertas" className="bg-info text-white shadow-lg mb-3">
+                                                <div id="div_control_ofertas"
+                                                     className="bg-info text-white shadow-lg mb-3">
                                                     <h2 id="control_ofertas">Control de tus ofertas</h2>
                                                 </div>
-                                                <hr />
+                                                <hr/>
                                                 <div className="col-8">
                                                     {/*{this.renderOfertasUs()}*/}
                                                 </div>
@@ -284,7 +287,7 @@ class Inicial extends Component {
                             </div>
                         </section>
                     </main>
-                    <hr />
+                    <hr/>
                 </Wrapper>
             </Fragment>
         )
@@ -293,7 +296,8 @@ class Inicial extends Component {
 
 function mapStateToProps(state) {
     return {
-            ofertasEmp: state.OfertasEmpresa.list,
+        ofertasEmp: state.OfertasEmpresa.list,
+
     }
 }
 
