@@ -9,6 +9,8 @@ import Category from '../src/containers/Category'
 import AdminView from '../src/containers/AdminView'
 import UserOrders from "./containers/UserOrders";
 import InicioEmpresa from "./containers/InicioEmpresa";
+import PerfilEmpresa from "./containers/PerfilEmpresa";
+
 
 ReactDOM.render(
     <BrowserRouter>
@@ -18,6 +20,8 @@ ReactDOM.render(
             <Route path="/admin" component={AdminView}/>
             <Route path="/empresa" component={InicioEmpresa}/>
             <Route path="/mispedidos" component={UserOrders}/>
+            <Route path="/perfil" component={PerfilEmpresa}/>
+
             {/*<Route path="/sobre-nosotros" component={Sobrenosotros}/>*/}
         </Switch>
     </BrowserRouter>

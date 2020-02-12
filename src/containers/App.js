@@ -51,7 +51,7 @@ class App extends Component {
 //comprobamos la url para ocultar navegador
         let query = window.location.origin;
         let element = document.getElementById('nav');
-        if(query === 'http://localhost:3001') {
+        if(query === 'http://localhost:3000') {
             element.classList.add("oculto");
             // console.log('element',element.hasAttribute('class'))
         }
