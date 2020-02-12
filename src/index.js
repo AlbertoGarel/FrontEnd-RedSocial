@@ -27,6 +27,7 @@ import inicioEmpresa from "./containers/InicioEmpresa";
 import Header from "./components/Header";
 import {GET_USER, GET_EMPRESA} from "./actions";
 import UserOrders from "./containers/UserOrders";
+import PerfilEmpresa from "./containers/PerfilEmpresa";
 
 console.log('%cSilence is Gold...', 'color:white;background-color:purple');
 // console.log = console.warn = console.error = () => {};
@@ -90,6 +91,7 @@ ReactDOM.render(
                 <Route path="/admin" component={AdminView}/>
                 <Route path="/mispedidos" component={UserOrders}/>
                 <Route path="/empresa" component={inicioEmpresa}/>
+                <Route path="/perfil" component={PerfilEmpresa}/>
                 <Route path="/404" component={NotFoundPage}/>
                 <Redirect to="/404"/>
             </Switch>
