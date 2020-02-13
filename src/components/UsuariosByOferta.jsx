@@ -15,11 +15,11 @@ class UsuariosByOferta extends Component {
         this.state = {}
     }
 
-    estado(id){
+    estado(id, num){
         
-        console.log(id);
+
        
-        // cambioEstado();
+         cambioEstado(id, num);
        
         
     }
@@ -53,8 +53,8 @@ class UsuariosByOferta extends Component {
                     <p className="card-text">{data.about}</p>
                 </div>
                 <div className="botonSelect">
-                    <button onClick={() => this.estado(data.ofer_user_id)} id="botonSizeA" type="button" class="btn btn-success shadow">Aceptar</button>
-                    <button onClick={() => this.estado(data.ofer_user_id)} id="botonSizeR" type="button" class="btn btn-danger shadow">Rechazar</button>
+                    <button onClick={() => this.estado(data.ofer_user_id, 2)} id="botonSizeA" type="button" class="btn btn-success shadow">Aceptar</button>
+                    <button onClick={() => this.estado(data.ofer_user_id, 3)} id="botonSizeR" type="button" class="btn btn-danger shadow">Rechazar</button>
                 </div>
 
             </div>
