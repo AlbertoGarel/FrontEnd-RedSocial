@@ -62,7 +62,7 @@ if (localStorage.getItem('user') && JSON.parse(localStorage.getItem('user')).tip
         type: GET_EMPRESA, payload:{
             tipo : user.tipo,
             id:  user.id,
-            username: user.username,
+            name: user.name,
             email: user.email,
             password: user.password,
             about: user.about,

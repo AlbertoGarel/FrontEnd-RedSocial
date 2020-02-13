@@ -158,7 +158,7 @@ class Modal extends Component {
                         let user = {
                             tipo: 'empresas',
                             id: res.data.obj.id,
-                            username: res.data.obj.name,
+                            name: res.data.obj.name,
                             email: res.data.obj.email,
                             password: res.data.obj.password,
                             about: res.data.obj.about,

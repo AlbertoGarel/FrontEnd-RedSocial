@@ -1,6 +1,8 @@
 import {GET_EMPRESA} from '../actions'
+import {UPDATE_EMPRESA} from '../actions'
 
 const initialState = {
+    // list:[]
     id: '',
     username: '',
     email:'',
@@ -20,6 +22,7 @@ function Empresa(state = initialState, action) {
     switch (action.type) {
         case GET_EMPRESA :
             return Object.assign({}, state, {
+                // list: action.payload
                 id: action.payload.id,
                 username: action.payload.username,
                 email:action.payload.email,
@@ -35,6 +38,26 @@ function Empresa(state = initialState, action) {
                 cif: action.payload.cif,
 
             });
+        case UPDATE_EMPRESA:
+            // return Object.assign({}, state, {
+            //
+            //     username: action.payload,
+            //
+            // });
+            // for(let key in state) {
+            //     if(state.hasOwnProperty(key)){
+            //         if(action.payload[key] == state[key]){
+            //             // console.log('key',action.payload[key] == state[key] )
+            //             console.log('key',action.payload)
+            //         }
+            //     }
+            // }
+return  state=action.payload;
+
+
+
+            // return [...state, state];
+                break;
         default:
             return state;
     }
