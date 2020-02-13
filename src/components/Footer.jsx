@@ -22,7 +22,7 @@ class Footer extends Component {
                     <li style={{color:'#A2A09E'}}>Política de privacidad</li>
                 </ul>
                 <div className="mr-5">
-                    <h6>© Mercahome S.A.</h6>
+                    <h6>© TechTalent S.A.</h6>
                 </div>
             </div>
         )

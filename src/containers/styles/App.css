@@ -1,11 +1,9 @@
 #intro{
-    background-size: cover;
+    background-size: 80%;
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: bottom;
 }
-#root .navbar.navbar-expand-lg.navbar-light.flex-shrink-1 {
-    /* display: none; */
-}
+
 #intro nav{
     border-bottom: none!important;
     background: transparent;
@@ -16,6 +14,8 @@
 }
 #intro img{
     float: left;
+    width: 50%;
+    margin: .5em;
 }
 #buttons-cont{
     float: right;
@@ -179,3 +179,4 @@
     width: 100%!important;
     left: 0;
 }
+

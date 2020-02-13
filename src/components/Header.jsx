@@ -58,8 +58,8 @@ class Header extends Component {
             <Fragment>
                 <nav id="nav" className="navbar navbar-expand-lg navbar-light flex-shrink-1">
                     <Link to="/home" id="enlace-logo"><img
-                        src="./assets/icons/logTT.png"
-                        alt="logo mercahome"
+                        src="./assets/icons/logo.png"
+                        alt="Tech Talent"
                         id="nav_logo"
                     />
                     </Link>
