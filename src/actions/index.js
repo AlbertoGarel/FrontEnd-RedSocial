@@ -103,10 +103,11 @@ export function showUsuarioByOferta(id) {
 export function cambioEstado(id, num) {
    let paramsBody = {
         'id': id,
-        'estado_id':num
-    }
+        'estado_id':num,
+    };
 
-    axios.post(`http://127.0.0.1:8000/api/empresa/empresa/estado/update`, paramsBody, userHeader)
+
+    axios.post(`http://127.0.0.1:8000/api/empresa/estado/update`, paramsBody, userHeader)
         .then(res => {
            
 

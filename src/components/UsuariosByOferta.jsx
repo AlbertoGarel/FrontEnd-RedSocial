@@ -12,16 +12,21 @@ class UsuariosByOferta extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+            botonsizeA: 'btn btn-success shadow',
+        }
     }
 
-    estado(id, num){
+    estado(id, num, sem){
         
 
        
          cambioEstado(id, num);
-       
-        
+         if(sem == 'aceptado'){
+             this.setState({botonsizeA:'btn btn-success shadow d-none'})
+         }
+
+
     }
 
     
@@ -53,7 +58,7 @@ class UsuariosByOferta extends Component {
                     <p className="card-text">{data.about}</p>
                 </div>
                 <div className="botonSelect">
-                    <button onClick={() => this.estado(data.ofer_user_id, 2)} id="botonSizeA" type="button" class="btn btn-success shadow">Aceptar</button>
+                    <button onClick={() => this.estado(data.ofer_user_id, 2, 'aceptado')} id="botonSizeA" type="button" class={this.state.botonsizeA}>Aceptar</button>
                     <button onClick={() => this.estado(data.ofer_user_id, 3)} id="botonSizeR" type="button" class="btn btn-danger shadow">Rechazar</button>
                 </div>
 
