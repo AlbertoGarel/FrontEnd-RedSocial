@@ -40,7 +40,8 @@ export const SHOW_OFERTASBYUSER = 'SHOW_OFERTASBYUSER';
 export const GET_EMPRESA = 'GET_EMPRESA';
 export const SHOW_OFERTASEMP = 'SHOW_OFERTASEMP';
 export const SHOW_TECNOLOGIAS = 'SHOW_TECNOLOGIAS';
-
+export const SHOW_USUBYOFERTA = 'SHOW_USUBYOFERTA';
+export const CAMBIO_ESTADO = 'CAMBIO_ESTADO';
 
 let userHeader = '';
 if (localStorage.getItem('user') && JSON.parse(localStorage.getItem('user')).tipo === 'usuario'
@@ -62,7 +63,7 @@ if (localStorage.getItem('user') && JSON.parse(localStorage.getItem('user')).tip
 export function showOfertasEmpresa() {
     axios.get(`http://127.0.0.1:8000/api/empresa/ofertas`, userHeader)
         .then(res => {
-            console.log('ofeertasss emmmpresssss', res.data.obj)
+           
             store.dispatch({type: SHOW_OFERTASEMP, payload: res.data.obj})
         })
         .catch(err => {
@@ -71,6 +72,44 @@ export function showOfertasEmpresa() {
             }
         )
 }
+
+// Ver usuarios inscritos en oferta
+
+export function showUsuarioByOferta(id) {
+    axios.get(`http://127.0.0.1:8000/api/empresa/users-ofertas/${id}`, userHeader)
+        .then(res => {
+           
+            console.log(res.data.obj);
+            
+
+            store.dispatch({type: SHOW_USUBYOFERTA, payload: res.data.obj})
+
+        })
+        .catch(err => {
+                console.log(err.error)
+
+            }
+        )
+}
+
+//Cambio de estado en ofertas
+
+export function cambioEstado(id) {
+    axios.post(`http://127.0.0.1:8000/api/empresa/empresa/estado/update/${id}`, userHeader)
+        .then(res => {
+           
+
+            store.dispatch({type: CAMBIO_ESTADO, payload: res.data.obj})
+
+        })
+        .catch(err => {
+                console.log(err.error)
+
+            }
+        )
+}
+
+
 
 
 ////////////////////////////////inicio sección de usuarios//////////////////////////////////////
@@ -270,6 +309,7 @@ export function closeNowCart() {
 }
 
 //-------------------------------------------------------------------------
+
 export function showCategories() {
     axios.get('http://localhost:8000/api/year')
 

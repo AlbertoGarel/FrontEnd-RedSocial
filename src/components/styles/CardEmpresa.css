@@ -1,0 +1,21 @@
+#ofertasEmp {
+background-color: rgb(241, 241, 241)!important;  
+line-height: 0.6em;
+}
+
+#ofertasEmp .btn{
+   padding: .5em 1em!important;
+}
+
+.botones {
+    display: flex;
+    align-content: space-around;
+}
+
+.superior{
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+

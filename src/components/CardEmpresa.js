@@ -1,7 +1,9 @@
-import React, {Component, Fragment} from 'react';
-import {connect} from 'react-redux'
+import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux'
 import Tecnologias from "../reducers/Tecnologias";
-
+import '../components/styles/CardEmpresa.css';
+import {showUsuarioByOferta} from '../actions';
+import axios from 'axios';
 
 class CardEmpresa extends Component {
     constructor() {
@@ -9,66 +11,77 @@ class CardEmpresa extends Component {
         this.state = {}
     }
 
-    componentDidMount() {
+   
+    componentDidMount(id) {
 
+        let userHeader = '';
+        if (JSON.parse(localStorage.getItem('user')).tipo === 'empresa') {
+
+            const tokenUser = JSON.parse(localStorage.getItem('user')).token;
+            userHeader = {
+                headers: {
+                    'Authorization': `Bearer ${tokenUser}`,
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Content-Type': 'application/json'
+                }
+            };
+        }
+
+        axios.delete('http://localhost:8000/api/empresa/oferta-delete/'+id, userHeader)
+            .then(res => {
+
+                return res
+                
+            }).catch(err => console.log(err))
     }
 
+    muestraUsuarios =(id)=>{
+    //    alert(id)
+        showUsuarioByOferta(id);
+       
+    }
 
     render() {
 
-        const {data, emp, city, tecnos} = this.props;
-        const danger = <span className="badge badge-pill badge-warning ml-3">Completar ficha</span>;
+        
+        const { data, emp, city, tecnos } = this.props;
+        // const danger = <span className="badge badge-pill badge-warning ml-3">Completar ficha</span>;
 
         return (
-            <div className="card m-3" style={{border: 1 + 'px solid #EFF0F1'}}>
-                <div className="card-header">
-                    <div className="d-flex justify-content-start align-items-center">
-                        <img src={emp.imagen_logo} alt="" className="img-fluid w-25"/>
-                        <div className="d-flex flex-column align-items-start">
-                            <span>cif: <span className="text-secondary">{!emp.name ? danger : emp.name}</span></span>
-                            <span>cif: <span className="text-secondary">{!emp.cif ? danger : emp.cif}</span></span>
-                            <span>email: <span
-                                className="text-secondary">{!emp.email ? danger : emp.email}</span></span>
-                            <span>direccion: <span
-                                className="text-secondary">{!emp.direccion ? danger : emp.direccion}</span></span>
-                            <span>web: <span
-                                className="text-secondary">{!emp.web ? danger : emp.web}</span></span><span>telefono: <span
-                            className="text-secondary">{!emp.telefono ? danger : emp.telefono}</span></span>
-                        </div>
+            <div id="ofertasEmp" className="card m-2" style={{ border: 1 + 'px solid #EFF0F1' }}>
+                <div className="card-body p-3" id="ofertasEmp">
+                    <div className="superior">
+                        <h5>{data.puesto}</h5>
+                        <button onClick={() => this.componentDidMount(emp.id)} id="eliminar" type="button" class="btn btn-outline-danger btn-sm">x</button>
                     </div>
-                    <hr className="mb-3 mt-3"/>
-                    <h4>Puesto: <strong>{data.puesto}</strong></h4>
-                    <hr/>
-                </div>
-                <div className="card-body p-3 d-flex justify-content-around align-items-center">
-                    <div className="d-flex flex-column">
-                        <p className="card-text">lugar del puesto: <strong
+                    <hr className="mb-3" />
+                    <div className="inferior">
+                        <p className="card-text">Lugar del puesto: <strong
                             className="text-info">{city.map((element) => {
-                            if (element.id == emp.ciudad_id) {
-                                return element.name_ciu;
-                            }
-                        })}</strong>
+                                if (element.id == emp.ciudad_id) {
+                                    return element.name_ciu;
+                                }
+                            })}</strong>
                         </p>
-                        <p className="card-text">tecnologia: <strong className="text-info">{tecnos.map((element) => {
+                        <p className="card-text">Tecnologia: <strong className="text-info">{tecnos.map((element) => {
                             if (element.id == data.tecnologia_id) {
                                 return element.name_tec;
                             }
                         })}</strong>
                         </p>
-                    </div>
-                    <div className="d-flex flex-column">
-                        <p className="card-text">exp. mínima: <strong className="text-info">{data.experiencia_min}
-                            {data.experiencia_min > 1 ? 'años' : 'año'}</strong></p>
-                        <p className="card-text">salario: <strong
-                            className="text-info">{data.salario_min} - {data.salario_max
-                        }</strong></p>
+                        <p className="card-text">Exp. mínima: <strong className="text-info">{data.experiencia_min}
+                            {data.experiencia_min > 1 ? ' años' : ' año'}</strong></p>
+                        <p className="card-text">Salario: <strong
+                            className="text-info">{data.salario_min}€ - {data.salario_max
+                            }€</strong></p>
                         <p className="card-text"><strong className="text info"></strong></p>
-                    </div>
-                    <div className="d-flex flex-column">
-                        <p className="card-text"><strong className="text info"></strong></p>
+
+                        <button onClick={() => this.muestraUsuarios(this.props.data.id)} id="botonVer" type="button" class="btn btn-success btn-sm float-right">Ver</button> 
                     </div>
                 </div>
+
             </div>
+
         )
     }
 }

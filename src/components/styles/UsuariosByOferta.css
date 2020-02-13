@@ -1,0 +1,30 @@
+.textoTitulo {
+    display: inline;
+    font-size: 16px;
+    color: rgb(138, 138, 138);
+}
+
+#sizeTexto {
+    font-size: 20px;
+    color: rgb(75, 99, 131);   
+}
+
+.botonSelect {
+    display: flex;
+    justify-content: flex-end;
+    margin: 1.5em;
+}
+
+#botonSizeA {
+    font-size: 12px;
+    margin: 0.5em;
+    padding: .8em 1em!important;
+    background-color: rgb(77, 153, 77);
+}
+
+#botonSizeR {
+    font-size: 12px;
+    margin: 0.5em;
+    padding: .8em 1em!important;
+    background-color: rgb(184, 53, 53);
+}
