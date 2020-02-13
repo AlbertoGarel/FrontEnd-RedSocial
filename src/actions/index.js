@@ -42,6 +42,7 @@ export const SHOW_OFERTASEMP = 'SHOW_OFERTASEMP';
 export const SHOW_TECNOLOGIAS = 'SHOW_TECNOLOGIAS';
 export const SHOW_USUBYOFERTA = 'SHOW_USUBYOFERTA';
 export const CAMBIO_ESTADO = 'CAMBIO_ESTADO';
+export const UPDATE_OFERTASEMP = 'UPDATE_OFERTASEMP';
 
 let userHeader = '';
 if (localStorage.getItem('user') && JSON.parse(localStorage.getItem('user')).tipo === 'usuario'

@@ -2,8 +2,10 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux'
 import Tecnologias from "../reducers/Tecnologias";
 import '../components/styles/CardEmpresa.css';
-import {showUsuarioByOferta} from '../actions';
+import { showUsuarioByOferta, OfertasEmpresa } from '../actions';
 import axios from 'axios';
+import store from '../store';
+import { UPDATE_OFERTASEMP } from '../actions'
 
 class CardEmpresa extends Component {
     constructor() {
@@ -11,48 +13,52 @@ class CardEmpresa extends Component {
         this.state = {}
     }
 
-   
-    componentDidMount(id) {
+
+    deleteOferta(id) {
 
         let userHeader = '';
-        if (JSON.parse(localStorage.getItem('user')).tipo === 'empresa') {
+        // if (JSON.parse(localStorage.getItem('user')).tipo === 'empresa') {
 
-            const tokenUser = JSON.parse(localStorage.getItem('user')).token;
-            userHeader = {
-                headers: {
-                    'Authorization': `Bearer ${tokenUser}`,
-                    'X-Requested-With': 'XMLHttpRequest',
-                    'Content-Type': 'application/json'
-                }
-            };
+        const tokenUser = JSON.parse(localStorage.getItem('user')).token;
+
+        userHeader = {
+            headers: {
+                'Authorization': `Bearer ${tokenUser}`,
+                'X-Requested-With': 'XMLHttpRequest',
+                'Content-Type': 'application/json'
+            }
+            // };
+
         }
 
-        axios.delete('http://localhost:8000/api/empresa/oferta-delete/'+id, userHeader)
-            .then(res => {
+        axios.delete('http://localhost:8000/api/empresa/oferta-delete/' + id, userHeader)
+        .then(res => {
+            const list = store.getState()?.OfertasEmpresa?.list?.filter(oferta => oferta.id !== id)
+            store.dispatch({ type: UPDATE_OFERTASEMP, payload: list })
+              
 
-                return res
-                
             }).catch(err => console.log(err))
     }
 
-    muestraUsuarios =(id)=>{
-    //    alert(id)
+    muestraUsuarios = (id) => {
+        //    alert(id)
         showUsuarioByOferta(id);
-       
+
     }
 
     render() {
 
-        
+
         const { data, emp, city, tecnos } = this.props;
         // const danger = <span className="badge badge-pill badge-warning ml-3">Completar ficha</span>;
+
 
         return (
             <div id="ofertasEmp" className="card m-2" style={{ border: 1 + 'px solid #EFF0F1' }}>
                 <div className="card-body p-3" id="ofertasEmp">
                     <div className="superior">
                         <h5>{data.puesto}</h5>
-                        <button onClick={() => this.componentDidMount(emp.id)} id="eliminar" type="button" class="btn btn-outline-danger btn-sm">x</button>
+                        <button onClick={() => this.deleteOferta(data.id)} id="eliminar" type="button" class="btn btn-outline-danger btn-sm">x</button>
                     </div>
                     <hr className="mb-3" />
                     <div className="inferior">
@@ -76,7 +82,7 @@ class CardEmpresa extends Component {
                             }€</strong></p>
                         <p className="card-text"><strong className="text info"></strong></p>
 
-                        <button onClick={() => this.muestraUsuarios(this.props.data.id)} id="botonVer" type="button" class="btn btn-success btn-sm float-right">Ver</button> 
+                        <button onClick={() => this.muestraUsuarios(this.props.data.id)} id="botonVer" type="button" class="btn btn-success btn-sm float-right">Ver</button>
                     </div>
                 </div>
 
@@ -90,7 +96,8 @@ function mapStateToProps(state) {
     return {
         emp: state.Empresa,
         city: state.Ciudades.list,
-        tecnos: state.Tecnologias.list
+        tecnos: state.Tecnologias.list,
+
     }
 }
 
