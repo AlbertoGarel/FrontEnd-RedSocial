@@ -111,7 +111,7 @@ export function cambioEstado(id, num) {
         .then(res => {
            
 
-            store.dispatch({type: CAMBIO_ESTADO, payload: res.data.obj})
+            // store.dispatch({type: CAMBIO_ESTADO, payload: res.data.obj})
 
         })
         .catch(err => {
