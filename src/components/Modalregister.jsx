@@ -22,7 +22,7 @@ class Modalregister extends Component {
             RegExitoUsu: '',
             RegExitoEmp: '',
             RegErrorUsu: '',
-            RegErrorEmp: '',
+            // RegErrorEmp: '',
             valuesUsu: {
                 email: '',
                 username: '',

@@ -40,6 +40,7 @@ export const SHOW_OFERTASBYUSER = 'SHOW_OFERTASBYUSER';
 export const GET_EMPRESA = 'GET_EMPRESA';
 export const SHOW_OFERTASEMP = 'SHOW_OFERTASEMP';
 export const SHOW_TECNOLOGIAS = 'SHOW_TECNOLOGIAS';
+export const UPDATE_EMPRESA = 'UPDATE_EMPRESA';
 
 
 let userHeader = '';
@@ -54,7 +55,7 @@ if (localStorage.getItem('user') && JSON.parse(localStorage.getItem('user')).tip
             'X-Requested-With': 'XMLHttpRequest',
             'Content-Type': 'application/json'
         }
-    };
+    }
 }
 
 /////////////////////////////////inicio secciòn de empresas//////////////////////////////////7//

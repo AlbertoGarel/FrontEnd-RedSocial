@@ -73,30 +73,34 @@ class Header extends Component {
                         <div id="search_cont" className="form-inline my-2 my-lg-0">
                             {/*<span id="search_span"><i className="fa fa-2x fa-search"/></span>*/}
                         </div>
-                        {
-                            JSON.parse(localStorage.getItem('user')).tipo == 'user' ?
-                                <div className="menu-left" role="menu">
-                                    <Link to="/home" className="menu-item subhead1-b" data-test="categories-link">
-                                        <label className="menu-item__label">HOME</label>
-                                        <span className="menu-item__border"/>
-                                    </Link>
-                                    <Link to="/categorias" className="menu-item subhead1-b" data-test="categories-link">
-                                        <label className="menu-item__label">PERFIL</label>
-                                        <span className="menu-item__border"/>
-                                    </Link>
-                                </div>
-                                :
-                                <div className="menu-left" role="menu">
-                                    <Link to="/empresa" className="menu-item subhead1-b" data-test="categories-link">
-                                        <label className="menu-item__label">HOME</label>
-                                        <span className="menu-item__border"/>
-                                    </Link>
-                                    <Link to="/perfil" className="menu-item subhead1-b" data-test="categories-link">
-                                        <label className="menu-item__label">PERFIL</label>
-                                        <span className="menu-item__border"/>
-                                    </Link>
-                                </div>
-                        }
+                        {/*{*/}
+                        {/*    JSON.parse(localStorage.getItem('user')).tipo == 'user' ?*/}
+                        {/*    < div className="menu-left" role="menu">*/}
+                        {/*    <Link to="/home" className="menu-item subhead1-b" data-test="categories-link">*/}
+                        {/*    <label className="menu-item__label">HOME</label>*/}
+                        {/*    <span className="menu-item__border"/>*/}
+                        {/*    </Link>*/}
+                        {/*    <Link to="/categorias" className="menu-item subhead1-b" data-test="categories-link">*/}
+                        {/*    <label className="menu-item__label">PERFIL</label>*/}
+                        {/*    <span className="menu-item__border"/>*/}
+                        {/*    </Link>*/}
+                        {/*    </div>*/}
+                        {/*    : ''*/}
+                        {/*}*/}
+                        {/*{*/}
+                        {/*    JSON.parse(localStorage.getItem('user')).tipo == 'empresas' ?*/}
+                        {/*        <div className="menu-left" role="menu">*/}
+                        {/*            <Link to="/empresa" className="menu-item subhead1-b" data-test="categories-link">*/}
+                        {/*                <label className="menu-item__label">HOME</label>*/}
+                        {/*                <span className="menu-item__border"/>*/}
+                        {/*            </Link>*/}
+                        {/*            <Link to="/perfil" className="menu-item subhead1-b" data-test="categories-link">*/}
+                        {/*                <label className="menu-item__label">PERFIL</label>*/}
+                        {/*                <span className="menu-item__border"/>*/}
+                        {/*            </Link>*/}
+                        {/*        </div>*/}
+                        {/*        : ''*/}
+                        {/*}*/}
                         <Modal
                             className="modal"
                             show={this.state.isShowing}
