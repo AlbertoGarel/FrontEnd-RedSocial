@@ -6,6 +6,7 @@ import React, {Component, Fragment} from 'react';
 import Wrapper from '../components/Wrapper';
 import OptionSelectCiud from '../components/OptionSelectCiud';
 import Showproducts from "../components/ShowProducts";
+import store from "../store";
 
 import {connect} from 'react-redux';
 /**
@@ -22,43 +23,58 @@ import 'bootstrap/dist/js/bootstrap.bundle.min';
  *  IMPORT STYLES
  * */
 import './styles/App.css';
-import {showCiudades} from "../actions";
+import {showCiudades, UPDATE_EMPRESA} from "../actions";
 import axios from "axios";
 
 
-class Category extends Component {
+class PerfilEmpresa extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            title: "promoción",
-            logExitoUsu: '',
-            logExitoEmp: '',
-            logErrorUsu: '',
-            logErrorEmp: '',
-            usercityUsu: '',
-            usercityEmp: '',
-            RegExitoUsu: '',
-            RegExitoEmp: '',
-            RegErrorUsu: '',
-            RegErrorEmp: '',
+            // name
+            // web
+            // direccion
+            // name_responsable
+            // telefono
+            // ciudad
+            // cif
+
+            // email
+            // password
+            // about
+            // imagen_logo
+
+
             validationsPerfil: {
-                inputName: '',
-                inputPrim_ape: '',
-                inputSeg_ape: '',
-                inputTelefono: '',
-                inputAddress: ''
+                //bloque 1
+                // inputname: '',
+                // inputweb: '',
+                // inputdireccion: '',
+                // inputname_responsable: '',
+                // inputtelefono: '',
+                // inputciudad: '',
+                // inputcif: '',
+                // bloque2
+                inputemail: '',
+                inputpassword: '',
+                inputinputcif: '',
             },
             valuesPerfil: {
-                inputName: '',
-                inputPrim_ape: '',
-                inputSeg_ape: '',
-                inputTelefono: '',
-                inputAddress: ''
+                inputname: '',
+                inputweb: '',
+                inputdireccion: '',
+                inputname_responsable: '',
+                inputtelefono: '',
+                inputarea: '',
+                inputemail: "",
+                inputpassword: '',
+                inputpassword2: ''
             },
-            sexo: 'hombre',
             city: 1,
+            passError: ''
         }
         this.myFormRef = React.createRef();
+        this.myFormRefe = React.createRef();
     }
 
 
@@ -72,103 +88,21 @@ class Category extends Component {
     }
 
     //validaciones perfil
-    validateOnePerfil = (ev) => {
-        // if (ev.target.id === "perfil") {
-// alert(ev.target.id)
-        const {name} = ev.target;
-        const value = this.state.valuesPerfil[name];
-        let message = '';
+    // validateOnePerfil = (ev) => {
+    //     const {name} = ev.target;
+    //     const value = this.state.valuesPerfil[name];
+    //     let message = '';
+    //
+    //
+    //     this.setState({
+    //         validationsPerfil: {
+    //             ...this.state.validationsPerfil,
+    //             [name]: message
+    //         }
+    //     })
+    //     // }
+    // };
 
-        // if (!value) {
-        //     message = `Error, es requerido`
-        // }
-        //
-        // if (value && name === 'inputName' && (value.length < 3 || value.length > 50)) {
-        //     message = 'Nombre debe contener de 8 a 20 caracteres.'
-        // }
-        // if (value && name === 'inputPrim_ape' && (value.length < 3 || value.length > 50)) {
-        //     message = 'Nombre debe contener de 8 a 20 caracteres.'
-        // }
-        // if (value && name === 'inputSeg_ape' && (value.length < 3 || value.length > 50)) {
-        //     message = 'Nombre debe contener de 8 a 20 caracteres.'
-        // }
-        // if (value && name === 'inputAddress' && (value.length < 3 || value.length > 50)) {
-        //     message = 'Nombre debe contener de 8 a 20 caracteres.'
-        // }
-        //
-        // if (value && name === 'email' && !/\S+@\S+\.\S+/.test(value)) {
-        //     message = 'Formato de Email debe ser :  example@mail.com'
-        // }
-
-        this.setState({
-            validationsPerfil: {
-                ...this.state.validationsPerfil,
-                [name]: message
-            }
-        })
-        // }
-    };
-
-    validateAll = (ev) => {
-        // const {usercityUsu, usercityEmp} = this.state;
-        const {inputName, inputPrim_ape, inputSeg_ape, inputTelefono, inputAddress} = this.state.valuesPerfil;
-        // const {nameEmp, nameResEmp, emailEmp, passwordEmp, confirmPasswordEmp} = this.state.valuesEmp;
-        const validationsPerfil = {
-            inputName: '',
-            inputPrim_ape: '',
-            inputSeg_ape: '',
-            inputTelefono: '',
-            inputAddress: ''
-        };
-        let isValid = true;
-
-        // if (ev.target.id === "register-formUsu") {
-            if (!inputName) {
-                validationsPerfil.inputName = 'Nombre es requerido.';
-                isValid = false
-            }
-
-        if ((!inputName) || (inputName && inputName.length < 3) || (inputName.length > 20)) {
-            validationsPerfil.inputName = 'Nombre debe contener de 3 a 20 caracteres.'
-            isValid = false
-        }
-        if (!inputPrim_ape) {
-            validationsPerfil.inputPrim_ape = 'Primer apellido es requerido.';
-            isValid = false
-        }
-
-        if ((!inputPrim_ape) || (inputPrim_ape && inputPrim_ape.length < 3) || (inputPrim_ape.length > 20)) {
-            validationsPerfil.inputPrim_ape = 'Primer apellido debe contener de 3 a 20 caracteres.'
-            isValid = false
-        }
-        if (!inputSeg_ape) {
-            validationsPerfil.inputSeg_ape = 'Segundo apellido es requerido.';
-            isValid = false
-        }
-
-        if ((!inputSeg_ape) || (inputSeg_ape && inputSeg_ape.length < 3) || (inputSeg_ape.length > 20)) {
-            validationsPerfil.inputSeg_ape = 'Segundo apellido debe contener de 8 a 20 caracteres.'
-            isValid = false
-        }
-        if (!inputAddress) {
-            validationsPerfil.inputAddress = 'Dirección es requerido.';
-            isValid = false
-        }
-
-            if ((!inputAddress) || (inputAddress && inputAddress.length < 3) || (inputAddress.length > 20)) {
-                validationsPerfil.inputAddress = 'Dirección debe contener de 8 a 20 caracteres.'
-                isValid = false
-            }
-
-
-
-        if (!isValid) {
-            this.setState({validationsPerfil})
-        }
-
-        return isValid
-        // }
-    }
     handleChangePerfil = (ev) => {
         const {name, value} = ev.target;
         this.setState({
@@ -178,69 +112,82 @@ class Category extends Component {
             }
         })
     };
+    // if(this.state.inputemail)
 
-    handlerSex = (ev) => {
-        this.setState({sexo: ev.target.value})
-    }
     handlerCity = (ev) => {
-        alert(ev.target.value)
         this.setState({city: ev.target.value})
-    }
+    };
 
     handleSubmit = (ev) => {
         ev.preventDefault();
-        const isValid = this.validateAll(ev);
-
-        if (!isValid) {
-            return false
+        if (this.state.valuesPerfil.inputpassword != this.state.valuesPerfil.inputpassword2) {
+            this.setState({passError: 'no son iguales'})
+            return false;
         }
 
-        // const values = JSON.stringify(this.state);
-        // if (ev.target.id === "register-formUsu") {
-        let paramsBody = {
-            "name": this.state.valuesPerfil.inputName,
-            // "email": this.state.valuesPerfil.i
-            "prim_apellido": this.state.valuesPerfil.inputPrim_ape,
-            "seg_apellido": this.state.valuesPerfil.inputSeg_ape,
-            "telefono": this.state.valuesPerfil.inputTelefono,
-            "direccion": this.state.valuesPerfil.inputAddress,
-            "ciudad_id": this.state.city,
-            "sexo": this.state.sexo,
-        };
-// console.log(paramsBody)
+        // let paramsBodyIn = '';
+        let paramsBody = '';
 
-        // let paramsHead = {
-        //     "X-Requested-With": "XMLHttpRequest",
-        //     "Content-Type": "application/json"
-        // };
-        let userHeader = '';
-         if(localStorage.getItem('user') && JSON.parse(localStorage.getItem('user')).tipo === 'empresa'){
+        if (ev.target.name === 'login') {
+            paramsBody = {
+                "password": this.state.valuesPerfil.inputpassword,
+                "email": this.state.valuesPerfil.inputemail
+            }
 
-            const tokenUser = JSON.parse(localStorage.getItem('user')).token;
-             userHeader = {
-                headers: {
-                    'Authorization': `Bearer ${tokenUser}`,
-                    'X-Requested-With': 'XMLHttpRequest',
-                    'Content-Type': 'application/json'
+        } else {
+            paramsBody = {
+                "name": this.state.valuesPerfil.inputname,
+                "web": this.state.valuesPerfil.inputweb,
+                "name_responsable": this.state.valuesPerfil.inputname_responsable,
+                "telefono": this.state.valuesPerfil.inputtelefono,
+                "direccion": this.state.valuesPerfil.inputdireccion,
+                "ciudad_id": this.state.city,
+                "about": this.state.valuesPerfil.inputarea,
+            }
+        }
+
+        for(var key in paramsBody) {
+            if(paramsBody.hasOwnProperty(key)){
+                if(!paramsBody[key]){
+                    // alert("vacia la propiedad "+key);
+                    delete paramsBody[key];
                 }
-            };
-         }
-        axios.post('http://127.0.0.1:8000/api/user/update', paramsBody, userHeader)
+            }
+        }
+        console.log('definitivo', paramsBody)
+
+        const tokenUser = JSON.parse(localStorage.getItem('user')).token;
+        let userHeader = {
+            headers: {
+                'Authorization': `Bearer ${tokenUser}`,
+                'X-Requested-With': 'XMLHttpRequest',
+                'Content-Type': 'application/json',
+
+            }
+        };
+
+
+        axios.post('http://127.0.0.1:8000/api/empresa/editar', paramsBody, userHeader)
             .then(res => {
                 this.setState({
                     RegExitoUsu: res.data.message,
-                    RegErrorUsu: '',
                 });
+
+                store.dispatch({type:UPDATE_EMPRESA, payload: paramsBody})
+
+
+                // console.log('resd', res.obj);
                 // if (res.status == 200) window.location.href = "/";
                 // this.handleSubmit("login-form")
             })
             .catch(err => {
                 this.setState({
                     RegErrorUsu: err.message,
-                    RegExitoUsu: ''
-                })
+                });
+                console.log('resderr', err);
             });
         this.myFormRef.reset();
+        this.myFormRefe.reset();
 
 
     };
@@ -271,11 +218,6 @@ class Category extends Component {
                                         <div className="col-8">
                                             <h2 className="m-3">Perfil de usuario</h2>
                                             <hr className="mb-5"/>
-                                            {/*---mensajes de error y acierto---*/}
-                                            <div className="alert alert-success" role="alert">
-                                                {this.state.RegExitoUsu}
-                                            </div>
-                                            {/*------*/}
                                             <section className="d-flex justify-content-between align-items-center">
                                                 <div className="card" style={{width: 18 + 'rem'}}>
                                                     <img
@@ -301,131 +243,125 @@ class Category extends Component {
                                                 <form id="perfil"
                                                       onSubmit={(ev) => this.handleSubmit(ev)}
                                                       method="post"
+                                                      name="perfil"
                                                       role="form"
                                                       ref={(perfil) => this.myFormRef = perfil}
                                                 >
                                                     <div className="form-row">
                                                         <div className="form-group col-md-6">
-                                                            <label htmlFor="inputName">Nombre registrado: <span className="badge badge-success">{this.props.username}</span></label>
+                                                            <label htmlFor="inputname">Nombre registrado: <span
+                                                                className="badge badge-success">{this.props.datosEmp.name}</span></label>
                                                             <input type="text" className="form-control"
                                                                    id="inputName"
 
-                                                                   placeholder={this.props.username}
-                                                                   name="inputName"
+                                                                   placeholder={this.props.datosEmp.username}
+                                                                   name="inputname"
                                                                    onChange={this.handleChangePerfil}
-                                                                   onBlur={this.validateOnePerfil}
 
-                                                                   // placeholder="Nombre"
+                                                                // placeholder="Nombre"
                                                             />
                                                             <p className="error">{this.state.validationsPerfil.inputName}</p>
                                                         </div>
                                                         <div className="form-group col-md-6">
-                                                            <label htmlFor="inputPrim_ape">Primer apellido registrado: <span className={!this.props.prim_apellido ? "badge badge-danger" : "badge badge-success"}>
-                                                                {!this.props.prim_apellido ? 'sin registro' : this.props.prim_apellido}
+                                                            <label htmlFor="inputweb">web: <span
+                                                                className={!this.props.datosEmp.web ? "badge badge-danger" : "badge badge-success"}>
+                                                                {!this.props.datosEmp.web ? 'sin registro' : this.props.datosEmp.web}
                                                             </span></label>
                                                             <input type="text" className="form-control"
-                                                                   id="inputPrim_ape"
+                                                                   id="inputweb"
 
-                                                                   name="inputPrim_ape"
+                                                                   name="inputweb"
                                                                    onChange={this.handleChangePerfil}
-                                                                   onBlur={this.validateOnePerfil}
+
 
                                                                    placeholder="Primer apellido"
                                                             />
                                                             <p className="error">{this.state.validationsPerfil.inputPrim_ape}</p>
                                                         </div>
                                                         <div className="form-group col-md-6">
-                                                            <label htmlFor="inputSeg_ape">Segundo apellido registrado: <span className={!this.props.seg_apellido ? "badge badge-danger" : "badge badge-success"}>
-                                                                 {!this.props.seg_apellido ? 'sin registro' : this.props.seg_apellido}
+                                                            <label htmlFor="inputname_responsable">Nombre
+                                                                responsable: <span
+                                                                    className={!this.props.datosEmp.name_responsable ? "badge badge-danger" : "badge badge-success"}>
+                                                                 {!this.props.datosEmp.name_responsable ? 'sin registro' : this.props.datosEmp.name_responsable}
                                                             </span></label>
                                                             <input type="text" className="form-control"
-                                                                   id="inputSeg_ape"
+                                                                   id="inputname_responsable"
 
-                                                                   name="inputSeg_ape"
+                                                                   name="inputname_responsable"
                                                                    onChange={this.handleChangePerfil}
-                                                                   onBlur={this.validateOnePerfil}
 
-                                                                   placeholder="Segundo apellido"
+                                                                   placeholder={this.props.datosEmp.nombre_responsable}
 
                                                             />
                                                             <p className="error">{this.state.validationsPerfil.inputSeg_ape}</p>
                                                         </div>
                                                         <div className="form-group col-md-6">
-                                                            <label htmlFor="inputSeg_ape">Telefono registrado: <span className={!this.props.telefono ? "badge badge-danger" : "badge badge-success"}>
-                                                                {!this.props.telefono ? 'sin registro' : this.props.telefono}
+                                                            <label htmlFor="inputtelefono">Telefono registrado: <span
+                                                                className={!this.props.inputtelefono ? "badge badge-danger" : "badge badge-success"}>
+                                                                {!this.props.datosEmp.telefono ? 'sin registro' : this.props.datosEmp.telefono}
                                                             </span></label>
                                                             <input type="tel"
-                                                                   // pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}"
+                                                                // pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}"
                                                                    className="form-control"
                                                                    placeholder="999 999 999"
-                                                                   id="inputTelefono"
+                                                                   id="inputtelefono"
 
-                                                                   name="inputTelefono"
+                                                                   name="inputtelefono"
                                                                    onChange={this.handleChangePerfil}
-                                                                   onBlur={this.validateOnePerfil}
-
                                                             />
                                                             <p className="error">{this.state.validationsPerfil.inputTelefono}</p>
                                                         </div>
                                                     </div>
                                                     <div className="form-group">
-                                                        <label htmlFor="inputAddress">Dirección registrado: <span className={!this.props.direccion ? "badge badge-danger" : "badge badge-success"}>
-                                                            {!this.props.direccion ? 'sin registro' : this.props.direccion}
+                                                        <label htmlFor="inputdireccion">Dirección registrado: <span
+                                                            className={!this.props.datosEmp.direccion ? "badge badge-danger" : "badge badge-success"}>
+                                                            {!this.props.datosEmp.direccion ? 'sin registro' : this.props.datosEmp.direccion}
                                                         </span></label>
                                                         <input type="text" className="form-control"
-                                                               id="inputAddress"
+                                                               id="inputdireccion"
                                                                placeholder="Calle San Mateo"
 
-                                                               name="inputAddress"
+                                                               name="inputdireccion"
                                                                onChange={this.handleChangePerfil}
-                                                               onBlur={this.validateOnePerfil}
+
 
                                                         />
                                                         <p className="error">{this.state.validationsPerfil.inputAddress}</p>
                                                     </div>
                                                     <div className="form-row">
                                                         <div className="form-group col-md-6">
-                                                            <label htmlFor="inputCity">Provincia registrado: <span className={!this.props.ciudad_id ? "badge badge-danger" : "badge badge-success"}>
+                                                            <label htmlFor="inputciudad">Provincia registrado: <span
+                                                                className={!this.props.ciudad_id ? "badge badge-danger" : "badge badge-success"}>
                                                                 {!this.props.ciudad_id ? 'sin registro' : this.props.ciudad_id}
                                                             </span></label>
-                                                            <select className="form-control" id="ciudades_lista"
+                                                            <select className="form-control" id="inputciudad"
                                                                     defaultValue={this.state.city}
                                                                     onChange={(ev) => this.handlerCity(ev)}
                                                             >
                                                                 {this.renderCities()}
                                                             </select>
-                                                            {/*<p className="error">{this.state.validationsPerfil.cityPerfil}</p>*/}
+                                                            <p className="error">{this.state.validationsPerfil.cityPerfil}</p>
                                                         </div>
                                                         <div className="form-group col-md-6">
-                                                            <label htmlFor="inputZip">Sexo registrado: <span className={!this.props.sexo ? "badge badge-danger" : "badge badge-success"}>
-                                                                {!this.props.sexo ? 'sin registro' : this.props.sexo}
-                                                            </span></label>
-                                                            <select className="form-control" id="inputZip"
-                                                                    defaultValue={this.state.sexo}
-                                                                    onChange={(ev) => this.handlerSex(ev)}
-                                                            >
-                                                                <option value="Hombre"
-                                                                >
-                                                                    Hombre
-                                                                </option>
-                                                                <option value="Mujer"
-                                                                >
-                                                                    Mujer
-                                                                </option>
-                                                            </select>
+                                                            <label htmlFor="inputcif">CIF: </label>
+                                                            <input
+                                                                className="form-control" id="inputcif"
+                                                                name="inputcif"
+                                                                value={this.props.datosEmp.cif}
+                                                                readOnly
+                                                            />
                                                         </div>
                                                     </div>
                                                     <div className="form-group">
-                                                        <div className="form-check">
-                                                            <input className="form-check-input" type="checkbox"
-                                                                   id="gridCheck"/>
-                                                            <label className="form-check-label" htmlFor="gridCheck">
-                                                                Check me out
-                                                            </label>
-                                                        </div>
+                                                        <label htmlFor="inputarea">Sobre nosotros:</label>
+                                                        <textarea className="form-control rounded-0"
+                                                                  id="inputarea" rows="10"
+                                                                  onChange={this.handleChangePerfil}
+                                                                  name="inputarea"/>
                                                     </div>
                                                     <button type="submit" className="btn btn-primary">Modificar
                                                     </button>
+
                                                 </form>
 
                                                 {/*------*/}
@@ -434,63 +370,50 @@ class Category extends Component {
                                         <div className="col-4">
                                             <h2 className="m-3">Datos de Login</h2>
                                             <hr className="mb-5"/>
+                                            <img src={this.props.datosEmp.imagen_logo}
+                                                 className="w-50 img-fluid text-center" alt="logo de empresa"
+                                                 style={{display: 'block', margin: 0 + ' auto'}}/>
                                             <div className="datos p-3 mb-3">
-                                                <form action="">
+                                                <form id="login"
+                                                      name="login"
+                                                      onSubmit={(ev) => this.handleSubmit(ev)}
+                                                      method="post"
+                                                      role="form"
+                                                      ref={(login) => this.myFormRefe = login}
+                                                >
                                                     <div className="form-row">
                                                         <div className="form-group col-md-12">
-                                                            <label htmlFor="inputEmail4">Email registrado: <span className={!this.props.email ? "badge badge-danger" : "badge badge-success"}>
-                                                              {!this.props.email ? 'sin registro' : this.props.email}
+                                                            <label htmlFor="inputemail">Email registrado: <span
+                                                                className={!this.props.datosEmp.email ? "badge badge-danger" : "badge badge-success"}>
+                                                              {!this.props.datosEmp.email ? 'sin registro' : this.props.datosEmp.email}
                                                             </span></label>
                                                             <input type="email" className="form-control"
-                                                                   id="inputEmail4"/>
+                                                                   id="inputemail"
+                                                                   name="inputemail"
+                                                                   onChange={this.handleChangePerfil}/>/>
+
                                                         </div>
                                                         <div className="form-group col-md-12">
-                                                            <label htmlFor="inputPassword4">Password</label>
+                                                            <label htmlFor="inputpassword">Password</label>
                                                             <input type="password" className="form-control"
-                                                                   id="inputPassword4"/>
+                                                                   id="inputpassword"
+                                                                   name="inputpassword"
+                                                                   onChange={this.handleChangePerfil}/>
                                                         </div>
+                                                        <p className="text-danger tetx-center">{this.state.passError}</p>
                                                         <div className="form-group col-md-12">
-                                                            <label htmlFor="inputPassword4">Confirmar
+                                                            <label htmlFor="inputpassword2">Confirmar
                                                                 password</label>
                                                             <input type="password" className="form-control"
-                                                                   id="inputPassword4"/>
+                                                                   id="inputpassword2"
+                                                                   name="inputpassword2"
+                                                                   onChange={this.handleChangePerfil}/>
                                                         </div>
+                                                        <p>{this.props.emeilError}</p>
                                                     </div>
                                                     <button type="submit" className="btn btn-primary">Modificar
                                                     </button>
                                                 </form>
-                                            </div>
-                                            <div className="">
-                                                <h2 className="m-3">Datos para Ficha</h2>
-                                                <hr className="mb-5"/>
-                                                <div className="datos p-3 mb-3">
-                                                    <form action="">
-                                                        <div className="form-group">
-                                                            <label htmlFor="exampleFormControlTextarea1">Sobre mí registrado: <span className={!this.props.about ? "badge badge-danger" : "badge badge-success"}>
-                                                               {!this.props.about ? 'sin registro' : this.props.about}
-                                                            </span></label>
-                                                            <textarea className="form-control"
-                                                                      id="exampleFormControlTextarea1"
-                                                                      rows="3"/>
-                                                            <div className="form-group">
-                                                                <label htmlFor="inputState">Tecnología registrado: <span className={!this.props.tecnologia_id ? "badge badge-danger" : "badge badge-success"}>
-                                                                   {!this.props.tecnologia_id ? 'sin registro' : this.props.tecnologia_id}
-                                                                </span></label>
-                                                                <select id="inputState" className="form-control">
-                                                                    //options
-                                                                </select>
-                                                            </div>
-                                                            <div className="form-group">
-                                                                <label htmlFor="inputState">Estudios registrados: <span className={!this.props.estudios_id ? "badge badge-danger" : "badge badge-success"}>
-                                                                    {!this.props.estudios_id ? 'sin registro' : this.props.estudios_id}
-                                                                </span></label>
-                                                                <select id="inputState" className="form-control">
-                                                                    //options
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -508,23 +431,24 @@ class Category extends Component {
 function mapStateToProps(state) {
     return {
         ciud: state.Ciudades.list,
-        id: state.Users.id,
-        username: state.Users.username,
-        prim_apellido: state.Users.prim_apellido,
-        seg_apellido: state.Users.seg_apellido,
-        email: state.Users.email,
-        password: state.Users.password,
-        about: state.Users.about,
-        ciudad_id: state.Users.ciudad_id,
-        direccion: state.Users.direccion,
-        imagen: state.Users.imagen,
-        sexo: state.Users.sexo,
-        especialidad: state.Users.especialidad,
-        tecnologia_id: state.Users.tecnologia_id,
-        estudios_id: state.Users.estudios_id,
-        telefono: state.Users.telefono,
-        token: state.Users.token,
+        // id: state.Users.id,
+        // username: state.Users.username,
+        // prim_apellido: state.Users.prim_apellido,
+        // seg_apellido: state.Users.seg_apellido,
+        // email: state.Users.email,
+        // password: state.Users.password,
+        // about: state.Users.about,
+        // ciudad_id: state.Users.ciudad_id,
+        // direccion: state.Users.direccion,
+        // imagen: state.Users.imagen,
+        // sexo: state.Users.sexo,
+        // especialidad: state.Users.especialidad,
+        // tecnologia_id: state.Users.tecnologia_id,
+        // estudios_id: state.Users.estudios_id,
+        // telefono: state.Users.telefono,
+        // token: state.Users.token,
+        datosEmp: state.Empresa
     }
 }
 
-export default connect(mapStateToProps)(Category);
+export default connect(mapStateToProps)(PerfilEmpresa);
