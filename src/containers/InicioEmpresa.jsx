@@ -61,10 +61,6 @@ class InicialEmpresa extends Component {
 
     }
 
-    
-
-
-
     usuariosOferta = () => {
         return this.props.usuarioOferta.map((product, index) => {
             return (
@@ -85,29 +81,6 @@ class InicialEmpresa extends Component {
                 </Fragment>
             )
         })
-    }
-    renderPoolRenders = () => {
-        switch (this.props.controlBusq) {
-            // case 'todas':
-            //     return this.props.ofertasEmp.map((product, index) => {
-            //         return (
-            //             <Fragment key={index}>
-            //                 <CardEmpresa data={product} />
-            //             </Fragment>
-            //         )
-            //     });
-            //     break;
-
-            // default:
-            //     return this.props.ofertasEmp.map((product, index) => {
-            //         return (
-            //             <Fragment key={index}>
-            //                 <CardEmpresa data={product} />
-            //             </Fragment>
-            //         )
-
-            //     });
-        }
     };
 
 
@@ -148,24 +121,24 @@ class InicialEmpresa extends Component {
                                 </div>
                                 <div className="container-fluid">
                                     <div className="row">
-                                        <div className="col-8">
+                                        <div className="col-10 d-flex flex-column ">
                                             {/* {this.renderPoolRenders()} */}
                                             {this.usuariosOferta()}
                                         </div>
-                                        <div style={{ backgroundColor: '#00ced114' }} className="col-4">
-                                            <div className="container-flui">
-                                                <div id="div_control_ofertas"
-                                                    className="bg-info text-white shadow-lg mb-3">
-                                                    <h2 id="control_ofertas">Crear oferta</h2>
-                                                </div>
-                                                <hr />
-                                                <div className="col-8">
-                                                    {/*{this.renderOfertasUs()}*/}
-                                                </div>
+                                        {/*<div style={{ backgroundColor: '#00ced114' }} className="col-4">*/}
+                                        {/*    <div className="container-flui">*/}
+                                        {/*        <div id="div_control_ofertas"*/}
+                                        {/*            className="bg-info text-white shadow-lg mb-3">*/}
+                                        {/*            <h2 id="control_ofertas">Crear oferta</h2>*/}
+                                        {/*        </div>*/}
+                                        {/*        <hr />*/}
+                                        {/*        <div className="col-8">*/}
+                                        {/*            /!*{this.renderOfertasUs()}*!/*/}
+                                        {/*        </div>*/}
 
-                                                {/*------*/}
-                                            </div>
-                                        </div>
+                                        {/*        /!*------*!/*/}
+                                        {/*    </div>*/}
+                                        {/*</div>*/}
                                     </div>
                                 </div>
                             </div>

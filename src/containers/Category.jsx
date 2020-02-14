@@ -57,6 +57,7 @@ class Category extends Component {
             },
             sexo: 'hombre',
             city: 1,
+            correcto: 'alert alert-success oculto'
         }
         this.myFormRef = React.createRef();
     }
@@ -207,12 +208,7 @@ class Category extends Component {
             "ciudad_id": this.state.city,
             "sexo": this.state.sexo,
         };
-// console.log(paramsBody)
 
-        // let paramsHead = {
-        //     "X-Requested-With": "XMLHttpRequest",
-        //     "Content-Type": "application/json"
-        // };
         let userHeader = '';
          if(localStorage.getItem('user') && JSON.parse(localStorage.getItem('user')).tipo === 'usuario'){
 
@@ -230,7 +226,11 @@ class Category extends Component {
                 this.setState({
                     RegExitoUsu: res.data.message,
                     RegErrorUsu: '',
+                    correcto: 'alert alert-success'
                 });
+                setTimeout(function(){
+                    this.setState({correcto: 'alert alert-success oculto'})
+                }.bind,2000)
                 // if (res.status == 200) window.location.href = "/";
                 // this.handleSubmit("login-form")
             })
@@ -272,30 +272,30 @@ class Category extends Component {
                                             <h2 className="m-3">Perfil de usuario</h2>
                                             <hr className="mb-5"/>
                                             {/*---mensajes de error y acierto---*/}
-                                            <div className="alert alert-success" role="alert">
+                                            <div className="" role="alert">
                                                 {this.state.RegExitoUsu}
                                             </div>
                                             {/*------*/}
                                             <section className="d-flex justify-content-between align-items-center">
-                                                <div className="card" style={{width: 18 + 'rem'}}>
+                                                <div className="card" style={{width: 22 + 'rem'}}>
                                                     <img
                                                         src="https://joanboira.com/wp-content/uploads/2019/10/Retrato-de-perfil-profesional-1.jpg"
                                                         className="card-img-top" alt="..."/>
                                                 </div>
-                                                <div className="input-group mb-3 justify-content-end">
-                                                    <div className="input-group-prepend">
-                                                    <span className="input-group-text"
-                                                          id="inputGroupFileAddon01">Upload</span>
-                                                    </div>
-                                                    <div className="custom-file col-6">
-                                                        <input type="file" className="custom-file-input"
-                                                               id="inputGroupFile01"
-                                                               aria-describedby="inputGroupFileAddon01"/>
-                                                        <label className="custom-file-label"
-                                                               htmlFor="inputGroupFile01">Choose
-                                                            file</label>
-                                                    </div>
-                                                </div>
+                                                {/*<div className="input-group mb-3 justify-content-end">*/}
+                                                {/*    <div className="input-group-prepend">*/}
+                                                {/*    <span className="input-group-text"*/}
+                                                {/*          id="inputGroupFileAddon01">Upload</span>*/}
+                                                {/*    </div>*/}
+                                                {/*    <div className="custom-file col-6">*/}
+                                                {/*        <input type="file" className="custom-file-input"*/}
+                                                {/*               id="inputGroupFile01"*/}
+                                                {/*               aria-describedby="inputGroupFileAddon01"/>*/}
+                                                {/*        <label className="custom-file-label"*/}
+                                                {/*               htmlFor="inputGroupFile01">Choose*/}
+                                                {/*            file</label>*/}
+                                                {/*    </div>*/}
+                                                {/*</div>*/}
                                             </section>
                                             <div className="datos p-3 mb-3">
                                                 <form id="perfil"
@@ -306,7 +306,7 @@ class Category extends Component {
                                                 >
                                                     <div className="form-row">
                                                         <div className="form-group col-md-6">
-                                                            <label htmlFor="inputName">Nombre registrado: <span className="badge badge-success">{this.props.username}</span></label>
+                                                            <label htmlFor="inputName">Nombre:</label>
                                                             <input type="text" className="form-control"
                                                                    id="inputName"
 
@@ -320,9 +320,7 @@ class Category extends Component {
                                                             <p className="error">{this.state.validationsPerfil.inputName}</p>
                                                         </div>
                                                         <div className="form-group col-md-6">
-                                                            <label htmlFor="inputPrim_ape">Primer apellido registrado: <span className={!this.props.prim_apellido ? "badge badge-danger" : "badge badge-success"}>
-                                                                {!this.props.prim_apellido ? 'sin registro' : this.props.prim_apellido}
-                                                            </span></label>
+                                                            <label htmlFor="inputPrim_ape">Primer apellido:</label>
                                                             <input type="text" className="form-control"
                                                                    id="inputPrim_ape"
 
@@ -335,9 +333,7 @@ class Category extends Component {
                                                             <p className="error">{this.state.validationsPerfil.inputPrim_ape}</p>
                                                         </div>
                                                         <div className="form-group col-md-6">
-                                                            <label htmlFor="inputSeg_ape">Segundo apellido registrado: <span className={!this.props.seg_apellido ? "badge badge-danger" : "badge badge-success"}>
-                                                                 {!this.props.seg_apellido ? 'sin registro' : this.props.seg_apellido}
-                                                            </span></label>
+                                                            <label htmlFor="inputSeg_ape">Segundo apellido:</label>
                                                             <input type="text" className="form-control"
                                                                    id="inputSeg_ape"
 
@@ -351,9 +347,7 @@ class Category extends Component {
                                                             <p className="error">{this.state.validationsPerfil.inputSeg_ape}</p>
                                                         </div>
                                                         <div className="form-group col-md-6">
-                                                            <label htmlFor="inputSeg_ape">Telefono registrado: <span className={!this.props.telefono ? "badge badge-danger" : "badge badge-success"}>
-                                                                {!this.props.telefono ? 'sin registro' : this.props.telefono}
-                                                            </span></label>
+                                                            <label htmlFor="inputSeg_ape">Telefono registrado:</label>
                                                             <input type="tel"
                                                                    // pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}"
                                                                    className="form-control"
@@ -369,9 +363,7 @@ class Category extends Component {
                                                         </div>
                                                     </div>
                                                     <div className="form-group">
-                                                        <label htmlFor="inputAddress">Dirección registrado: <span className={!this.props.direccion ? "badge badge-danger" : "badge badge-success"}>
-                                                            {!this.props.direccion ? 'sin registro' : this.props.direccion}
-                                                        </span></label>
+                                                        <label htmlFor="inputAddress">Dirección:</label>
                                                         <input type="text" className="form-control"
                                                                id="inputAddress"
                                                                placeholder="Calle San Mateo"
@@ -385,9 +377,7 @@ class Category extends Component {
                                                     </div>
                                                     <div className="form-row">
                                                         <div className="form-group col-md-6">
-                                                            <label htmlFor="inputCity">Provincia registrado: <span className={!this.props.ciudad_id ? "badge badge-danger" : "badge badge-success"}>
-                                                                {!this.props.ciudad_id ? 'sin registro' : this.props.ciudad_id}
-                                                            </span></label>
+                                                            <label htmlFor="inputCity">Provincia:</label>
                                                             <select className="form-control" id="ciudades_lista"
                                                                     defaultValue={this.state.city}
                                                                     onChange={(ev) => this.handlerCity(ev)}
@@ -397,9 +387,7 @@ class Category extends Component {
                                                             {/*<p className="error">{this.state.validationsPerfil.cityPerfil}</p>*/}
                                                         </div>
                                                         <div className="form-group col-md-6">
-                                                            <label htmlFor="inputZip">Sexo registrado: <span className={!this.props.sexo ? "badge badge-danger" : "badge badge-success"}>
-                                                                {!this.props.sexo ? 'sin registro' : this.props.sexo}
-                                                            </span></label>
+                                                            <label htmlFor="inputZip">Sexo:</label>
                                                             <select className="form-control" id="inputZip"
                                                                     defaultValue={this.state.sexo}
                                                                     onChange={(ev) => this.handlerSex(ev)}
@@ -434,13 +422,12 @@ class Category extends Component {
                                         <div className="col-4">
                                             <h2 className="m-3">Datos de Login</h2>
                                             <hr className="mb-5"/>
+                                            <img style={{margin: 0+' auto'}} className="w-50 text-center d-block" src="https://images.vexels.com/media/users/3/136498/isolated/preview/588187d92d423fb320f4a4cf8b2486c5-icono-de-candado-abierto-by-vexels.png" alt=""/>
                                             <div className="datos p-3 mb-3">
                                                 <form action="">
                                                     <div className="form-row">
                                                         <div className="form-group col-md-12">
-                                                            <label htmlFor="inputEmail4">Email registrado: <span className={!this.props.email ? "badge badge-danger" : "badge badge-success"}>
-                                                              {!this.props.email ? 'sin registro' : this.props.email}
-                                                            </span></label>
+                                                            <label htmlFor="inputEmail4">Email:</label>
                                                             <input type="email" className="form-control"
                                                                    id="inputEmail4"/>
                                                         </div>
@@ -466,28 +453,26 @@ class Category extends Component {
                                                 <div className="datos p-3 mb-3">
                                                     <form action="">
                                                         <div className="form-group">
-                                                            <label htmlFor="exampleFormControlTextarea1">Sobre mí registrado: <span className={!this.props.about ? "badge badge-danger" : "badge badge-success"}>
-                                                               {!this.props.about ? 'sin registro' : this.props.about}
-                                                            </span></label>
+                                                            <label htmlFor="exampleFormControlTextarea1">Sobre mí:</label>
                                                             <textarea className="form-control"
                                                                       id="exampleFormControlTextarea1"
                                                                       rows="3"/>
                                                             <div className="form-group">
-                                                                <label htmlFor="inputState">Tecnología registrado: <span className={!this.props.tecnologia_id ? "badge badge-danger" : "badge badge-success"}>
-                                                                   {!this.props.tecnologia_id ? 'sin registro' : this.props.tecnologia_id}
-                                                                </span></label>
+                                                                <label htmlFor="inputState">Tecnología:</label>
                                                                 <select id="inputState" className="form-control">
                                                                     //options
                                                                 </select>
                                                             </div>
                                                             <div className="form-group">
-                                                                <label htmlFor="inputState">Estudios registrados: <span className={!this.props.estudios_id ? "badge badge-danger" : "badge badge-success"}>
-                                                                    {!this.props.estudios_id ? 'sin registro' : this.props.estudios_id}
-                                                                </span></label>
+                                                                <label htmlFor="inputState">Estudios:</label>
                                                                 <select id="inputState" className="form-control">
                                                                     //options
                                                                 </select>
                                                             </div>
+                                                            <button type="submit" className="btn btn-primary"
+
+                                                            >Modificar
+                                                            </button>
                                                         </div>
                                                     </form>
                                                 </div>

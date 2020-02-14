@@ -467,7 +467,7 @@ console.log('elementos de render',elems);
                                                     <hr/>
                                                 </div>
                                                 <div className="panel-body">
-                                                    <div className="row formulario-row">
+                                                    <div className="row formulario-row large">
                                                         <div className="col-lg-12">
                                                             {/*<p className="error">{this.state.logError}</p>*/}
                                                             {/*<p className="correcto">{this.state.logExito}</p>*/}
@@ -580,6 +580,7 @@ console.log('elementos de render',elems);
                             {/*flip inicio detras*/}
                             <div className="back"
                                  style={this.state.ModalRotate == 'empresa' ? {transform: 'rotateY(0deg)'} : {}}>
+                                <h2 className="text-center pb-4">Registro empresas</h2>
                                 <p className="error">{this.state.RegErrorEmp}</p>
                                 <p className="correcto">{this.state.RegExitoEmp}</p>
                                 <form id="register-formEmp"

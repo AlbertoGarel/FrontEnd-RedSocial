@@ -255,14 +255,6 @@ class Inicial extends Component {
                             <div className="contenido">
                                 <div className="titulo mx-auto mb-2 position-sticky">
                                     {/*<div className="">*/}
-                                    <div className="buscador">
-                                        <input id="input-buscador" type="text" className="form-control"
-                                            aria-label="Sizing example input"
-                                            aria-describedby="inputGroup-sizing-default" />
-                                        <button id="button-buscador" type="button"
-                                            className="btn btn-secondary">Buscar
-                                        </button>
-                                    </div>
                                     <h2 className="ml-3">{
                                         renderizado === 'todas' || '' ?
                                             <h2>Todas Las Ofertas</h2>
@@ -272,12 +264,6 @@ class Inicial extends Component {
                                             </h2>
                                     }
                                     </h2>
-                                    {
-                                        (this.state.render === 'category') ?
-                                            <SortBtn clickHandler={this.outputEvent} data={this.state.btn} />
-                                            : <SortBtn clickHandler={this.outputEvent} data={this.state.btn}
-                                                tipo={"d-none"} />
-                                    }
                                     <hr className="mb-5" />
                                     {/*</div>*/}
                                 </div>

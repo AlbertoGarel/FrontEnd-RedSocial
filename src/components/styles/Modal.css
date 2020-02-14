@@ -24,7 +24,7 @@
     }
 }
 .modal-header {
-    background: #0E9B68;
+    background: #87A48B;
     height: auto;
     line-height: 40px;
     padding: 5px 20px;
@@ -45,7 +45,7 @@
 }
 
 .modal-footer {
-    background: #0E9B68;
+    background: #87A48B;
     height: 35px;
     padding: 15px;
 }
@@ -129,6 +129,9 @@
     color: #029f5b;
     font-size: 18px;
 }
+.large{
+    height: 10vh!important;
+}
 .panel-login>.panel-heading hr{
     margin-top: 10px;
     margin-bottom: 0px;
@@ -209,7 +212,7 @@
 }
 p.error{
     color: red;
-    font-size: 1.3em;
+    font-size: .9em;
 }
 p.correcto{
     color:greenyellow;
